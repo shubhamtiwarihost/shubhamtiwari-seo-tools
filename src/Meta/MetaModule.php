@@ -2,13 +2,13 @@
 /**
  * Registers SEO meta fields and template settings.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Module;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Module;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -48,9 +48,9 @@ final class MetaModule implements Module {
 	 */
 	public function register(): void {
 		add_action( 'init', array( $this, 'register_meta' ) );
-		add_filter( 'stseo_settings_fields', array( $this, 'add_template_fields' ) );
-		add_filter( 'stseo_settings_sections', array( $this, 'add_section' ) );
-		add_action( 'stseo_settings_section_' . SearchAppearanceFields::SECTION, array( $this->template_fields, 'render_help' ) );
+		add_filter( 'dumpseo_settings_fields', array( $this, 'add_template_fields' ) );
+		add_filter( 'dumpseo_settings_sections', array( $this, 'add_section' ) );
+		add_action( 'dumpseo_settings_section_' . SearchAppearanceFields::SECTION, array( $this->template_fields, 'render_help' ) );
 	}
 
 	/**
@@ -142,11 +142,11 @@ final class MetaModule implements Module {
 		foreach ( (array) $sections as $id => $title ) {
 			$result[ (string) $id ] = (string) $title;
 			if ( 'general' === $id ) {
-				$result[ SearchAppearanceFields::SECTION ] = __( 'Search appearance', 'shubhamtiwari-seo-tools' );
+				$result[ SearchAppearanceFields::SECTION ] = __( 'Search appearance', 'dumpseo' );
 			}
 		}
 		if ( ! isset( $result[ SearchAppearanceFields::SECTION ] ) ) {
-			$result[ SearchAppearanceFields::SECTION ] = __( 'Search appearance', 'shubhamtiwari-seo-tools' );
+			$result[ SearchAppearanceFields::SECTION ] = __( 'Search appearance', 'dumpseo' );
 		}
 		return $result;
 	}

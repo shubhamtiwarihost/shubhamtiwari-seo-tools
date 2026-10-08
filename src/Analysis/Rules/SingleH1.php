@@ -2,13 +2,13 @@
 /**
  * H1 headings inside the content.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -43,8 +43,8 @@ final class SingleH1 extends BaseRule {
 		return $this->result(
 			Result::WARNING,
 			Result::LOW,
-			__( 'The text contains a level 1 heading, and most themes already show the title as one.', 'shubhamtiwari-seo-tools' ),
-			__( 'Change headings inside the text to level 2 or lower.', 'shubhamtiwari-seo-tools' ),
+			__( 'The text contains a level 1 heading, and most themes already show the title as one.', 'dumpseo' ),
+			__( 'Change headings inside the text to level 2 or lower.', 'dumpseo' ),
 			array( 'count' => $input->content->h1_count )
 		);
 	}

@@ -2,10 +2,10 @@
 /**
  * Text sanitizing helpers.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Helpers;
+namespace DumpSEO\Helpers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,7 +17,7 @@ final class Text {
 	/**
 	 * Stand-in for "%" while core sanitizes. Plain ASCII letters so core leaves it alone.
 	 */
-	private const PERCENT = 'STSEOPERCENTSIGN';
+	private const PERCENT = 'DUMPSEOPERCENTSIGN';
 
 	/**
 	 * Single-line plain text that may contain %%variables%%.

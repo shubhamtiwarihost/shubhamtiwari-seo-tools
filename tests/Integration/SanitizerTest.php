@@ -2,19 +2,19 @@
 /**
  * Settings sanitization with real WordPress functions.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Settings\Sanitizer;
-use ShubhamTiwariSeoTools\Settings\Schema;
+use DumpSEO\Settings\Sanitizer;
+use DumpSEO\Settings\Schema;
 use WP_UnitTestCase;
 
 /**
  * Malicious and malformed input must never reach the database unsanitized.
  *
- * @covers \ShubhamTiwariSeoTools\Settings\Sanitizer
+ * @covers \DumpSEO\Settings\Sanitizer
  */
 final class SanitizerTest extends WP_UnitTestCase {
 

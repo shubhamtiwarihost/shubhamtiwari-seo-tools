@@ -2,14 +2,14 @@
 /**
  * Subheadings spread through the text.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Readability\Rules;
+namespace DumpSEO\Readability\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
-use ShubhamTiwariSeoTools\Analysis\Rules\BaseRule;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
+use DumpSEO\Analysis\Rules\BaseRule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -62,8 +62,8 @@ final class SubheadingDistribution extends BaseRule {
 			return $this->result(
 				Result::WARNING,
 				Result::MEDIUM,
-				__( 'The text has no subheadings.', 'shubhamtiwari-seo-tools' ),
-				__( 'Add subheadings so readers can scan the text and find the part they need.', 'shubhamtiwari-seo-tools' ),
+				__( 'The text has no subheadings.', 'dumpseo' ),
+				__( 'Add subheadings so readers can scan the text and find the part they need.', 'dumpseo' ),
 				$meta
 			);
 		}
@@ -72,11 +72,11 @@ final class SubheadingDistribution extends BaseRule {
 				Result::WARNING,
 				Result::MEDIUM,
 				/* translators: 1: number of sections, 2: word limit. */
-				sprintf( _n( '%1$d section runs longer than %2$d words without a subheading.', '%1$d sections run longer than %2$d words without a subheading.', $long, 'shubhamtiwari-seo-tools' ), $long, self::MAX_WORDS ),
-				__( 'Add a subheading where the topic shifts.', 'shubhamtiwari-seo-tools' ),
+				sprintf( _n( '%1$d section runs longer than %2$d words without a subheading.', '%1$d sections run longer than %2$d words without a subheading.', $long, 'dumpseo' ), $long, self::MAX_WORDS ),
+				__( 'Add a subheading where the topic shifts.', 'dumpseo' ),
 				$meta
 			);
 		}
-		return $this->result( Result::PASS, Result::MEDIUM, __( 'Subheadings are spread well through the text.', 'shubhamtiwari-seo-tools' ), '', $meta );
+		return $this->result( Result::PASS, Result::MEDIUM, __( 'Subheadings are spread well through the text.', 'dumpseo' ), '', $meta );
 	}
 }

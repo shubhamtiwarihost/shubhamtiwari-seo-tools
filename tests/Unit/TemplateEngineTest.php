@@ -2,20 +2,20 @@
 /**
  * Tests for TemplateEngine and text truncation.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Meta\TemplateEngine;
-use ShubhamTiwariSeoTools\Meta\VariableValues;
+use DumpSEO\Meta\TemplateEngine;
+use DumpSEO\Meta\VariableValues;
 
 /**
  * Covers variable replacement, separator cleanup and injection resistance.
  *
- * @covers \ShubhamTiwariSeoTools\Meta\TemplateEngine
- * @covers \ShubhamTiwariSeoTools\Meta\VariableValues::truncate
+ * @covers \DumpSEO\Meta\TemplateEngine
+ * @covers \DumpSEO\Meta\VariableValues::truncate
  */
 final class TemplateEngineTest extends TestCase {
 

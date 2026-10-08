@@ -2,14 +2,14 @@
 /**
  * The site itself.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema\Pieces;
+namespace DumpSEO\Schema\Pieces;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Schema\Piece;
-use ShubhamTiwariSeoTools\Schema\SchemaContext;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Schema\Piece;
+use DumpSEO\Schema\SchemaContext;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -49,7 +49,7 @@ final class WebSite implements Piece {
 		 *
 		 * @param bool $search Default true.
 		 */
-		if ( apply_filters( 'stseo_schema_search_action', true ) ) {
+		if ( apply_filters( 'dumpseo_schema_search_action', true ) ) {
 			$node['potentialAction'] = array(
 				array(
 					'@type'       => 'SearchAction',

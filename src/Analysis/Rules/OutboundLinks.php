@@ -2,13 +2,13 @@
 /**
  * Links to other sites.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ final class OutboundLinks extends BaseRule {
 	public function check( Input $input ): Result {
 		$count = 0;
 		foreach ( $input->content->links as $href ) {
-			if ( ! \ShubhamTiwariSeoTools\Analysis\Document::is_internal( $href, $input->host ) ) {
+			if ( ! \DumpSEO\Analysis\Document::is_internal( $href, $input->host ) ) {
 				++$count;
 			}
 		}
@@ -51,12 +51,12 @@ final class OutboundLinks extends BaseRule {
 			return $this->result(
 				Result::INFO,
 				Result::LOW,
-				__( 'The text has no links to other websites.', 'shubhamtiwari-seo-tools' ),
-				__( 'Where you rely on facts from elsewhere, link to the source.', 'shubhamtiwari-seo-tools' ),
+				__( 'The text has no links to other websites.', 'dumpseo' ),
+				__( 'Where you rely on facts from elsewhere, link to the source.', 'dumpseo' ),
 				$meta
 			);
 		}
 		/* translators: %d: number of links. */
-		return $this->result( Result::PASS, Result::LOW, sprintf( _n( 'The text has %d link to another website.', 'The text has %d links to other websites.', $count, 'shubhamtiwari-seo-tools' ), $count ), '', $meta );
+		return $this->result( Result::PASS, Result::LOW, sprintf( _n( 'The text has %d link to another website.', 'The text has %d links to other websites.', $count, 'dumpseo' ), $count ), '', $meta );
 	}
 }

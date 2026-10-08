@@ -2,10 +2,10 @@
 /**
  * What is being analysed.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis;
+namespace DumpSEO\Analysis;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -119,7 +119,7 @@ final class Input {
 		if ( null === $this->sentences ) {
 			$this->sentences = array();
 			foreach ( array_merge( $this->content->paragraphs, $this->content->list_items ) as $block ) {
-				$this->sentences = array_merge( $this->sentences, \ShubhamTiwariSeoTools\Readability\Sentences::split( $block ) );
+				$this->sentences = array_merge( $this->sentences, \DumpSEO\Readability\Sentences::split( $block ) );
 			}
 		}
 		return $this->sentences;

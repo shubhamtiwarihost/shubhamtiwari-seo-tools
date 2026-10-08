@@ -2,10 +2,10 @@
 /**
  * %%variable%% template engine.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
 defined( 'ABSPATH' ) || exit;
 

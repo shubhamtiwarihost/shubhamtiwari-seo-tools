@@ -2,21 +2,21 @@
 /**
  * Visible breadcrumbs: function, shortcode and block.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Breadcrumbs\BreadcrumbsModule;
-use ShubhamTiwariSeoTools\Frontend\CurrentPage;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Breadcrumbs\BreadcrumbsModule;
+use DumpSEO\Frontend\CurrentPage;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
 use WP_UnitTestCase;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Breadcrumbs\BreadcrumbsModule
- * @covers \ShubhamTiwariSeoTools\Breadcrumbs\Renderer
- * @covers \ShubhamTiwariSeoTools\Breadcrumbs\Trail
+ * @covers \DumpSEO\Breadcrumbs\BreadcrumbsModule
+ * @covers \DumpSEO\Breadcrumbs\Renderer
+ * @covers \DumpSEO\Breadcrumbs\Trail
  */
 final class BreadcrumbsTest extends WP_UnitTestCase {
 
@@ -40,7 +40,7 @@ final class BreadcrumbsTest extends WP_UnitTestCase {
 	private function crumbs( string $url ): string {
 		$this->go_to( $url );
 		Plugin::instance()->container()->get( CurrentPage::class )->reset();
-		return stseo_get_breadcrumbs();
+		return dumpseo_get_breadcrumbs();
 	}
 
 	/**
@@ -50,7 +50,7 @@ final class BreadcrumbsTest extends WP_UnitTestCase {
 	 * @return array<int, array{0: string, 1: string}> [name, href or '' for the current page].
 	 */
 	private function items( string $html ): array {
-		preg_match_all( '#<li class="stseo-breadcrumbs__item">(?:<a href="([^"]*)">([^<]*)</a>|<span[^>]*>([^<]*)</span>)#', $html, $m, PREG_SET_ORDER );
+		preg_match_all( '#<li class="dumpseo-breadcrumbs__item">(?:<a href="([^"]*)">([^<]*)</a>|<span[^>]*>([^<]*)</span>)#', $html, $m, PREG_SET_ORDER );
 		return array_map(
 			static function ( array $found ): array {
 				return '' !== $found[1] ? array( html_entity_decode( $found[2] ), $found[1] ) : array( html_entity_decode( $found[3] ), '' );
@@ -76,7 +76,7 @@ final class BreadcrumbsTest extends WP_UnitTestCase {
 
 		$html = $this->crumbs( get_permalink( $post ) );
 
-		$this->assertStringStartsWith( '<nav class="stseo-breadcrumbs" aria-label="Breadcrumbs"><ol', $html );
+		$this->assertStringStartsWith( '<nav class="dumpseo-breadcrumbs" aria-label="Breadcrumbs"><ol', $html );
 		$this->assertSame(
 			array(
 				array( 'Home', home_url( '/' ) ),
@@ -120,12 +120,12 @@ final class BreadcrumbsTest extends WP_UnitTestCase {
 		$this->go_to( get_permalink( $page ) );
 		Plugin::instance()->container()->get( CurrentPage::class )->reset();
 
-		$shortcode = do_shortcode( '[stseo_breadcrumbs]' );
+		$shortcode = do_shortcode( '[dumpseo_breadcrumbs]' );
 		$this->assertSame( array( array( 'Home', home_url( '/' ) ), array( 'Team', '' ) ), $this->items( $shortcode ) );
 
-		$block = do_blocks( '<!-- wp:stseo/breadcrumbs {"style":{"spacing":{"margin":{"top":"2rem"}}}} /-->' );
+		$block = do_blocks( '<!-- wp:dumpseo/breadcrumbs {"style":{"spacing":{"margin":{"top":"2rem"}}}} /-->' );
 		$this->assertStringStartsWith( '<nav ', $block );
-		$this->assertStringContainsString( 'class="stseo-breadcrumbs wp-block-stseo-breadcrumbs"', $block );
+		$this->assertStringContainsString( 'class="dumpseo-breadcrumbs wp-block-dumpseo-breadcrumbs"', $block );
 		$this->assertMatchesRegularExpression( '/style="margin-top:2rem;?"/', $block, 'Block supports (spacing) apply (WordPress 6.4 adds a trailing semicolon).' );
 		$this->assertSame( $this->items( $shortcode ), $this->items( $block ) );
 	}

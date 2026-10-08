@@ -2,21 +2,21 @@
 /**
  * Settings screen: registration, permissions, saving and rendering.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Admin\SettingsPage;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Admin\SettingsPage;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
 use WP_UnitTestCase;
 use WPDieException;
 
 /**
  * Exercises the settings page against real WordPress.
  *
- * @covers \ShubhamTiwariSeoTools\Admin\SettingsPage
+ * @covers \DumpSEO\Admin\SettingsPage
  */
 final class SettingsPageTest extends WP_UnitTestCase {
 
@@ -38,7 +38,7 @@ final class SettingsPageTest extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Roles and whether they may manage ShubhamTiwari SEO Tools settings.
+	 * Roles and whether they may manage DumpSEO settings.
 	 *
 	 * @return array<string, array{string, bool}>
 	 */
@@ -107,7 +107,7 @@ final class SettingsPageTest extends WP_UnitTestCase {
 		$this->assertArrayNotHasKey( 'evil_key', $stored );
 
 		$codes = wp_list_pluck( get_settings_errors( Settings::OPTION ), 'code' );
-		$this->assertContains( 'stseo_invalid_organization_logo', $codes );
+		$this->assertContains( 'dumpseo_invalid_organization_logo', $codes );
 	}
 
 	public function test_settings_option_is_autoloaded(): void {
@@ -150,7 +150,7 @@ final class SettingsPageTest extends WP_UnitTestCase {
 				}
 			}
 		}
-		$this->assertMatchesRegularExpression( '/<label for="stseo-remove-data-on-uninstall"><input type="checkbox"/', $html );
+		$this->assertMatchesRegularExpression( '/<label for="dumpseo-remove-data-on-uninstall"><input type="checkbox"/', $html );
 	}
 
 	public function test_plugins_screen_settings_link_only_for_admins(): void {
@@ -160,6 +160,6 @@ final class SettingsPageTest extends WP_UnitTestCase {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 		$links = $this->page->action_links( array() );
 		$this->assertCount( 1, $links );
-		$this->assertStringContainsString( 'page=shubhamtiwari-seo-tools', $links[0] );
+		$this->assertStringContainsString( 'page=dumpseo', $links[0] );
 	}
 }

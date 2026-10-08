@@ -2,10 +2,10 @@
 /**
  * Request context.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
 defined( 'ABSPATH' ) || exit;
 

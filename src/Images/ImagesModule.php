@@ -2,35 +2,35 @@
 /**
  * Image SEO: missing alternative text.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Images;
+namespace DumpSEO\Images;
 
-use ShubhamTiwariSeoTools\Admin\SettingsPage;
-use ShubhamTiwariSeoTools\Context;
-use ShubhamTiwariSeoTools\Module;
+use DumpSEO\Admin\SettingsPage;
+use DumpSEO\Context;
+use DumpSEO\Module;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Finds images without alternative text. Read-only: ShubhamTiwari SEO Tools never changes
+ * Finds images without alternative text. Read-only: DumpSEO never changes
  * media; the site owner edits alt text in the media library.
  *
  * - Media Library (list view): "Alt text" column and a "Missing alt text" filter.
- * - ShubhamTiwari SEO Tools settings, "Images" section: how many images have no alt text, with a link to that list.
+ * - DumpSEO settings, "Images" section: how many images have no alt text, with a link to that list.
  */
 final class ImagesModule implements Module {
 
 	/**
 	 * Query variable of the media list filter.
 	 */
-	public const FILTER_VAR = 'stseo_alt';
+	public const FILTER_VAR = 'dumpseo_alt';
 
 	/**
 	 * Media list column ID.
 	 */
-	public const COLUMN = 'stseo_alt';
+	public const COLUMN = 'dumpseo_alt';
 
 	/**
 	 * Request context.
@@ -63,7 +63,7 @@ final class ImagesModule implements Module {
 		add_action( 'manage_media_custom_column', array( $this, 'render_column' ), 10, 2 );
 		add_action( 'restrict_manage_posts', array( $this, 'render_filter' ) );
 		add_action( 'pre_get_posts', array( $this, 'apply_filter' ) );
-		add_action( 'stseo_settings_section_images', array( $this, 'render_report' ) );
+		add_action( 'dumpseo_settings_section_images', array( $this, 'render_report' ) );
 	}
 
 	/**
@@ -121,11 +121,11 @@ final class ImagesModule implements Module {
 		foreach ( (array) $columns as $key => $label ) {
 			$result[ (string) $key ] = (string) $label;
 			if ( 'title' === $key ) {
-				$result[ self::COLUMN ] = __( 'Alt text', 'shubhamtiwari-seo-tools' );
+				$result[ self::COLUMN ] = __( 'Alt text', 'dumpseo' );
 			}
 		}
 		if ( ! isset( $result[ self::COLUMN ] ) ) {
-			$result[ self::COLUMN ] = __( 'Alt text', 'shubhamtiwari-seo-tools' );
+			$result[ self::COLUMN ] = __( 'Alt text', 'dumpseo' );
 		}
 		return $result;
 	}
@@ -143,8 +143,8 @@ final class ImagesModule implements Module {
 		$alt = trim( (string) get_post_meta( (int) $post_id, '_wp_attachment_image_alt', true ) );
 		if ( '' === $alt ) {
 			printf(
-				'<span class="stseo-alt-missing"><span aria-hidden="true">✕ </span>%s</span>',
-				esc_html__( 'Missing', 'shubhamtiwari-seo-tools' )
+				'<span class="dumpseo-alt-missing"><span aria-hidden="true">✕ </span>%s</span>',
+				esc_html__( 'Missing', 'dumpseo' )
 			);
 			return;
 		}
@@ -163,10 +163,10 @@ final class ImagesModule implements Module {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only list filter, like core's own filters.
 		$current = isset( $_GET[ self::FILTER_VAR ] ) ? sanitize_key( wp_unslash( $_GET[ self::FILTER_VAR ] ) ) : '';
 		?>
-		<label for="stseo-alt-filter" class="screen-reader-text"><?php esc_html_e( 'Filter by alt text', 'shubhamtiwari-seo-tools' ); ?></label>
-		<select name="<?php echo esc_attr( self::FILTER_VAR ); ?>" id="stseo-alt-filter">
-			<option value=""><?php esc_html_e( 'All alt text', 'shubhamtiwari-seo-tools' ); ?></option>
-			<option value="missing" <?php selected( $current, 'missing' ); ?>><?php esc_html_e( 'Missing alt text', 'shubhamtiwari-seo-tools' ); ?></option>
+		<label for="dumpseo-alt-filter" class="screen-reader-text"><?php esc_html_e( 'Filter by alt text', 'dumpseo' ); ?></label>
+		<select name="<?php echo esc_attr( self::FILTER_VAR ); ?>" id="dumpseo-alt-filter">
+			<option value=""><?php esc_html_e( 'All alt text', 'dumpseo' ); ?></option>
+			<option value="missing" <?php selected( $current, 'missing' ); ?>><?php esc_html_e( 'Missing alt text', 'dumpseo' ); ?></option>
 		</select>
 		<?php
 	}
@@ -198,7 +198,7 @@ final class ImagesModule implements Module {
 		}
 		$count = self::missing_alt_count();
 		if ( 0 === $count ) {
-			printf( '<p><span aria-hidden="true">✓ </span>%s</p>', esc_html__( 'Every image in the media library has alternative text.', 'shubhamtiwari-seo-tools' ) );
+			printf( '<p><span aria-hidden="true">✓ </span>%s</p>', esc_html__( 'Every image in the media library has alternative text.', 'dumpseo' ) );
 			return;
 		}
 		printf(
@@ -206,7 +206,7 @@ final class ImagesModule implements Module {
 			esc_html(
 				sprintf(
 					/* translators: %s: number of images. */
-					_n( '%s image in the media library has no alternative text.', '%s images in the media library have no alternative text.', $count, 'shubhamtiwari-seo-tools' ),
+					_n( '%s image in the media library has no alternative text.', '%s images in the media library have no alternative text.', $count, 'dumpseo' ),
 					number_format_i18n( $count )
 				)
 			),
@@ -219,8 +219,8 @@ final class ImagesModule implements Module {
 					admin_url( 'upload.php' )
 				)
 			),
-			esc_html__( 'Review them in the media library', 'shubhamtiwari-seo-tools' )
+			esc_html__( 'Review them in the media library', 'dumpseo' )
 		);
-		echo '<p class="description">' . esc_html__( 'Alternative text describes an image for people who cannot see it and helps image search. ShubhamTiwari SEO Tools only reports; it never changes your media. Purely decorative images can stay empty.', 'shubhamtiwari-seo-tools' ) . '</p>';
+		echo '<p class="description">' . esc_html__( 'Alternative text describes an image for people who cannot see it and helps image search. DumpSEO only reports; it never changes your media. Purely decorative images can stay empty.', 'dumpseo' ) . '</p>';
 	}
 }

@@ -2,10 +2,10 @@
 
 ## Where a title or description comes from
 
-For every frontend page ShubhamTiwari SEO Tools decides, in order:
+For every frontend page DumpSEO decides, in order:
 
 1. **Custom value** saved on the post, page or term (SEO title / meta description fields). May contain variables.
-2. **Template** from *SEO Tools → Search appearance* for that kind of page.
+2. **Template** from *DumpSEO → Search appearance* for that kind of page.
 3. If the result is empty: the **title** falls back to WordPress's own title; **no description** tag is printed.
 
 | Page | Custom value from | Template setting |
@@ -28,7 +28,7 @@ For every frontend page ShubhamTiwari SEO Tools decides, in order:
 | `%%title%%` | Post title, term name, author name, post type name, date label or search phrase — whatever the page is about |
 | `%%site_name%%` | Site title (Settings → General) |
 | `%%sitedesc%%` | Site tagline |
-| `%%separator%%` | Separator chosen in ShubhamTiwari SEO Tools settings |
+| `%%separator%%` | Separator chosen in DumpSEO settings |
 | `%%excerpt%%` | Manual excerpt, otherwise the start of the content, plain text, max 155 characters (cut at a word). Empty for password-protected posts. |
 | `%%description%%` | Term description, author biography or post type description |
 | `%%category%%` | First category of the post (alphabetical); the term name on category archives |
@@ -39,7 +39,7 @@ For every frontend page ShubhamTiwari SEO Tools decides, in order:
 | `%%pt_singular%%`, `%%pt_plural%%` | Post type name |
 | `%%currentyear%%` | Current year |
 
-Developers can add variables with the `stseo_template_variables` filter (values: string or closure returning string).
+Developers can add variables with the `dumpseo_template_variables` filter (values: string or closure returning string).
 
 ## Rendering rules
 
@@ -53,4 +53,4 @@ Developers can add variables with the `stseo_template_variables` filter (values:
 
 - `<title>`: through core's `pre_get_document_title` (themes with `title-tag` support — all block themes) and `wp_title` (older themes). Feed titles are not changed.
 - `<meta name="description">`: printed early in `wp_head`.
-- Disable both with `add_filter( 'stseo_head_output_enabled', '__return_false' );`.
+- Disable both with `add_filter( 'dumpseo_head_output_enabled', '__return_false' );`.

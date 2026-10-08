@@ -1,5 +1,5 @@
 /**
- * Pure helpers for the ShubhamTiwari SEO Tools sidebar (no WordPress imports, unit-tested).
+ * Pure helpers for the DumpSEO sidebar (no WordPress imports, unit-tested).
  */
 
 /**

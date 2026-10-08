@@ -2,16 +2,16 @@
 /**
  * One part of the schema graph.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema;
+namespace DumpSEO\Schema;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * A schema.org node type. Pieces are registered through the
- * `stseo_schema_pieces` filter and refer to each other by `@id`
+ * `dumpseo_schema_pieces` filter and refer to each other by `@id`
  * (see SchemaContext), never by calling each other.
  */
 interface Piece {

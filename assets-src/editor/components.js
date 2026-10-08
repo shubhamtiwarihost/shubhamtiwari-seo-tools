@@ -1,18 +1,18 @@
 /**
- * Presentational components for the ShubhamTiwari SEO Tools sidebar.
+ * Presentational components for the DumpSEO sidebar.
  */
 import { createElement } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import { charLength, lengthBand } from './utils';
 
 export const STATUS = {
-	error: { symbol: '✕', label: __( 'Problem', 'shubhamtiwari-seo-tools' ) },
+	error: { symbol: '✕', label: __( 'Problem', 'dumpseo' ) },
 	warning: {
 		symbol: '!',
-		label: __( 'Improvement', 'shubhamtiwari-seo-tools' ),
+		label: __( 'Improvement', 'dumpseo' ),
 	},
-	info: { symbol: 'i', label: __( 'Note', 'shubhamtiwari-seo-tools' ) },
-	pass: { symbol: '✓', label: __( 'Good', 'shubhamtiwari-seo-tools' ) },
+	info: { symbol: 'i', label: __( 'Note', 'dumpseo' ) },
+	pass: { symbol: '✓', label: __( 'Good', 'dumpseo' ) },
 };
 
 /**
@@ -24,11 +24,11 @@ export const STATUS = {
 export function StatusMarker( { status } ) {
 	const info = STATUS[ status ] || STATUS.info;
 	return (
-		<span className={ `stseo-status stseo-status--${ status }` }>
-			<span aria-hidden="true" className="stseo-status__symbol">
+		<span className={ `dumpseo-status dumpseo-status--${ status }` }>
+			<span aria-hidden="true" className="dumpseo-status__symbol">
 				{ info.symbol }
 			</span>
-			<span className="stseo-status__label">{ info.label }</span>
+			<span className="dumpseo-status__label">{ info.label }</span>
 		</span>
 	);
 }
@@ -47,14 +47,14 @@ export function LengthHint( { text, min, max } ) {
 	let message;
 	switch ( band ) {
 		case 'empty':
-			message = __( 'Empty.', 'shubhamtiwari-seo-tools' );
+			message = __( 'Empty.', 'dumpseo' );
 			break;
 		case 'short':
 			message = sprintf(
 				/* translators: 1: characters, 2: recommended minimum, 3: recommended maximum. */
 				__(
 					'%1$d characters — a little short (aim for %2$d–%3$d).',
-					'shubhamtiwari-seo-tools'
+					'dumpseo'
 				),
 				length,
 				min,
@@ -66,7 +66,7 @@ export function LengthHint( { text, min, max } ) {
 				/* translators: 1: characters, 2: recommended minimum, 3: recommended maximum. */
 				__(
 					'%1$d characters — may be cut off (aim for %2$d–%3$d).',
-					'shubhamtiwari-seo-tools'
+					'dumpseo'
 				),
 				length,
 				min,
@@ -76,17 +76,14 @@ export function LengthHint( { text, min, max } ) {
 		default:
 			message = sprintf(
 				/* translators: 1: characters, 2: recommended minimum, 3: recommended maximum. */
-				__(
-					'%1$d characters — good length (%2$d–%3$d).',
-					'shubhamtiwari-seo-tools'
-				),
+				__( '%1$d characters — good length (%2$d–%3$d).', 'dumpseo' ),
 				length,
 				min,
 				max
 			);
 	}
 	return (
-		<span className={ `stseo-length stseo-length--${ band }` }>
+		<span className={ `dumpseo-length dumpseo-length--${ band }` }>
 			{ message }
 		</span>
 	);
@@ -103,22 +100,19 @@ export function LengthHint( { text, min, max } ) {
 export function SearchPreview( { title, url, description } ) {
 	return (
 		<div
-			className="stseo-preview"
-			aria-label={ __(
-				'Search result preview',
-				'shubhamtiwari-seo-tools'
-			) }
+			className="dumpseo-preview"
+			aria-label={ __( 'Search result preview', 'dumpseo' ) }
 			role="group"
 		>
-			<p className="stseo-preview__url">{ url }</p>
-			<p className="stseo-preview__title">
-				{ title || __( '(no title)', 'shubhamtiwari-seo-tools' ) }
+			<p className="dumpseo-preview__url">{ url }</p>
+			<p className="dumpseo-preview__title">
+				{ title || __( '(no title)', 'dumpseo' ) }
 			</p>
-			<p className="stseo-preview__description">
+			<p className="dumpseo-preview__description">
 				{ description ||
 					__(
 						'No description: search engines will pick text from the page.',
-						'shubhamtiwari-seo-tools'
+						'dumpseo'
 					) }
 			</p>
 		</div>
@@ -136,18 +130,18 @@ export function ResultList( { report } ) {
 		return null;
 	}
 	return (
-		<ul className="stseo-results">
+		<ul className="dumpseo-results">
 			{ report.results.map( ( result ) => (
 				<li
 					key={ result.id }
-					className={ `stseo-result stseo-result--${ result.status }` }
+					className={ `dumpseo-result dumpseo-result--${ result.status }` }
 				>
 					<StatusMarker status={ result.status } />
-					<span className="stseo-result__message">
+					<span className="dumpseo-result__message">
 						{ result.message }
 					</span>
 					{ result.recommendation && (
-						<span className="stseo-result__advice">
+						<span className="dumpseo-result__advice">
 							{ result.recommendation }
 						</span>
 					) }

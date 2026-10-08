@@ -2,7 +2,7 @@
 
 ## Canonical URL
 
-ShubhamTiwari SEO Tools prints one `<link rel="canonical">` per page and removes WordPress's own (which only covers single posts), so there is never a duplicate.
+DumpSEO prints one `<link rel="canonical">` per page and removes WordPress's own (which only covers single posts), so there is never a duplicate.
 
 | Page | Canonical |
 |---|---|
@@ -13,15 +13,15 @@ ShubhamTiwari SEO Tools prints one `<link rel="canonical">` per page and removes
 
 - The canonical is built from WordPress's permalink functions, never copied from the address bar, so tracking parameters like `?utm_source=` never appear in it.
 - **Custom canonical:** a post, page or term can point to another URL (for content duplicated elsewhere). It must be a full `https://` or `http://` address; anything else is rejected.
-- Developers: `stseo_canonical` filter (return `''` to print none).
+- Developers: `dumpseo_canonical` filter (return `''` to print none).
 
 ## Search engine indexing (robots meta)
 
-ShubhamTiwari SEO Tools adds directives to WordPress's single robots tag (core `wp_robots`); it never prints a second one.
+DumpSEO adds directives to WordPress's single robots tag (core `wp_robots`); it never prints a second one.
 
 **Defaults: nothing is hidden.** Search results and 404 pages are always `noindex`.
 
-**Per page type** (*SEO Tools → Search appearance*): "hide from search engines (noindex)" for each post type, taxonomy, author archives and date archives. The homepage has no such switch on purpose.
+**Per page type** (*DumpSEO → Search appearance*): "hide from search engines (noindex)" for each post type, taxonomy, author archives and date archives. The homepage has no such switch on purpose.
 
 **Per post / term:**
 
@@ -32,6 +32,6 @@ ShubhamTiwari SEO Tools adds directives to WordPress's single robots tag (core `
 | Hide from search results (noindex) | Hides this item only |
 | nofollow / noarchive / nosnippet / noimageindex | Added on top |
 
-**WordPress's "Discourage search engines from indexing this site"** (Settings → Reading) always wins: ShubhamTiwari SEO Tools never removes core's noindex. The ShubhamTiwari SEO Tools settings screen shows a warning while it is on.
+**WordPress's "Discourage search engines from indexing this site"** (Settings → Reading) always wins: DumpSEO never removes core's noindex. The DumpSEO settings screen shows a warning while it is on.
 
-Stored as `_stseo_robots`, a comma-separated list limited to `index, noindex, nofollow, noarchive, nosnippet, noimageindex`; anything else is discarded, and `noindex` wins over `index`.
+Stored as `_dumpseo_robots`, a comma-separated list limited to `index, noindex, nofollow, noarchive, nosnippet, noimageindex`; anything else is discarded, and `noindex` wins over `index`.

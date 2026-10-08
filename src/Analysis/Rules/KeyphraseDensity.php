@@ -2,13 +2,13 @@
 /**
  * How often the keyphrase is used.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -55,22 +55,22 @@ final class KeyphraseDensity extends BaseRule {
 			return $this->result(
 				Result::WARNING,
 				Result::HIGH,
-				__( 'The focus keyphrase does not appear in the text.', 'shubhamtiwari-seo-tools' ),
-				__( 'Use the keyphrase where it fits naturally in the text.', 'shubhamtiwari-seo-tools' ),
+				__( 'The focus keyphrase does not appear in the text.', 'dumpseo' ),
+				__( 'Use the keyphrase where it fits naturally in the text.', 'dumpseo' ),
 				$meta
 			);
 		}
 		/* translators: 1: number of times the keyphrase is used, 2: uses per 100 words. */
-		$found = sprintf( _n( 'The focus keyphrase is used %1$d time (%2$s per 100 words).', 'The focus keyphrase is used %1$d times (%2$s per 100 words).', $count, 'shubhamtiwari-seo-tools' ), $count, (string) $density );
+		$found = sprintf( _n( 'The focus keyphrase is used %1$d time (%2$s per 100 words).', 'The focus keyphrase is used %1$d times (%2$s per 100 words).', $count, 'dumpseo' ), $count, (string) $density );
 
 		if ( $density < 0.5 ) {
-			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Use the keyphrase a little more often.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Use the keyphrase a little more often.', 'dumpseo' ), $meta );
 		}
 		if ( $density > 4.5 ) {
-			return $this->result( Result::ERROR, Result::HIGH, $found, __( 'This is far more than reads naturally. Replace some uses with synonyms or pronouns.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::ERROR, Result::HIGH, $found, __( 'This is far more than reads naturally. Replace some uses with synonyms or pronouns.', 'dumpseo' ), $meta );
 		}
 		if ( $density > 3 ) {
-			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Use the keyphrase a little less often so the text does not feel repetitive.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Use the keyphrase a little less often so the text does not feel repetitive.', 'dumpseo' ), $meta );
 		}
 		return $this->result( Result::PASS, Result::HIGH, $found, '', $meta );
 	}

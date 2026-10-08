@@ -2,21 +2,21 @@
 /**
  * Builds the JSON-LD graph.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema;
+namespace DumpSEO\Schema;
 
-use ShubhamTiwariSeoTools\Breadcrumbs\Trail;
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Meta\PageContext;
-use ShubhamTiwariSeoTools\Schema\Pieces\Article;
-use ShubhamTiwariSeoTools\Schema\Pieces\BreadcrumbList;
-use ShubhamTiwariSeoTools\Schema\Pieces\PrimaryImage;
-use ShubhamTiwariSeoTools\Schema\Pieces\Publisher;
-use ShubhamTiwariSeoTools\Schema\Pieces\WebPage;
-use ShubhamTiwariSeoTools\Schema\Pieces\WebSite;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Breadcrumbs\Trail;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Meta\PageContext;
+use DumpSEO\Schema\Pieces\Article;
+use DumpSEO\Schema\Pieces\BreadcrumbList;
+use DumpSEO\Schema\Pieces\PrimaryImage;
+use DumpSEO\Schema\Pieces\Publisher;
+use DumpSEO\Schema\Pieces\WebPage;
+use DumpSEO\Schema\Pieces\WebSite;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -24,8 +24,8 @@ defined( 'ABSPATH' ) || exit;
  * Collects nodes from every registered piece into one `@graph`.
  *
  * Pieces: publisher, website, webpage, primary_image, breadcrumb, article.
- * Extensions add, replace or remove pieces with `stseo_schema_pieces`
- * and change the final graph with `stseo_schema_graph`.
+ * Extensions add, replace or remove pieces with `dumpseo_schema_pieces`
+ * and change the final graph with `dumpseo_schema_graph`.
  */
 class Graph {
 
@@ -81,7 +81,7 @@ class Graph {
 		 * @param array<string, mixed> $pieces  Pieces keyed by ID.
 		 * @param SchemaContext        $context Schema context.
 		 */
-		$pieces = apply_filters( 'stseo_schema_pieces', $pieces, $context );
+		$pieces = apply_filters( 'dumpseo_schema_pieces', $pieces, $context );
 
 		$graph = array();
 		foreach ( (array) $pieces as $piece ) {
@@ -99,7 +99,7 @@ class Graph {
 		 * @param array<int, mixed> $graph   Nodes.
 		 * @param SchemaContext     $context Schema context.
 		 */
-		$graph = apply_filters( 'stseo_schema_graph', $graph, $context );
+		$graph = apply_filters( 'dumpseo_schema_graph', $graph, $context );
 
 		$nodes = array();
 		$ids   = array();

@@ -2,13 +2,13 @@
 /**
  * Alternative text on images.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -53,14 +53,14 @@ final class ImageAlt extends BaseRule {
 			'missing' => $missing,
 		);
 		if ( 0 === $missing ) {
-			return $this->result( Result::PASS, Result::MEDIUM, __( 'Every image has alternative text.', 'shubhamtiwari-seo-tools' ), '', $meta );
+			return $this->result( Result::PASS, Result::MEDIUM, __( 'Every image has alternative text.', 'dumpseo' ), '', $meta );
 		}
 		return $this->result(
 			Result::WARNING,
 			Result::MEDIUM,
 			/* translators: 1: images without alt text, 2: total images. */
-			sprintf( _n( '%1$d of %2$d image has no alternative text.', '%1$d of %2$d images have no alternative text.', $total, 'shubhamtiwari-seo-tools' ), $missing, $total ),
-			__( 'Describe what each image shows. Purely decorative images can stay empty.', 'shubhamtiwari-seo-tools' ),
+			sprintf( _n( '%1$d of %2$d image has no alternative text.', '%1$d of %2$d images have no alternative text.', $total, 'dumpseo' ), $missing, $total ),
+			__( 'Describe what each image shows. Purely decorative images can stay empty.', 'dumpseo' ),
 			$meta
 		);
 	}

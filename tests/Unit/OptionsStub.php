@@ -2,10 +2,10 @@
 /**
  * In-memory replacement for the WordPress options API.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Functions;
 

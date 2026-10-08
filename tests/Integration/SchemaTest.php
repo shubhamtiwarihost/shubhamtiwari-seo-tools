@@ -2,34 +2,34 @@
 /**
  * JSON-LD output on real requests.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Frontend\CurrentPage;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Schema\Piece;
-use ShubhamTiwariSeoTools\Schema\SchemaContext;
-use ShubhamTiwariSeoTools\Schema\SchemaModule;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Frontend\CurrentPage;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Plugin;
+use DumpSEO\Schema\Piece;
+use DumpSEO\Schema\SchemaContext;
+use DumpSEO\Schema\SchemaModule;
+use DumpSEO\Settings\Settings;
 use WP_UnitTestCase;
 
 /**
  * Checks the structured data printed in wp_head.
  *
- * @covers \ShubhamTiwariSeoTools\Schema\SchemaModule
- * @covers \ShubhamTiwariSeoTools\Schema\Graph
- * @covers \ShubhamTiwariSeoTools\Schema\SchemaContext
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\Publisher
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\WebSite
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\WebPage
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\PrimaryImage
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\BreadcrumbList
- * @covers \ShubhamTiwariSeoTools\Schema\Pieces\Article
- * @covers \ShubhamTiwariSeoTools\Breadcrumbs\Trail
- * @covers \ShubhamTiwariSeoTools\Compatibility\Conflicts
+ * @covers \DumpSEO\Schema\SchemaModule
+ * @covers \DumpSEO\Schema\Graph
+ * @covers \DumpSEO\Schema\SchemaContext
+ * @covers \DumpSEO\Schema\Pieces\Publisher
+ * @covers \DumpSEO\Schema\Pieces\WebSite
+ * @covers \DumpSEO\Schema\Pieces\WebPage
+ * @covers \DumpSEO\Schema\Pieces\PrimaryImage
+ * @covers \DumpSEO\Schema\Pieces\BreadcrumbList
+ * @covers \DumpSEO\Schema\Pieces\Article
+ * @covers \DumpSEO\Breadcrumbs\Trail
+ * @covers \DumpSEO\Compatibility\Conflicts
  */
 final class SchemaTest extends WP_UnitTestCase {
 
@@ -75,7 +75,7 @@ final class SchemaTest extends WP_UnitTestCase {
 			return array();
 		}
 		$this->assertSame( 1, substr_count( $html, '<script' ), 'Exactly one JSON-LD block.' );
-		$this->assertSame( 1, preg_match( '#^<script type="application/ld\+json" class="stseo-schema">(.*)</script>\n$#s', $html, $m ) );
+		$this->assertSame( 1, preg_match( '#^<script type="application/ld\+json" class="dumpseo-schema">(.*)</script>\n$#s', $html, $m ) );
 		$data = json_decode( $m[1], true );
 		$this->assertIsArray( $data, 'Valid JSON.' );
 		$this->assertSame( 'https://schema.org', $data['@context'] );
@@ -280,10 +280,10 @@ final class SchemaTest extends WP_UnitTestCase {
 		$other = static function () {
 			return 'Other SEO Plugin';
 		};
-		add_filter( 'stseo_schema_conflict', $other );
+		add_filter( 'dumpseo_schema_conflict', $other );
 		$this->assertSame( '', $this->html( $url ) );
 		$this->assertStringContainsString( 'Other SEO Plugin', get_echo( array( $this->schema, 'render_notice' ) ) );
-		remove_filter( 'stseo_schema_conflict', $other );
+		remove_filter( 'dumpseo_schema_conflict', $other );
 
 		$faq = new class() implements Piece {
 			public function is_needed( SchemaContext $context ): bool {
@@ -305,9 +305,9 @@ final class SchemaTest extends WP_UnitTestCase {
 			$pieces['bad'] = 'not a piece';
 			return $pieces;
 		};
-		add_filter( 'stseo_schema_pieces', $add );
+		add_filter( 'dumpseo_schema_pieces', $add );
 		$nodes = $this->graph( $url );
-		remove_filter( 'stseo_schema_pieces', $add );
+		remove_filter( 'dumpseo_schema_pieces', $add );
 
 		$this->assertArrayHasKey( 'FAQPage', $nodes );
 		$this->assertArrayNotHasKey( 'empty', $nodes['FAQPage'], 'Empty values removed.' );

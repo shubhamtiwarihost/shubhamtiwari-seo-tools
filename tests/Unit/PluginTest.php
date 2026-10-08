@@ -2,31 +2,31 @@
 /**
  * Tests for the Plugin module registry.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Actions;
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Admin\SettingsPage;
-use ShubhamTiwariSeoTools\Container;
-use ShubhamTiwariSeoTools\Context;
-use ShubhamTiwariSeoTools\Migrations\Migrator;
-use ShubhamTiwariSeoTools\Module;
-use ShubhamTiwariSeoTools\Plugin;
+use DumpSEO\Admin\SettingsPage;
+use DumpSEO\Container;
+use DumpSEO\Context;
+use DumpSEO\Migrations\Migrator;
+use DumpSEO\Module;
+use DumpSEO\Plugin;
 
 /**
  * Covers boot order, module filtering and extension hooks.
  *
- * @covers \ShubhamTiwariSeoTools\Plugin
+ * @covers \DumpSEO\Plugin
  */
 final class PluginTest extends TestCase {
 
 	protected function set_up() {
 		parent::set_up();
-		OptionsStub::install( array( Migrator::VERSION_OPTION => STSEO_VERSION ) );
+		OptionsStub::install( array( Migrator::VERSION_OPTION => DUMPSEO_VERSION ) );
 		Functions\when( 'is_admin' )->justReturn( false );
 		Functions\when( 'wp_doing_cron' )->justReturn( false );
 	}
@@ -43,14 +43,14 @@ final class PluginTest extends TestCase {
 		$active->expects( $this->once() )->method( 'register' );
 		$inactive->expects( $this->never() )->method( 'register' );
 
-		Filters\expectApplied( 'stseo_modules' )->once()->andReturn(
+		Filters\expectApplied( 'dumpseo_modules' )->once()->andReturn(
 			array(
 				'active'   => $active,
 				'inactive' => $inactive,
 				'bogus'    => new \stdClass(),
 			)
 		);
-		Actions\expectDone( 'stseo_loaded' )->once();
+		Actions\expectDone( 'dumpseo_loaded' )->once();
 
 		$plugin = Plugin::instance();
 		$plugin->boot();
@@ -61,7 +61,7 @@ final class PluginTest extends TestCase {
 	}
 
 	public function test_boot_runs_only_once(): void {
-		Filters\expectApplied( 'stseo_modules' )->once()->andReturn( array() );
+		Filters\expectApplied( 'dumpseo_modules' )->once()->andReturn( array() );
 
 		Plugin::instance()->boot();
 		Plugin::instance()->boot();
@@ -71,10 +71,10 @@ final class PluginTest extends TestCase {
 
 	public function test_boot_runs_migrations_before_modules(): void {
 		$options = OptionsStub::install();
-		Actions\expectDone( 'stseo_installed' )->once();
-		Filters\expectApplied( 'stseo_modules' )->once()->andReturnUsing(
+		Actions\expectDone( 'dumpseo_installed' )->once();
+		Filters\expectApplied( 'dumpseo_modules' )->once()->andReturnUsing(
 			function () use ( $options ) {
-				$this->assertSame( STSEO_VERSION, $options->options[ Migrator::VERSION_OPTION ] ?? null );
+				$this->assertSame( DUMPSEO_VERSION, $options->options[ Migrator::VERSION_OPTION ] ?? null );
 				return array();
 			}
 		);
@@ -84,7 +84,7 @@ final class PluginTest extends TestCase {
 
 	public function test_extensions_can_replace_services_before_modules_build(): void {
 		$custom = new Context();
-		Actions\expectDone( 'stseo_container' )->once()->whenHappen(
+		Actions\expectDone( 'dumpseo_container' )->once()->whenHappen(
 			static function ( Container $container ) use ( $custom ) {
 				$container->set(
 					Context::class,
@@ -118,7 +118,7 @@ final class PluginTest extends TestCase {
 
 	public function test_settings_page_loads_in_admin(): void {
 		Functions\when( 'is_admin' )->justReturn( true );
-		Functions\when( 'plugin_basename' )->justReturn( 'shubhamtiwari-seo-tools/shubhamtiwari-seo-tools.php' );
+		Functions\when( 'plugin_basename' )->justReturn( 'dumpseo/dumpseo.php' );
 
 		$plugin = Plugin::instance();
 		$plugin->boot();

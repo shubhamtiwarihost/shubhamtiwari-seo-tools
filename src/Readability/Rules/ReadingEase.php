@@ -2,16 +2,16 @@
 /**
  * Flesch reading ease.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Readability\Rules;
+namespace DumpSEO\Readability\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
-use ShubhamTiwariSeoTools\Analysis\Rules\BaseRule;
-use ShubhamTiwariSeoTools\Analysis\Document;
-use ShubhamTiwariSeoTools\Readability\Sentences;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
+use DumpSEO\Analysis\Rules\BaseRule;
+use DumpSEO\Analysis\Document;
+use DumpSEO\Readability\Sentences;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -73,7 +73,7 @@ final class ReadingEase extends BaseRule {
 			'label' => $this->label( $score ),
 		);
 		/* translators: 1: score, 2: difficulty label such as "fairly difficult". */
-		$found = sprintf( __( 'Flesch reading ease is %1$s (%2$s).', 'shubhamtiwari-seo-tools' ), (string) $score, $this->label( $score ) );
+		$found = sprintf( __( 'Flesch reading ease is %1$s (%2$s).', 'dumpseo' ), (string) $score, $this->label( $score ) );
 
 		if ( $score >= self::MIN_SCORE ) {
 			return $this->result( Result::PASS, Result::MEDIUM, $found, '', $meta );
@@ -82,7 +82,7 @@ final class ReadingEase extends BaseRule {
 			Result::WARNING,
 			Result::MEDIUM,
 			$found,
-			__( 'Use shorter sentences and more everyday words, unless your readers expect technical language.', 'shubhamtiwari-seo-tools' ),
+			__( 'Use shorter sentences and more everyday words, unless your readers expect technical language.', 'dumpseo' ),
 			$meta
 		);
 	}
@@ -94,20 +94,20 @@ final class ReadingEase extends BaseRule {
 	 */
 	private function label( float $score ): string {
 		if ( $score >= 80 ) {
-			return __( 'easy', 'shubhamtiwari-seo-tools' );
+			return __( 'easy', 'dumpseo' );
 		}
 		if ( $score >= 70 ) {
-			return __( 'fairly easy', 'shubhamtiwari-seo-tools' );
+			return __( 'fairly easy', 'dumpseo' );
 		}
 		if ( $score >= 60 ) {
-			return __( 'plain', 'shubhamtiwari-seo-tools' );
+			return __( 'plain', 'dumpseo' );
 		}
 		if ( $score >= 50 ) {
-			return __( 'fairly difficult', 'shubhamtiwari-seo-tools' );
+			return __( 'fairly difficult', 'dumpseo' );
 		}
 		if ( $score >= 30 ) {
-			return __( 'difficult', 'shubhamtiwari-seo-tools' );
+			return __( 'difficult', 'dumpseo' );
 		}
-		return __( 'very difficult', 'shubhamtiwari-seo-tools' );
+		return __( 'very difficult', 'dumpseo' );
 	}
 }

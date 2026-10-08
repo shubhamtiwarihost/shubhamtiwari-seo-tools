@@ -2,14 +2,14 @@
 /**
  * Which content must stay out of (or be kept in) the sitemap.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Sitemap;
+namespace DumpSEO\Sitemap;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -74,7 +74,7 @@ class Exclusions {
 						'fields'         => 'ids',
 						'posts_per_page' => -1,
 						'no_found_rows'  => true,
-						// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Sitemap requests only; returns IDs; only posts that have a ShubhamTiwari SEO Tools robots value are scanned.
+						// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query -- Sitemap requests only; returns IDs; only posts that have a DumpSEO robots value are scanned.
 						'meta_query'     => array( $this->token_clause( $token ) ),
 					)
 				)

@@ -2,14 +2,14 @@
 /**
  * Minimal WooCommerce declarations for static analysis of src/WooCommerce.
  *
- * Only what ShubhamTiwari SEO Tools calls; signatures follow WooCommerce's own docblocks.
+ * Only what DumpSEO calls; signatures follow WooCommerce's own docblocks.
  * Read by PHPStan (scanFiles), never executed. Extend when the integration
  * uses more of WooCommerce, or switch to php-stubs/woocommerce-stubs.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-// phpcs:disable -- Declarations mirroring a third-party API; not ShubhamTiwari SEO Tools code.
+// phpcs:disable -- Declarations mirroring a third-party API; not DumpSEO code.
 
 /**
  * @param string $page cart, checkout, myaccount, shop, terms.

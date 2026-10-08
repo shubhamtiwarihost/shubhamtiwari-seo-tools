@@ -115,14 +115,14 @@ jobs:
           path: build/
       - name: Build distributable directory
         run: |
-          mkdir -p dist/shubhamtiwari-seo-tools
-          rsync -a --exclude-from=.distignore ./ dist/shubhamtiwari-seo-tools/
-          (cd dist && zip -qr shubhamtiwari-seo-tools.zip shubhamtiwari-seo-tools)
-          unzip -l dist/shubhamtiwari-seo-tools.zip
+          mkdir -p dist/dumpseo
+          rsync -a --exclude-from=.distignore ./ dist/dumpseo/
+          (cd dist && zip -qr dumpseo.zip dumpseo)
+          unzip -l dist/dumpseo.zip
       - uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: dist/shubhamtiwari-seo-tools
+          build-dir: dist/dumpseo
       - uses: actions/upload-artifact@v4
         with:
-          name: shubhamtiwari-seo-tools-zip
-          path: dist/shubhamtiwari-seo-tools.zip
+          name: dumpseo-zip
+          path: dist/dumpseo.zip

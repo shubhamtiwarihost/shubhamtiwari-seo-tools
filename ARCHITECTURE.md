@@ -3,23 +3,23 @@
 ## Boot sequence
 
 ```
-shubhamtiwari-seo-tools.php
- ├─ defines STSEO_* constants
- ├─ registers ShubhamTiwariSeoTools\Autoloader (PSR-4, src/ → ShubhamTiwariSeoTools\)
- ├─ registers activation/deactivation hooks (ShubhamTiwariSeoTools\Lifecycle)
+dumpseo.php
+ ├─ defines DUMPSEO_* constants
+ ├─ registers DumpSEO\Autoloader (PSR-4, src/ → DumpSEO\)
+ ├─ registers activation/deactivation hooks (DumpSEO\Lifecycle)
  └─ plugins_loaded
-     ├─ ShubhamTiwariSeoTools\Requirements — PHP/WP version check; notice on the Plugins screen and stop if unmet
-     └─ ShubhamTiwariSeoTools\Plugin::instance()->boot()
+     ├─ DumpSEO\Requirements — PHP/WP version check; notice on the Plugins screen and stop if unmet
+     └─ DumpSEO\Plugin::instance()->boot()
           ├─ Migrator::maybe_run()             — install/upgrade data if the stored version is older
-          ├─ do_action( 'stseo_container' ) — extensions declare/replace services
-          ├─ apply_filters( 'stseo_modules', default modules, $container )
+          ├─ do_action( 'dumpseo_container' ) — extensions declare/replace services
+          ├─ apply_filters( 'dumpseo_modules', default modules, $container )
           ├─ for each Module: if should_load() → register()
-          └─ do_action( 'stseo_loaded', $plugin )
+          └─ do_action( 'dumpseo_loaded', $plugin )
 ```
 
-## Services (`ShubhamTiwariSeoTools\Container`)
+## Services (`DumpSEO\Container`)
 
-A deliberately tiny container: services are declared with a factory, built on first `get()`, then shared. No autowiring or reflection. A service may be replaced until it has been built (this is how an extension swaps an implementation, via the `stseo_container` action); replacing a built service throws.
+A deliberately tiny container: services are declared with a factory, built on first `get()`, then shared. No autowiring or reflection. A service may be replaced until it has been built (this is how an extension swaps an implementation, via the `dumpseo_container` action); replacing a built service throws.
 
 | Service | Purpose |
 |---|---|
@@ -28,26 +28,26 @@ A deliberately tiny container: services are declared with a factory, built on fi
 
 ## Data versioning and migrations
 
-- `stseo_db_version` (autoloaded) holds the data version. It is compared with `STSEO_VERSION` on every request — one string comparison.
-- **Fresh install:** version recorded, `stseo_installed` fires, no steps run.
-- **Upgrade:** every step in `Migrations\Registry` with `stored < version <= code` runs in `version_compare` order; the version is recorded after each step, so a crash resumes at the next request. Then `stseo_upgraded` fires.
+- `dumpseo_db_version` (autoloaded) holds the data version. It is compared with `DUMPSEO_VERSION` on every request — one string comparison.
+- **Fresh install:** version recorded, `dumpseo_installed` fires, no steps run.
+- **Upgrade:** every step in `Migrations\Registry` with `stored < version <= code` runs in `version_compare` order; the version is recorded after each step, so a crash resumes at the next request. Then `dumpseo_upgraded` fires.
 - **Downgrade** (older code, newer data): nothing runs and the stored version is never lowered. Migrations must stay backward-readable for one minor version so rollback is safe.
-- **Concurrency:** `stseo_migration_lock` (not autoloaded) is taken with `add_option()`, which is atomic on the unique `option_name` key. Locks older than 10 minutes are treated as stale.
+- **Concurrency:** `dumpseo_migration_lock` (not autoloaded) is taken with `add_option()`, which is atomic on the unique `option_name` key. Locks older than 10 minutes are treated as stale.
 - Migrations run on normal requests, not only on activation, because network activation and FTP/deploy upgrades never fire the activation hook for every site.
 
 ## Settings
 
 ```
-Settings\Schema     — list of Field definitions (key, section, type, default, label); filter: stseo_settings_fields
+Settings\Schema     — list of Field definitions (key, section, type, default, label); filter: dumpseo_settings_fields
 Settings\Settings   — read API: all() / get(); stored values over defaults; wrong-typed values fall back to default
 Settings\Sanitizer  — untrusted input → clean array; invalid value keeps the old value + error message
 Admin\SettingsPage  — Settings API registration + screen (admin requests only)
 ```
 
-- **One option**, `stseo_settings`, autoloaded. Nothing is written until the owner saves, so reading never creates rows.
+- **One option**, `dumpseo_settings`, autoloaded. Nothing is written until the owner saves, so reading never creates rows.
 - **Field types:** `bool`, `text` (`sanitize_text_field`), `url` (absolute http/https only, then `esc_url_raw`), `enum` (must be a declared choice), `twitter_handle` (`^[A-Za-z0-9_]{1,15}$`, leading `@` removed).
 - **Checkboxes:** browsers omit unchecked boxes. The form posts a hidden `_sections` list; a missing boolean means "off" only for sections on that form. Programmatic `update_option()` calls change only the keys they pass.
-- **Security:** saving goes through core `options.php` → nonce from `settings_fields()` + `option_page_capability_stseo_settings_group` = `manage_options`. The render callback re-checks the capability. Every value is escaped at output.
+- **Security:** saving goes through core `options.php` → nonce from `settings_fields()` + `option_page_capability_dumpseo_settings_group` = `manage_options`. The render callback re-checks the capability. Every value is escaped at output.
 - **Idempotent sanitizing:** WordPress runs the sanitize callback twice when the option is first created; sanitizing clean output returns it unchanged (tested).
 - Full list of stored data: [docs/DATA.md](docs/DATA.md).
 
@@ -74,7 +74,7 @@ Helpers\Text::sanitize_line    sanitize_text_field() that keeps %%variables%% in
 ## Editor UI
 
 ```
-Admin\PostTypes       post types that get SEO controls (public + show_ui, not attachment; stseo_editor_post_types)
+Admin\PostTypes       post types that get SEO controls (public + show_ui, not attachment; dumpseo_editor_post_types)
 Admin\EditorModule    enqueue_block_editor_assets → build/editor (sidebar); adds "custom-fields" support at init:99
 Admin\Metabox         Classic Editor box (only when the block editor is not used for that post); nonce + edit_post
 Admin\SeoForm         shared field names + form → meta rules (used by Metabox and TermFields)
@@ -94,7 +94,7 @@ assets/js/metabox.js  Classic Editor script (no build step); renders with textCo
 CurrentPage        shared per-request resolution (context, title, description, canonical, robots) — used by HeadModule and SocialModule
 SocialTags         builds og:* / twitter:* / article:* values (plain text; image: custom → featured → default)
 SocialModule       prints at wp_head priority 5 with esc_attr/esc_url; turns off Jetpack OG; settings-screen notice
-Compatibility\Conflicts   detects other SEO plugins that print social tags (version constants); ShubhamTiwari SEO Tools then prints none
+Compatibility\Conflicts   detects other SEO plugins that print social tags (version constants); DumpSEO then prints none
 ```
 
 User guide: [docs/SOCIAL.md](docs/SOCIAL.md).
@@ -103,10 +103,10 @@ User guide: [docs/SOCIAL.md](docs/SOCIAL.md).
 
 ```
 WooCommerce\WooModule   should_load(): class_exists( 'WooCommerce' ) at plugins_loaded; only filters, never touches WooCommerce data
-                         stseo_robots_directives / stseo_sitemap_excluded_posts → cart, checkout, account hidden
-                         stseo_og_is_article + stseo_social_tags → og:type product, product:price:*, product:availability
-                         stseo_schema_article_type + stseo_schema_webpage_type → no Article, ItemPage
-                         stseo_breadcrumb_trail → Home › Shop › product_cat chain › product
+                         dumpseo_robots_directives / dumpseo_sitemap_excluded_posts → cart, checkout, account hidden
+                         dumpseo_og_is_article + dumpseo_social_tags → og:type product, product:price:*, product:availability
+                         dumpseo_schema_article_type + dumpseo_schema_webpage_type → no Article, ItemPage
+                         dumpseo_breadcrumb_trail → Home › Shop › product_cat chain › product
                          woocommerce_structured_data_breadcrumblist / _website → [] while SchemaModule::active()
 ```
 
@@ -117,12 +117,12 @@ WooCommerce\WooModule   should_load(): class_exists( 'WooCommerce' ) at plugins_
 
 ```
 Redirects\Paths            pure: source/target normalisation, protected paths, loop detection (unit-tested)
-Redirects\Store            CPT stseo_redirect (every cap = manage_options, not public, not in REST); index option
+Redirects\Store            CPT dumpseo_redirect (every cap = manage_options, not public, not in REST); index option
 Redirects\RedirectsModule  parse_request (priority 1, GET/HEAD, not REST/AJAX/cron) → wp_redirect or 410 (404 template)
 Redirects\AdminScreen      edit box, list columns, validation in wp_insert_post_data (invalid → draft + notice)
 ```
 
-- **Fast path:** `stseo_redirect_index` (source => id/target/type) is rebuilt on every change and autoloaded up to 500 redirects, so matching adds no query; above 500 it loads on demand (1 query, object-cached). It always exists (created on install, self-healing if lost) because a missing option costs a query per request.
+- **Fast path:** `dumpseo_redirect_index` (source => id/target/type) is rebuilt on every change and autoloaded up to 500 redirects, so matching adds no query; above 500 it loads on demand (1 query, object-cached). It always exists (created on install, self-healing if lost) because a missing option costs a query per request.
 - The index is maintained from `RedirectsModule` (loaded in every context), not the admin screen: `save_post`/`trashed_post`/`untrashed_post`/`deleted_post` mark it stale; it is rebuilt once at shutdown, or on the next read. So WP-CLI, imports and code keep it current. The rebuild re-validates sources and targets, because only the admin screen validates on save.
 - Matching happens before WordPress runs the main query, so redirected requests skip content queries entirely.
 - Title = normalised source path, read raw (`get_post_field`), never through display filters.
@@ -146,8 +146,8 @@ Field::TYPE_IMAGE_URL  stored/validated like TYPE_URL; the settings screen adds 
 ```
 Breadcrumbs\Trail              home → parents → current page (shared with the BreadcrumbList schema piece)
 Breadcrumbs\Renderer           trail → <nav aria-label><ol> HTML; every value escaped; settings: home label, separator
-Breadcrumbs\BreadcrumbsModule  shortcode, dynamic block stseo/breadcrumbs (render_callback + block supports), inline layout CSS
-src/functions.php              stseo_breadcrumbs() / stseo_get_breadcrumbs() for themes (loaded by shubhamtiwari-seo-tools.php)
+Breadcrumbs\BreadcrumbsModule  shortcode, dynamic block dumpseo/breadcrumbs (render_callback + block supports), inline layout CSS
+src/functions.php              dumpseo_breadcrumbs() / dumpseo_get_breadcrumbs() for themes (loaded by dumpseo.php)
 assets-src/blocks/breadcrumbs  editor side of the block: a static sample (the real trail depends on the page being viewed)
 ```
 
@@ -174,13 +174,13 @@ Breadcrumbs\Trail  home → parents → current page; shared with the visible br
 ## SEO analysis
 
 ```
-AnalysisModule     POST /stseo/v1/analysis (rest_api_init only; edit_post permission; read-only)
+AnalysisModule     POST /dumpseo/v1/analysis (rest_api_init only; edit_post permission; read-only)
 InputFactory       post + unsaved editor values → Input; titles/descriptions rendered by Resolver::resolve_custom
                    exactly as on the frontend; noindex from Robots; one capped query for duplicate keyphrases
 Input              plain values + Keyphrase + Document; rules read only this
 Document           post HTML → text, word count, first paragraph, subheadings, h1 count, links, image alts (pure PHP)
 Keyphrase          case-insensitive whole-word matching; hyphens = spaces; curly quotes = straight; slug matching
-Engine             runs Rule objects (stseo_analysis_rules), sorts worst-first, counts per status — no score
+Engine             runs Rule objects (dumpseo_analysis_rules), sorts worst-first, counts per status — no score
 Rules/             one class per check, each returning a Result {status, severity, message, recommendation, metadata}
 ```
 
@@ -188,7 +188,7 @@ Rules/             one class per check, each returning a Result {status, severit
 - Analysis runs on the stored content (block markup), not on `the_content` output, to avoid running other plugins' filters on every keystroke. Dynamic blocks and shortcodes are therefore not expanded.
 - Measured: ~7,300-word post analysed in about 5 ms, 1 MB peak. Nothing is loaded on frontend requests except one `rest_api_init` hook.
 - Two rule sets share the engine: `Engine::seo()` and `Engine::readability()`. The endpoint returns `{ seo, readability }` built from one Input.
-- Readability (`src/Readability/`): `Sentences` (sentence splitting, English syllable estimate), `English` (transition words, passive-voice indicator), and one rule class per check. Language-specific rules check `Input::is_english()`; the content language comes from the site locale (`stseo_content_locale` filter for multilingual sites).
+- Readability (`src/Readability/`): `Sentences` (sentence splitting, English syllable estimate), `English` (transition words, passive-voice indicator), and one rule class per check. Language-specific rules check `Input::is_english()`; the content language comes from the site locale (`dumpseo_content_locale` filter for multilingual sites).
 - Measured with both rule sets: ~5,900-word post in about 22 ms, 1 MB peak.
 - User guides: [docs/ANALYSIS.md](docs/ANALYSIS.md), [docs/READABILITY.md](docs/READABILITY.md).
 
@@ -213,7 +213,7 @@ ImageRenderer      WP_Sitemaps_Renderer subclass: same escaping as core + image:
 
 ## Modules
 
-Every feature is a class implementing `ShubhamTiwariSeoTools\Module`:
+Every feature is a class implementing `DumpSEO\Module`:
 
 ```php
 interface Module {
@@ -226,11 +226,11 @@ Rules:
 - `register()` only attaches hooks. Work happens inside hook callbacks, as late as possible.
 - Admin-only modules return `is_admin()` from `should_load()`; frontend-only modules return `! is_admin()`.
 - Modules receive their dependencies through the constructor. No module reaches into another module's internals.
-- Third parties (including a future Pro add-on) add or replace modules via the `stseo_modules` filter.
+- Third parties (including a future Pro add-on) add or replace modules via the `dumpseo_modules` filter.
 
 ## Why a custom autoloader instead of Composer's
 
-The distributed plugin must not depend on `vendor/`. Composer is used only for development tools. `src/Autoloader.php` is ~20 lines, maps `ShubhamTiwariSeoTools\X\Y` → `src/X/Y.php`, and rejects class names containing anything other than `[A-Za-z0-9_\]`.
+The distributed plugin must not depend on `vendor/`. Composer is used only for development tools. `src/Autoloader.php` is ~20 lines, maps `DumpSEO\X\Y` → `src/X/Y.php`, and rejects class names containing anything other than `[A-Za-z0-9_\]`.
 
 ## Why PSR-4 file names instead of `class-foo.php`
 
@@ -260,29 +260,29 @@ assets-src/editor/    Gutenberg sidebar source (built by @wordpress/scripts → 
 
 | Hook | Purpose |
 |---|---|
-| `stseo_container` (action) | Declare or replace services before modules are built |
-| `stseo_modules` (filter) | Add/replace modules |
-| `stseo_settings_fields` (filter) | Add settings fields |
-| `stseo_settings_sections` (filter) | Add settings sections |
-| `stseo_settings_section_{id}` (action) | Print help text above a settings section |
-| `stseo_template_variables` (filter) | Add or change `%%variable%%` values |
-| `stseo_head_output_enabled` (filter) | Turn off title/description/canonical/robots output |
-| `stseo_canonical` (filter) | Change or remove the canonical URL |
-| `stseo_sitemap_images` (filter) | Change a post's sitemap images |
-| `stseo_social_output_enabled`, `stseo_social_conflict`, `stseo_social_tags`, `stseo_social_image`, `stseo_og_is_article` (filters) | Social tag control |
-| `stseo_schema_output_enabled`, `stseo_schema_conflict`, `stseo_schema_pieces`, `stseo_schema_graph`, `stseo_schema_article_type`, `stseo_schema_search_action` (filters) | Structured data control |
-| `stseo_robots_directives` (filter) | Add or remove robots directives for a page (canonical, schema and sitemap follow) |
-| `stseo_sitemap_excluded_posts` (filter) | Extra post IDs to leave out of a post type's sitemap |
-| `stseo_schema_webpage_type` (filter) | schema.org type of the WebPage node |
-| `stseo_redirect` (filter) | Change or skip the redirect for a request path |
-| `stseo_editor_post_types` (filter) | Post types with the sidebar/metabox |
-| `stseo_analysis_rules`, `stseo_readability_rules` (filters) | Add, replace or remove analysis rules |
-| `stseo_transition_words`, `stseo_content_locale` (filters) | Readability word list; content language per post |
-| `stseo_breadcrumb_trail` (filter) | Change the breadcrumb trail (visible breadcrumbs and BreadcrumbList schema) |
-| `stseo_sitemap_image_hosts` (filter) | Hosts whose images count as this site's (e.g. a CDN) |
-| `stseo_loaded` (action) | Run after core modules registered |
-| `stseo_installed` (action) | First install on a site |
-| `stseo_upgraded` (action) | Data upgraded; receives from, to, steps run |
+| `dumpseo_container` (action) | Declare or replace services before modules are built |
+| `dumpseo_modules` (filter) | Add/replace modules |
+| `dumpseo_settings_fields` (filter) | Add settings fields |
+| `dumpseo_settings_sections` (filter) | Add settings sections |
+| `dumpseo_settings_section_{id}` (action) | Print help text above a settings section |
+| `dumpseo_template_variables` (filter) | Add or change `%%variable%%` values |
+| `dumpseo_head_output_enabled` (filter) | Turn off title/description/canonical/robots output |
+| `dumpseo_canonical` (filter) | Change or remove the canonical URL |
+| `dumpseo_sitemap_images` (filter) | Change a post's sitemap images |
+| `dumpseo_social_output_enabled`, `dumpseo_social_conflict`, `dumpseo_social_tags`, `dumpseo_social_image`, `dumpseo_og_is_article` (filters) | Social tag control |
+| `dumpseo_schema_output_enabled`, `dumpseo_schema_conflict`, `dumpseo_schema_pieces`, `dumpseo_schema_graph`, `dumpseo_schema_article_type`, `dumpseo_schema_search_action` (filters) | Structured data control |
+| `dumpseo_robots_directives` (filter) | Add or remove robots directives for a page (canonical, schema and sitemap follow) |
+| `dumpseo_sitemap_excluded_posts` (filter) | Extra post IDs to leave out of a post type's sitemap |
+| `dumpseo_schema_webpage_type` (filter) | schema.org type of the WebPage node |
+| `dumpseo_redirect` (filter) | Change or skip the redirect for a request path |
+| `dumpseo_editor_post_types` (filter) | Post types with the sidebar/metabox |
+| `dumpseo_analysis_rules`, `dumpseo_readability_rules` (filters) | Add, replace or remove analysis rules |
+| `dumpseo_transition_words`, `dumpseo_content_locale` (filters) | Readability word list; content language per post |
+| `dumpseo_breadcrumb_trail` (filter) | Change the breadcrumb trail (visible breadcrumbs and BreadcrumbList schema) |
+| `dumpseo_sitemap_image_hosts` (filter) | Hosts whose images count as this site's (e.g. a CDN) |
+| `dumpseo_loaded` (action) | Run after core modules registered |
+| `dumpseo_installed` (action) | First install on a site |
+| `dumpseo_upgraded` (action) | Data upgraded; receives from, to, steps run |
 | more added per phase | Documented in each module's docblock |
 
 Free never contains locked or teaser features; Pro is a separate plugin that uses these hooks.

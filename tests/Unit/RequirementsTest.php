@@ -2,16 +2,16 @@
 /**
  * Tests for Requirements.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Requirements;
+use DumpSEO\Requirements;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Requirements
+ * @covers \DumpSEO\Requirements
  */
 final class RequirementsTest extends TestCase {
 

@@ -2,23 +2,23 @@
 /**
  * Who may read and write SEO meta, via REST and the term screen.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Admin\TermFields;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\MetaModule;
-use ShubhamTiwariSeoTools\Plugin;
+use DumpSEO\Admin\TermFields;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\MetaModule;
+use DumpSEO\Plugin;
 use WP_REST_Request;
 use WP_UnitTestCase;
 
 /**
  * Capability boundaries for per-post and per-term SEO fields.
  *
- * @covers \ShubhamTiwariSeoTools\Meta\MetaModule
- * @covers \ShubhamTiwariSeoTools\Admin\TermFields
+ * @covers \DumpSEO\Meta\MetaModule
+ * @covers \DumpSEO\Admin\TermFields
  */
 final class MetaPermissionsTest extends WP_UnitTestCase {
 
@@ -148,7 +148,7 @@ final class MetaPermissionsTest extends WP_UnitTestCase {
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
 		$cat = self::factory()->category->create();
 
-		$this->submit_term( $cat, wp_create_nonce( 'stseo_term_' . $cat ), 'Great <em>news</em> "quoted"' );
+		$this->submit_term( $cat, wp_create_nonce( 'dumpseo_term_' . $cat ), 'Great <em>news</em> "quoted"' );
 
 		$this->assertSame( 'Great news "quoted"', get_term_meta( $cat, Keys::TITLE, true ) );
 	}
@@ -160,11 +160,11 @@ final class MetaPermissionsTest extends WP_UnitTestCase {
 
 		$this->submit_term( $cat, null, 'No nonce' );
 		$this->submit_term( $cat, 'forged', 'Forged' );
-		$this->submit_term( $cat, wp_create_nonce( 'stseo_term_' . $other ), 'Nonce for another term' );
+		$this->submit_term( $cat, wp_create_nonce( 'dumpseo_term_' . $other ), 'Nonce for another term' );
 		$this->assertSame( '', get_term_meta( $cat, Keys::TITLE, true ) );
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'author' ) ) );
-		$this->submit_term( $cat, wp_create_nonce( 'stseo_term_' . $cat ), 'Author attempt' );
+		$this->submit_term( $cat, wp_create_nonce( 'dumpseo_term_' . $cat ), 'Author attempt' );
 		$this->assertSame( '', get_term_meta( $cat, Keys::TITLE, true ), 'Authors cannot manage categories.' );
 	}
 
@@ -173,7 +173,7 @@ final class MetaPermissionsTest extends WP_UnitTestCase {
 		$cat = self::factory()->category->create();
 		update_term_meta( $cat, Keys::TITLE, 'Old' );
 
-		$this->submit_term( $cat, wp_create_nonce( 'stseo_term_' . $cat ), '' );
+		$this->submit_term( $cat, wp_create_nonce( 'dumpseo_term_' . $cat ), '' );
 
 		$this->assertFalse( metadata_exists( 'term', $cat, Keys::TITLE ) );
 	}
@@ -189,6 +189,6 @@ final class MetaPermissionsTest extends WP_UnitTestCase {
 
 		$this->assertStringNotContainsString( '<script>', $html );
 		$this->assertStringContainsString( 'name="' . TermFields::NONCE_FIELD . '"', $html );
-		$this->assertStringContainsString( '<label for="stseo-term-title">', $html );
+		$this->assertStringContainsString( '<label for="dumpseo-term-title">', $html );
 	}
 }

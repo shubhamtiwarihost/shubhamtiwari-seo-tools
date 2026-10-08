@@ -2,18 +2,18 @@
 /**
  * Tests for robots token parsing.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
-use ShubhamTiwariSeoTools\Meta\Robots;
+use DumpSEO\Meta\Robots;
 
 /**
  * Covers the allowlist and conflict rules for stored robots values.
  *
- * @covers \ShubhamTiwariSeoTools\Meta\Robots::sanitize
- * @covers \ShubhamTiwariSeoTools\Meta\Robots::parse
+ * @covers \DumpSEO\Meta\Robots::sanitize
+ * @covers \DumpSEO\Meta\Robots::parse
  */
 final class RobotsTest extends TestCase {
 

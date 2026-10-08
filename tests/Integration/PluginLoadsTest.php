@@ -2,14 +2,14 @@
 /**
  * Smoke tests against a real WordPress install.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Lifecycle;
-use ShubhamTiwariSeoTools\Migrations\Migrator;
-use ShubhamTiwariSeoTools\Plugin;
+use DumpSEO\Lifecycle;
+use DumpSEO\Migrations\Migrator;
+use DumpSEO\Plugin;
 use WP_UnitTestCase;
 
 /**
@@ -18,8 +18,8 @@ use WP_UnitTestCase;
 final class PluginLoadsTest extends WP_UnitTestCase {
 
 	public function test_plugin_constants_and_boot(): void {
-		$this->assertTrue( defined( 'STSEO_VERSION' ) );
-		$this->assertSame( 1, did_action( 'stseo_loaded' ) );
+		$this->assertTrue( defined( 'DUMPSEO_VERSION' ) );
+		$this->assertSame( 1, did_action( 'dumpseo_loaded' ) );
 		$this->assertInstanceOf( Plugin::class, Plugin::instance() );
 	}
 
@@ -29,7 +29,7 @@ final class PluginLoadsTest extends WP_UnitTestCase {
 		Lifecycle::activate();
 		Lifecycle::activate();
 
-		$this->assertSame( STSEO_VERSION, get_option( Migrator::VERSION_OPTION ) );
+		$this->assertSame( DUMPSEO_VERSION, get_option( Migrator::VERSION_OPTION ) );
 		$this->assertFalse( get_option( Migrator::LOCK_OPTION ), 'Lock must be released.' );
 
 		// Read on every request, so it must be autoloaded ('yes'/'on' depending on WP version).

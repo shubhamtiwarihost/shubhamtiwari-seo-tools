@@ -2,10 +2,10 @@
 /**
  * Parsed post content.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis;
+namespace DumpSEO\Analysis;
 
 defined( 'ABSPATH' ) || exit;
 

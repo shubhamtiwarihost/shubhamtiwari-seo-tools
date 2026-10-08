@@ -2,16 +2,16 @@
 /**
  * Builds Open Graph and X (Twitter) Card tags.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Social;
+namespace DumpSEO\Social;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\PageContext;
-use ShubhamTiwariSeoTools\Meta\Resolver;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\PageContext;
+use DumpSEO\Meta\Resolver;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -118,7 +118,7 @@ class SocialTags {
 		 * @param array<int, array{attr: string, key: string, value: string, url: bool}> $tags    Tags.
 		 * @param PageContext                                                            $context Page context.
 		 */
-		$filtered = apply_filters( 'stseo_social_tags', $tags, $context );
+		$filtered = apply_filters( 'dumpseo_social_tags', $tags, $context );
 
 		return $this->validate( $filtered );
 	}
@@ -150,7 +150,7 @@ class SocialTags {
 		 * @param mixed       $image   Image array {url, width, height, type, alt}, or null. Validated after filtering.
 		 * @param PageContext $context Page context.
 		 */
-		$filtered = apply_filters( 'stseo_social_image', $image, $context );
+		$filtered = apply_filters( 'dumpseo_social_image', $image, $context );
 
 		if ( ! is_array( $filtered ) || ! isset( $filtered['url'] ) || '' === (string) Text::http_url( $filtered['url'] ) ) {
 			return null;
@@ -231,7 +231,7 @@ class SocialTags {
 		 * @param bool        $article Default decision.
 		 * @param PageContext $context Page context.
 		 */
-		return (bool) apply_filters( 'stseo_og_is_article', $article, $context );
+		return (bool) apply_filters( 'dumpseo_og_is_article', $article, $context );
 	}
 
 	/**

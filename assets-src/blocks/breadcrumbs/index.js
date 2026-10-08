@@ -8,25 +8,22 @@ import { createElement } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 const SAMPLE = [
-	__( 'Home', 'shubhamtiwari-seo-tools' ),
-	__( 'Category', 'shubhamtiwari-seo-tools' ),
-	__( 'Current page', 'shubhamtiwari-seo-tools' ),
+	__( 'Home', 'dumpseo' ),
+	__( 'Category', 'dumpseo' ),
+	__( 'Current page', 'dumpseo' ),
 ];
 
 function Edit() {
-	const blockProps = useBlockProps( { className: 'stseo-breadcrumbs' } );
+	const blockProps = useBlockProps( { className: 'dumpseo-breadcrumbs' } );
 	return (
-		<nav
-			{ ...blockProps }
-			aria-label={ __( 'Breadcrumbs', 'shubhamtiwari-seo-tools' ) }
-		>
-			<ol className="stseo-breadcrumbs__list">
+		<nav { ...blockProps } aria-label={ __( 'Breadcrumbs', 'dumpseo' ) }>
+			<ol className="dumpseo-breadcrumbs__list">
 				{ SAMPLE.map( ( name, index ) => (
-					<li key={ name } className="stseo-breadcrumbs__item">
+					<li key={ name } className="dumpseo-breadcrumbs__item">
 						{ index < SAMPLE.length - 1 ? (
 							// Not a real link in the editor; the frontend links to the real pages.
 							<a
-								href="#stseo-breadcrumbs"
+								href="#dumpseo-breadcrumbs"
 								onClick={ ( event ) => event.preventDefault() }
 							>
 								{ name }
@@ -36,7 +33,7 @@ function Edit() {
 						) }
 						{ index < SAMPLE.length - 1 && (
 							<span
-								className="stseo-breadcrumbs__separator"
+								className="dumpseo-breadcrumbs__separator"
 								aria-hidden="true"
 							>
 								›
@@ -49,19 +46,16 @@ function Edit() {
 	);
 }
 
-registerBlockType( 'stseo/breadcrumbs', {
+registerBlockType( 'dumpseo/breadcrumbs', {
 	apiVersion: 3,
-	title: __( 'Breadcrumbs', 'shubhamtiwari-seo-tools' ),
+	title: __( 'Breadcrumbs', 'dumpseo' ),
 	description: __(
 		'Shows the path from the homepage to the current page. The trail is built for each page when it is displayed.',
-		'shubhamtiwari-seo-tools'
+		'dumpseo'
 	),
 	category: 'theme',
 	icon: 'arrow-right-alt2',
-	keywords: [
-		__( 'navigation', 'shubhamtiwari-seo-tools' ),
-		__( 'path', 'shubhamtiwari-seo-tools' ),
-	],
+	keywords: [ __( 'navigation', 'dumpseo' ), __( 'path', 'dumpseo' ) ],
 	edit: Edit,
 	save: () => null,
 } );

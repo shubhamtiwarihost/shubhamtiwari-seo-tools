@@ -2,10 +2,10 @@
 /**
  * Redirect source/target normalisation and loop detection.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Redirects;
+namespace DumpSEO\Redirects;
 
 defined( 'ABSPATH' ) || exit;
 

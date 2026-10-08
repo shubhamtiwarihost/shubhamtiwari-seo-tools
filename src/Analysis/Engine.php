@@ -2,10 +2,10 @@
 /**
  * Runs the analysis rules.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis;
+namespace DumpSEO\Analysis;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ class Engine {
 	 * Constructor.
 	 *
 	 * @param Rule[] $rules  Built-in rules.
-	 * @param string $filter Filter name for extensions, e.g. "stseo_analysis_rules".
+	 * @param string $filter Filter name for extensions, e.g. "dumpseo_analysis_rules".
 	 */
 	public function __construct( array $rules, string $filter ) {
 		$this->rules = array();
@@ -75,7 +75,7 @@ class Engine {
 				new Rules\SingleH1(),
 				new Rules\Indexable(),
 			),
-			'stseo_analysis_rules'
+			'dumpseo_analysis_rules'
 		);
 	}
 
@@ -85,14 +85,14 @@ class Engine {
 	public static function readability(): self {
 		return new self(
 			array(
-				new \ShubhamTiwariSeoTools\Readability\Rules\SentenceLength(),
-				new \ShubhamTiwariSeoTools\Readability\Rules\ParagraphLength(),
-				new \ShubhamTiwariSeoTools\Readability\Rules\SubheadingDistribution(),
-				new \ShubhamTiwariSeoTools\Readability\Rules\PassiveVoice(),
-				new \ShubhamTiwariSeoTools\Readability\Rules\TransitionWords(),
-				new \ShubhamTiwariSeoTools\Readability\Rules\ReadingEase(),
+				new \DumpSEO\Readability\Rules\SentenceLength(),
+				new \DumpSEO\Readability\Rules\ParagraphLength(),
+				new \DumpSEO\Readability\Rules\SubheadingDistribution(),
+				new \DumpSEO\Readability\Rules\PassiveVoice(),
+				new \DumpSEO\Readability\Rules\TransitionWords(),
+				new \DumpSEO\Readability\Rules\ReadingEase(),
 			),
-			'stseo_readability_rules'
+			'dumpseo_readability_rules'
 		);
 	}
 
@@ -106,12 +106,12 @@ class Engine {
 		/**
 		 * Filters the rules of a rule set. Entries that are not Rule instances are ignored.
 		 *
-		 * Hook names: `stseo_analysis_rules` (SEO checks), `stseo_readability_rules`.
+		 * Hook names: `dumpseo_analysis_rules` (SEO checks), `dumpseo_readability_rules`.
 		 *
 		 * @param array<string, mixed> $rules Rules keyed by ID.
 		 * @param Input                $input Analysis input.
 		 */
-		$rules = apply_filters( $this->filter, $this->rules, $input ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Always one of the two stseo_* names above.
+		$rules = apply_filters( $this->filter, $this->rules, $input ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.DynamicHooknameFound -- Always one of the two dumpseo_* names above.
 
 		$results = array();
 		foreach ( (array) $rules as $rule ) {

@@ -2,26 +2,26 @@
 /**
  * Open Graph and X Card output on real requests.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Admin\TermFields;
-use ShubhamTiwariSeoTools\Frontend\CurrentPage;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
-use ShubhamTiwariSeoTools\Social\SocialModule;
+use DumpSEO\Admin\TermFields;
+use DumpSEO\Frontend\CurrentPage;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
+use DumpSEO\Social\SocialModule;
 use WP_UnitTestCase;
 
 /**
  * Checks the social tags printed in wp_head.
  *
- * @covers \ShubhamTiwariSeoTools\Social\SocialModule
- * @covers \ShubhamTiwariSeoTools\Social\SocialTags
- * @covers \ShubhamTiwariSeoTools\Compatibility\Conflicts
- * @covers \ShubhamTiwariSeoTools\Frontend\CurrentPage
+ * @covers \DumpSEO\Social\SocialModule
+ * @covers \DumpSEO\Social\SocialTags
+ * @covers \DumpSEO\Compatibility\Conflicts
+ * @covers \DumpSEO\Frontend\CurrentPage
  */
 final class SocialTest extends WP_UnitTestCase {
 
@@ -238,14 +238,14 @@ final class SocialTest extends WP_UnitTestCase {
 		$other = static function () {
 			return 'Other SEO Plugin';
 		};
-		add_filter( 'stseo_social_conflict', $other );
+		add_filter( 'dumpseo_social_conflict', $other );
 
 		$this->assertSame( array(), $this->tags( get_permalink( $post ) ) );
-		$this->assertTrue( $this->social->jetpack_open_graph( true ), 'Jetpack left alone when ShubhamTiwari SEO Tools is not printing.' );
+		$this->assertTrue( $this->social->jetpack_open_graph( true ), 'Jetpack left alone when DumpSEO is not printing.' );
 		$this->assertStringContainsString( 'Other SEO Plugin', get_echo( array( $this->social, 'render_notice' ) ) );
 
-		remove_filter( 'stseo_social_conflict', $other );
-		$this->assertFalse( $this->social->jetpack_open_graph( true ), 'Jetpack OG off while ShubhamTiwari SEO Tools prints OG.' );
+		remove_filter( 'dumpseo_social_conflict', $other );
+		$this->assertFalse( $this->social->jetpack_open_graph( true ), 'Jetpack OG off while DumpSEO prints OG.' );
 		$this->assertSame( '', get_echo( array( $this->social, 'render_notice' ) ) );
 	}
 
@@ -270,7 +270,7 @@ final class SocialTest extends WP_UnitTestCase {
 		$fields = Plugin::build_container()->get( TermFields::class );
 		$this->assertInstanceOf( TermFields::class, $fields );
 		$_POST = array(
-			TermFields::NONCE_FIELD        => wp_create_nonce( 'stseo_term_' . $cat ),
+			TermFields::NONCE_FIELD        => wp_create_nonce( 'dumpseo_term_' . $cat ),
 			TermFields::SOCIAL_TITLE_FIELD => 'Guides for %%site_name%%',
 			TermFields::SOCIAL_DESC_FIELD  => 'Every guide we wrote.',
 			TermFields::SOCIAL_IMAGE_FIELD => 'javascript:alert(1)',

@@ -2,48 +2,48 @@
 /**
  * Plugin container and module registry.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
-use ShubhamTiwariSeoTools\Analysis\AnalysisModule;
-use ShubhamTiwariSeoTools\Analysis\Engine;
-use ShubhamTiwariSeoTools\Analysis\InputFactory;
-use ShubhamTiwariSeoTools\Admin\EditorModule;
-use ShubhamTiwariSeoTools\Admin\Metabox;
-use ShubhamTiwariSeoTools\Admin\SettingsPage;
-use ShubhamTiwariSeoTools\Admin\TermFields;
-use ShubhamTiwariSeoTools\Breadcrumbs\BreadcrumbsModule;
-use ShubhamTiwariSeoTools\Breadcrumbs\Renderer;
-use ShubhamTiwariSeoTools\Breadcrumbs\Trail;
-use ShubhamTiwariSeoTools\Compatibility\Conflicts;
-use ShubhamTiwariSeoTools\Frontend\CurrentPage;
-use ShubhamTiwariSeoTools\Frontend\HeadModule;
-use ShubhamTiwariSeoTools\Redirects\AdminScreen as RedirectsAdmin;
-use ShubhamTiwariSeoTools\Redirects\RedirectsModule;
-use ShubhamTiwariSeoTools\Redirects\Store as RedirectStore;
-use ShubhamTiwariSeoTools\Images\ImagesModule;
-use ShubhamTiwariSeoTools\Meta\Canonical;
-use ShubhamTiwariSeoTools\Meta\MetaModule;
-use ShubhamTiwariSeoTools\Meta\Resolver;
-use ShubhamTiwariSeoTools\Meta\Robots;
-use ShubhamTiwariSeoTools\Meta\TemplateEngine;
-use ShubhamTiwariSeoTools\Meta\SearchAppearanceFields;
-use ShubhamTiwariSeoTools\Meta\VariableValues;
-use ShubhamTiwariSeoTools\Migrations\Migrator;
-use ShubhamTiwariSeoTools\Migrations\Registry;
-use ShubhamTiwariSeoTools\Schema\Graph;
-use ShubhamTiwariSeoTools\Schema\SchemaModule;
-use ShubhamTiwariSeoTools\Settings\Sanitizer;
-use ShubhamTiwariSeoTools\Settings\Schema;
-use ShubhamTiwariSeoTools\Settings\Settings;
-use ShubhamTiwariSeoTools\Sitemap\Exclusions;
-use ShubhamTiwariSeoTools\Sitemap\Images;
-use ShubhamTiwariSeoTools\Sitemap\SitemapModule;
-use ShubhamTiwariSeoTools\Social\SocialModule;
-use ShubhamTiwariSeoTools\Social\SocialTags;
-use ShubhamTiwariSeoTools\WooCommerce\WooModule;
+use DumpSEO\Analysis\AnalysisModule;
+use DumpSEO\Analysis\Engine;
+use DumpSEO\Analysis\InputFactory;
+use DumpSEO\Admin\EditorModule;
+use DumpSEO\Admin\Metabox;
+use DumpSEO\Admin\SettingsPage;
+use DumpSEO\Admin\TermFields;
+use DumpSEO\Breadcrumbs\BreadcrumbsModule;
+use DumpSEO\Breadcrumbs\Renderer;
+use DumpSEO\Breadcrumbs\Trail;
+use DumpSEO\Compatibility\Conflicts;
+use DumpSEO\Frontend\CurrentPage;
+use DumpSEO\Frontend\HeadModule;
+use DumpSEO\Redirects\AdminScreen as RedirectsAdmin;
+use DumpSEO\Redirects\RedirectsModule;
+use DumpSEO\Redirects\Store as RedirectStore;
+use DumpSEO\Images\ImagesModule;
+use DumpSEO\Meta\Canonical;
+use DumpSEO\Meta\MetaModule;
+use DumpSEO\Meta\Resolver;
+use DumpSEO\Meta\Robots;
+use DumpSEO\Meta\TemplateEngine;
+use DumpSEO\Meta\SearchAppearanceFields;
+use DumpSEO\Meta\VariableValues;
+use DumpSEO\Migrations\Migrator;
+use DumpSEO\Migrations\Registry;
+use DumpSEO\Schema\Graph;
+use DumpSEO\Schema\SchemaModule;
+use DumpSEO\Settings\Sanitizer;
+use DumpSEO\Settings\Schema;
+use DumpSEO\Settings\Settings;
+use DumpSEO\Sitemap\Exclusions;
+use DumpSEO\Sitemap\Images;
+use DumpSEO\Sitemap\SitemapModule;
+use DumpSEO\Social\SocialModule;
+use DumpSEO\Social\SocialTags;
+use DumpSEO\WooCommerce\WooModule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
  * Owns the service container and boots modules once.
  *
  * Extensions (including a future Pro add-on) add modules through the
- * `stseo_modules` filter and services through the `stseo_container`
+ * `dumpseo_modules` filter and services through the `dumpseo_container`
  * action rather than by editing this class.
  */
 final class Plugin {
@@ -118,7 +118,7 @@ final class Plugin {
 		$container->set(
 			Migrator::class,
 			static function () {
-				return new Migrator( STSEO_VERSION, Registry::all() );
+				return new Migrator( DUMPSEO_VERSION, Registry::all() );
 			}
 		);
 		$container->set(
@@ -291,10 +291,10 @@ final class Plugin {
 		 *
 		 * @param Container $container Service container.
 		 */
-		do_action( 'stseo_container', $this->container );
+		do_action( 'dumpseo_container', $this->container );
 
 		/**
-		 * Filters the modules ShubhamTiwari SEO Tools loads.
+		 * Filters the modules DumpSEO loads.
 		 *
 		 * Third-party callbacks may return anything, so entries that are not
 		 * Module instances are skipped.
@@ -302,7 +302,7 @@ final class Plugin {
 		 * @param array<string, mixed> $modules   Modules keyed by ID.
 		 * @param Container            $container Service container.
 		 */
-		$modules = apply_filters( 'stseo_modules', $this->default_modules(), $this->container );
+		$modules = apply_filters( 'dumpseo_modules', $this->default_modules(), $this->container );
 
 		foreach ( (array) $modules as $id => $module ) {
 			if ( ! $module instanceof Module || ! $module->should_load() ) {
@@ -313,11 +313,11 @@ final class Plugin {
 		}
 
 		/**
-		 * Fires after ShubhamTiwari SEO Tools has registered its modules.
+		 * Fires after DumpSEO has registered its modules.
 		 *
 		 * @param Plugin $plugin The plugin instance.
 		 */
-		do_action( 'stseo_loaded', $this );
+		do_action( 'dumpseo_loaded', $this );
 	}
 
 	/**

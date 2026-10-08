@@ -2,25 +2,25 @@
 /**
  * XML sitemap behaviour, using WordPress core's sitemap provider and renderer.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
-use ShubhamTiwariSeoTools\Sitemap\ImageRenderer;
-use ShubhamTiwariSeoTools\Sitemap\SitemapModule;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
+use DumpSEO\Sitemap\ImageRenderer;
+use DumpSEO\Sitemap\SitemapModule;
 use WP_UnitTestCase;
 
 /**
  * Checks what search engines would receive at /wp-sitemap-*.xml.
  *
- * @covers \ShubhamTiwariSeoTools\Sitemap\SitemapModule
- * @covers \ShubhamTiwariSeoTools\Sitemap\Exclusions
- * @covers \ShubhamTiwariSeoTools\Sitemap\Images
- * @covers \ShubhamTiwariSeoTools\Sitemap\ImageRenderer
+ * @covers \DumpSEO\Sitemap\SitemapModule
+ * @covers \DumpSEO\Sitemap\Exclusions
+ * @covers \DumpSEO\Sitemap\Images
+ * @covers \DumpSEO\Sitemap\ImageRenderer
  */
 final class SitemapTest extends WP_UnitTestCase {
 
@@ -201,7 +201,7 @@ final class SitemapTest extends WP_UnitTestCase {
 			)
 		);
 		// The sitemap leaves password-protected posts out entirely; check the collector on its own too.
-		$images = ( new \ShubhamTiwariSeoTools\Sitemap\Images() )->for_post( get_post( (int) get_posts( array( 'fields' => 'ids' ) )[0] ) );
+		$images = ( new \DumpSEO\Sitemap\Images() )->for_post( get_post( (int) get_posts( array( 'fields' => 'ids' ) )[0] ) );
 		$this->assertSame( array(), $images );
 	}
 
@@ -259,7 +259,7 @@ final class SitemapTest extends WP_UnitTestCase {
 
 		delete_option( Settings::OPTION );
 		update_option( 'blog_public', '0' );
-		$this->assertFalse( wp_sitemaps_get_server()->sitemaps_enabled(), 'ShubhamTiwari SEO Tools never re-enables a sitemap core turned off.' );
+		$this->assertFalse( wp_sitemaps_get_server()->sitemaps_enabled(), 'DumpSEO never re-enables a sitemap core turned off.' );
 	}
 
 	public function test_author_sitemap_switch_and_noindex(): void {

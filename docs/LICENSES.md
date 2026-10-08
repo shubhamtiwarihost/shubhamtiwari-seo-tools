@@ -1,6 +1,6 @@
 # Dependency & License Inventory
 
-ShubhamTiwari SEO Tools is GPL-2.0-or-later. This file lists every third-party component **shipped in the distributed plugin ZIP**, plus development-only tooling for transparency.
+DumpSEO is GPL-2.0-or-later. This file lists every third-party component **shipped in the distributed plugin ZIP**, plus development-only tooling for transparency.
 
 ## Shipped in the plugin ZIP
 

@@ -2,13 +2,13 @@
 /**
  * Keyphrase in subheadings.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -51,13 +51,13 @@ final class KeyphraseInSubheadings extends BaseRule {
 			'subheadings' => count( $input->content->subheadings ),
 		);
 		if ( $matches > 0 ) {
-			return $this->result( Result::PASS, Result::LOW, __( 'A subheading contains the focus keyphrase.', 'shubhamtiwari-seo-tools' ), '', $meta );
+			return $this->result( Result::PASS, Result::LOW, __( 'A subheading contains the focus keyphrase.', 'dumpseo' ), '', $meta );
 		}
 		return $this->result(
 			Result::WARNING,
 			Result::LOW,
-			__( 'No subheading contains the focus keyphrase.', 'shubhamtiwari-seo-tools' ),
-			__( 'Use the keyphrase (or close wording) in at least one subheading.', 'shubhamtiwari-seo-tools' ),
+			__( 'No subheading contains the focus keyphrase.', 'dumpseo' ),
+			__( 'Use the keyphrase (or close wording) in at least one subheading.', 'dumpseo' ),
 			$meta
 		);
 	}

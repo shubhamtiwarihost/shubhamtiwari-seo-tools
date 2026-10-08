@@ -1,5 +1,5 @@
 /**
- * Data hooks for the ShubhamTiwari SEO Tools sidebar.
+ * Data hooks for the DumpSEO sidebar.
  */
 import apiFetch from '@wordpress/api-fetch';
 import { select, useDispatch, useSelect } from '@wordpress/data';
@@ -8,18 +8,18 @@ import { useEffect, useState } from '@wordpress/element';
 import { analysisRequest } from './utils';
 
 export const KEYS = {
-	title: '_stseo_title',
-	description: '_stseo_description',
-	keyphrase: '_stseo_focus_keyphrase',
-	canonical: '_stseo_canonical',
-	robots: '_stseo_robots',
-	socialTitle: '_stseo_social_title',
-	socialDescription: '_stseo_social_description',
-	socialImage: '_stseo_social_image',
+	title: '_dumpseo_title',
+	description: '_dumpseo_description',
+	keyphrase: '_dumpseo_focus_keyphrase',
+	canonical: '_dumpseo_canonical',
+	robots: '_dumpseo_robots',
+	socialTitle: '_dumpseo_social_title',
+	socialDescription: '_dumpseo_social_description',
+	socialImage: '_dumpseo_social_image',
 };
 
 /**
- * The post's ShubhamTiwari SEO Tools meta and a setter. Values are saved with the post.
+ * The post's DumpSEO meta and a setter. Values are saved with the post.
  *
  * @return {[Object<string, string>, function(string, string): void]} Meta and setter.
  */
@@ -37,7 +37,7 @@ export function useSeoMeta() {
  * Runs the analysis on the unsaved post, one second after the last change.
  * Older requests are aborted so a slow response never overwrites a newer one.
  *
- * @param {Object<string, string>} meta Current ShubhamTiwari SEO Tools meta.
+ * @param {Object<string, string>} meta Current DumpSEO meta.
  * @return {{data: Object|null, loading: boolean, error: string}} State.
  */
 export function useAnalysis( meta ) {
@@ -73,7 +73,7 @@ export function useAnalysis( meta ) {
 		const timer = window.setTimeout( () => {
 			setState( ( previous ) => ( { ...previous, loading: true } ) );
 			apiFetch( {
-				path: '/stseo/v1/analysis',
+				path: '/dumpseo/v1/analysis',
 				method: 'POST',
 				signal: controller ? controller.signal : undefined,
 				data: analysisRequest( postId, {

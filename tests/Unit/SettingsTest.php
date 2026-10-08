@@ -2,23 +2,23 @@
 /**
  * Tests for Schema and Settings.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Settings\Field;
-use ShubhamTiwariSeoTools\Settings\Schema;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Settings\Field;
+use DumpSEO\Settings\Schema;
+use DumpSEO\Settings\Settings;
 
 /**
  * Covers defaults, stored-value handling and schema extension.
  *
- * @covers \ShubhamTiwariSeoTools\Settings\Settings
- * @covers \ShubhamTiwariSeoTools\Settings\Schema
- * @covers \ShubhamTiwariSeoTools\Settings\Field
+ * @covers \DumpSEO\Settings\Settings
+ * @covers \DumpSEO\Settings\Schema
+ * @covers \DumpSEO\Settings\Field
  */
 final class SettingsTest extends TestCase {
 
@@ -88,7 +88,7 @@ final class SettingsTest extends TestCase {
 	}
 
 	public function test_extensions_can_add_fields_and_junk_is_ignored(): void {
-		Filters\expectApplied( 'stseo_settings_fields' )->once()->andReturnUsing(
+		Filters\expectApplied( 'dumpseo_settings_fields' )->once()->andReturnUsing(
 			static function ( array $fields ) {
 				$fields['pro_feature'] = new Field( 'pro_feature', 'advanced', Field::TYPE_BOOL, true, 'Pro' );
 				$fields['junk']        = 'not a field';

@@ -2,26 +2,26 @@
 /**
  * Block editor sidebar loading and the Classic Editor metabox.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Admin\EditorModule;
-use ShubhamTiwariSeoTools\Admin\Metabox;
-use ShubhamTiwariSeoTools\Admin\SeoForm;
-use ShubhamTiwariSeoTools\Context;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\MetaModule;
-use ShubhamTiwariSeoTools\Plugin;
+use DumpSEO\Admin\EditorModule;
+use DumpSEO\Admin\Metabox;
+use DumpSEO\Admin\SeoForm;
+use DumpSEO\Context;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\MetaModule;
+use DumpSEO\Plugin;
 use WP_REST_Request;
 use WP_UnitTestCase;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Admin\EditorModule
- * @covers \ShubhamTiwariSeoTools\Admin\Metabox
- * @covers \ShubhamTiwariSeoTools\Admin\SeoForm
- * @covers \ShubhamTiwariSeoTools\Admin\PostTypes
+ * @covers \DumpSEO\Admin\EditorModule
+ * @covers \DumpSEO\Admin\Metabox
+ * @covers \DumpSEO\Admin\SeoForm
+ * @covers \DumpSEO\Admin\PostTypes
  */
 final class EditorTest extends WP_UnitTestCase {
 
@@ -54,7 +54,7 @@ final class EditorTest extends WP_UnitTestCase {
 	 * @param string|null          $nonce   Nonce (default: valid).
 	 */
 	private function submit( int $post_id, array $fields, ?string $nonce = null ): void {
-		$_POST = wp_slash( $fields ) + array( Metabox::NONCE_FIELD => $nonce ?? wp_create_nonce( 'stseo_post_' . $post_id ) );
+		$_POST = wp_slash( $fields ) + array( Metabox::NONCE_FIELD => $nonce ?? wp_create_nonce( 'dumpseo_post_' . $post_id ) );
 		$this->metabox->save( $post_id, get_post( $post_id ) );
 		$_POST = array();
 	}
@@ -149,24 +149,24 @@ final class EditorTest extends WP_UnitTestCase {
 	}
 
 	public function test_sidebar_script_only_on_supported_post_screens(): void {
-		if ( ! is_readable( STSEO_DIR . 'build/editor/index.asset.php' ) ) {
+		if ( ! is_readable( DUMPSEO_DIR . 'build/editor/index.asset.php' ) ) {
 			$this->markTestSkipped( 'Run `npm run build` first.' );
 		}
 		$module = new EditorModule();
 
 		set_current_screen( 'edit.php' );
 		$module->enqueue();
-		$this->assertFalse( wp_script_is( 'stseo-editor', 'enqueued' ), 'Not on list screens.' );
+		$this->assertFalse( wp_script_is( 'dumpseo-editor', 'enqueued' ), 'Not on list screens.' );
 
 		set_current_screen( 'post' );
 		$module->enqueue();
-		$this->assertTrue( wp_script_is( 'stseo-editor', 'enqueued' ) );
-		$this->assertStringContainsString( 'stseoEditor', (string) wp_scripts()->get_data( 'stseo-editor', 'before' )[1] );
+		$this->assertTrue( wp_script_is( 'dumpseo-editor', 'enqueued' ) );
+		$this->assertStringContainsString( 'dumpseoEditor', (string) wp_scripts()->get_data( 'dumpseo-editor', 'before' )[1] );
 
-		wp_dequeue_script( 'stseo-editor' );
+		wp_dequeue_script( 'dumpseo-editor' );
 		set_current_screen( 'attachment' );
 		$module->enqueue();
-		$this->assertFalse( wp_script_is( 'stseo-editor', 'enqueued' ), 'Not for media.' );
+		$this->assertFalse( wp_script_is( 'dumpseo-editor', 'enqueued' ), 'Not for media.' );
 		set_current_screen( 'front' );
 	}
 }

@@ -2,12 +2,12 @@
 /**
  * Canonical URLs.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
+use DumpSEO\Helpers\Text;
 
 defined( 'ABSPATH' ) || exit;
 

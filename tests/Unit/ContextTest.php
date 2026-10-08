@@ -2,18 +2,18 @@
 /**
  * Tests for Context.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Context;
+use DumpSEO\Context;
 
 /**
  * Covers request detection.
  *
- * @covers \ShubhamTiwariSeoTools\Context
+ * @covers \DumpSEO\Context
  */
 final class ContextTest extends TestCase {
 

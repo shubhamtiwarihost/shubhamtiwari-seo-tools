@@ -1,10 +1,10 @@
-=== ShubhamTiwari SEO Tools ===
+=== DumpSEO ===
 Contributors: shubhamtiwarihost
 Tags: seo, xml sitemap, schema, open graph, breadcrumbs
 Requires at least: 6.4
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Titles, meta descriptions, sitemaps, social cards, structured data, redirects an
 
 == Description ==
 
-ShubhamTiwari SEO Tools helps search engines and social networks understand your site, and helps you write content people can find. It is built on WordPress's own features (the core sitemap, the robots API, the block editor) and stays out of the way on the pages your visitors load.
+DumpSEO helps search engines and social networks understand your site, and helps you write content people can find. It is built on WordPress's own features (the core sitemap, the robots API, the block editor) and stays out of the way on the pages your visitors load.
 
 = Search appearance =
 
@@ -49,10 +49,10 @@ ShubhamTiwari SEO Tools helps search engines and social networks understand your
 = Privacy and performance =
 
 * No telemetry, no tracking, no calls to external services, no cookies.
-* Measured, not claimed: on normal pages ShubhamTiwari SEO Tools adds no extra database queries.
+* Measured, not claimed: on normal pages DumpSEO adds no extra database queries.
 * Accessible: results are always stated in words, never by color alone.
 
-If another SEO plugin is active, ShubhamTiwari SEO Tools stops printing social tags and structured data and says so, so nothing is duplicated.
+If another SEO plugin is active, DumpSEO stops printing social tags and structured data and says so, so nothing is duplicated.
 
 = Source code and build tools =
 
@@ -64,24 +64,24 @@ To rebuild `build/` from `assets-src/`: install Node.js 20 or newer, then run `n
 
 == Installation ==
 
-1. Install ShubhamTiwari SEO Tools from the Plugins screen (search for "ShubhamTiwari SEO Tools"), or upload the `shubhamtiwari-seo-tools` folder to `/wp-content/plugins/`.
+1. Install DumpSEO from the Plugins screen (search for "DumpSEO"), or upload the `dumpseo` folder to `/wp-content/plugins/`.
 2. Activate the plugin.
-3. Go to **SEO Tools** in the admin menu to check the site identity (organization or person, logo), title separator and defaults. Everything works with the defaults.
-4. Edit any post and open the **ShubhamTiwari SEO Tools** sidebar from the toolbar to see the preview and analysis.
+3. Go to **DumpSEO** in the admin menu to check the site identity (organization or person, logo), title separator and defaults. Everything works with the defaults.
+4. Edit any post and open the **DumpSEO** sidebar from the toolbar to see the preview and analysis.
 
 == Frequently Asked Questions ==
 
-= Does ShubhamTiwari SEO Tools replace the WordPress sitemap? =
+= Does DumpSEO replace the WordPress sitemap? =
 
 No. It improves the sitemap WordPress already provides at `/wp-sitemap.xml`, so it stays compatible with everything that expects it.
 
-= Will ShubhamTiwari SEO Tools conflict with another SEO plugin? =
+= Will DumpSEO conflict with another SEO plugin? =
 
-Running two SEO plugins is not recommended. If Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework or Slim SEO is active, ShubhamTiwari SEO Tools does not print social tags or structured data, and shows a notice on its settings screen.
+Running two SEO plugins is not recommended. If Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework or Slim SEO is active, DumpSEO does not print social tags or structured data, and shows a notice on its settings screen.
 
 = Does the analysis guarantee better rankings? =
 
-No. The checks reflect common, documented writing and on-page practices. Nobody can guarantee rankings, which is why ShubhamTiwari SEO Tools shows findings rather than a score.
+No. The checks reflect common, documented writing and on-page practices. Nobody can guarantee rankings, which is why DumpSEO shows findings rather than a score.
 
 = Which PHP versions are supported? =
 
@@ -93,30 +93,30 @@ Sentence length, paragraph length and subheading checks work for every language.
 
 = How do I show breadcrumbs? =
 
-Add the **Breadcrumbs** block to a template or post, use the `[stseo_breadcrumbs]` shortcode, or call `stseo_breadcrumbs()` in a theme template.
+Add the **Breadcrumbs** block to a template or post, use the `[dumpseo_breadcrumbs]` shortcode, or call `dumpseo_breadcrumbs()` in a theme template.
 
 = What happens to my data if I delete the plugin? =
 
-By default your settings and SEO fields are kept, so reinstalling restores them. To remove everything, tick "Remove all ShubhamTiwari SEO Tools data when the plugin is deleted" under SEO Tools → Advanced before deleting. Your posts and pages are never deleted.
+By default your settings and SEO fields are kept, so reinstalling restores them. To remove everything, tick "Remove all DumpSEO data when the plugin is deleted" under DumpSEO → Advanced before deleting. Your posts and pages are never deleted.
 
 == Screenshots ==
 
-1. The ShubhamTiwari SEO Tools sidebar in the block editor: search result preview, focus keyphrase, SEO title and meta description with length hints.
+1. The DumpSEO sidebar in the block editor: search result preview, focus keyphrase, SEO title and meta description with length hints.
 2. SEO analysis results in the sidebar. Every finding says what was found and what to do, in words.
-3. ShubhamTiwari SEO Tools settings: site identity, title separator and search appearance templates.
+3. DumpSEO settings: site identity, title separator and search appearance templates.
 4. Redirects: old and new addresses, redirect type and status.
 5. The media library lists images without alternative text.
 
 == Privacy ==
 
-ShubhamTiwari SEO Tools does not collect, store or send any personal data about visitors or users. It sets no cookies, loads nothing from third-party servers and makes no outbound requests. It stores only settings and the SEO fields you enter for your content (titles, descriptions, keyphrases, social fields, robots settings, redirects).
+DumpSEO does not collect, store or send any personal data about visitors or users. It sets no cookies, loads nothing from third-party servers and makes no outbound requests. It stores only settings and the SEO fields you enter for your content (titles, descriptions, keyphrases, social fields, robots settings, redirects).
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.2 =
 * First public release: search appearance, canonical and robots, sitemap improvements, social tags, structured data, SEO and readability analysis, block editor sidebar and Classic Editor box, breadcrumbs, image alt text report, redirects and WooCommerce support.
 
 == Upgrade Notice ==
 
-= 1.0.1 =
+= 1.0.2 =
 First public release.

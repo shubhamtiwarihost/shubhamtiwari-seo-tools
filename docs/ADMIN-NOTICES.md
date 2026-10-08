@@ -1,6 +1,6 @@
 # Admin notices and dashboard UI
 
-WordPress.org guideline 11: plugins must not hijack the admin dashboard; notices must be limited in scope and used with moderation. This file lists every notice-like element the plugin prints, where, to whom and why. Audit date: 2026-10-01 (version 1.0.1).
+WordPress.org guideline 11: plugins must not hijack the admin dashboard; notices must be limited in scope and used with moderation. This file lists every notice-like element the plugin prints, where, to whom and why. Audit date: 2026-10-01 (version 1.0.1); unchanged in 1.0.2 (rename only).
 
 ## Rules
 
@@ -13,12 +13,12 @@ WordPress.org guideline 11: plugins must not hijack the admin dashboard; notices
 
 | # | Element | Code | Screen | Who sees it | Trigger | Repeats? |
 |---|---|---|---|---|---|---|
-| 1 | "Plugin is inactive: requires PHP 7.4 and WordPress 6.4" (error) | `Requirements::render_notice()`, hooked on `admin_notices` and `network_admin_notices` in `shubhamtiwari-seo-tools.php` | **Plugins** and **Network Admin → Plugins** only | `activate_plugins` | PHP or WordPress below the minimum, so the plugin did not boot | While the condition lasts, on that screen only. WordPress itself normally refuses activation from the `Requires PHP` / `Requires at least` headers, so this is a fallback (for example after a PHP downgrade). |
-| 2 | "The redirect was saved as a draft and is not active" (error, with reasons) | `Redirects\AdminScreen::render_errors()` on `admin_notices` | Redirect list and redirect edit screens only (`stseo_redirect` post type) | `manage_options`, and only the user who made the save | A redirect failed validation on save | Once. Stored for 60 seconds per user and deleted when shown. |
+| 1 | "Plugin is inactive: requires PHP 7.4 and WordPress 6.4" (error) | `Requirements::render_notice()`, hooked on `admin_notices` and `network_admin_notices` in `dumpseo.php` | **Plugins** and **Network Admin → Plugins** only | `activate_plugins` | PHP or WordPress below the minimum, so the plugin did not boot | While the condition lasts, on that screen only. WordPress itself normally refuses activation from the `Requires PHP` / `Requires at least` headers, so this is a fallback (for example after a PHP downgrade). |
+| 2 | "The redirect was saved as a draft and is not active" (error, with reasons) | `Redirects\AdminScreen::render_errors()` on `admin_notices` | Redirect list and redirect edit screens only (`dumpseo_redirect` post type) | `manage_options`, and only the user who made the save | A redirect failed validation on save | Once. Stored for 60 seconds per user and deleted when shown. |
 | 3 | Settings validation errors | `settings_errors( Settings::OPTION )` in `SettingsPage::render_page()` | Plugin settings screen | `manage_options` | A submitted value was rejected | Once, after that save (WordPress Settings API). |
 | 4 | "Search engines are asked not to index this site" (warning, inline) | `SettingsPage::render_page()` | Plugin settings screen | `manage_options` | Settings → Reading → "Discourage search engines" is on | While the condition lasts, inside the page. |
-| 5 | "Another SEO plugin already prints social tags" (info, inline) | `Social\SocialModule::render_notice()` on `stseo_settings_section_social` | Plugin settings screen, Social section | `manage_options` | Another SEO plugin is active | While the condition lasts, inside the section. |
-| 6 | "Another SEO plugin already prints structured data" (info, inline) | `Schema\SchemaModule::render_notice()` on `stseo_settings_section_schema` | Plugin settings screen, Structured data section | `manage_options` | Another SEO plugin is active | While the condition lasts, inside the section. |
+| 5 | "Another SEO plugin already prints social tags" (info, inline) | `Social\SocialModule::render_notice()` on `dumpseo_settings_section_social` | Plugin settings screen, Social section | `manage_options` | Another SEO plugin is active | While the condition lasts, inside the section. |
+| 6 | "Another SEO plugin already prints structured data" (info, inline) | `Schema\SchemaModule::render_notice()` on `dumpseo_settings_section_schema` | Plugin settings screen, Structured data section | `manage_options` | Another SEO plugin is active | While the condition lasts, inside the section. |
 
 Items 3–6 are printed inside the plugin's own page markup (`class="notice … inline"`), not through the global notice hooks, so they cannot appear anywhere else.
 

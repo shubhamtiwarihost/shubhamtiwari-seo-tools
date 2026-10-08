@@ -1,11 +1,11 @@
 <?php
 /**
- * Constants PHPStan needs to know about (defined at runtime in shubhamtiwari-seo-tools.php).
+ * Constants PHPStan needs to know about (defined at runtime in dumpseo.php).
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-define( 'STSEO_VERSION', '0.0.0' );
-define( 'STSEO_FILE', '' );
-define( 'STSEO_DIR', '' );
-define( 'STSEO_URL', '' );
+define( 'DUMPSEO_VERSION', '0.0.0' );
+define( 'DUMPSEO_FILE', '' );
+define( 'DUMPSEO_DIR', '' );
+define( 'DUMPSEO_URL', '' );

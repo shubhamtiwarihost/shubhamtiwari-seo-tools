@@ -2,69 +2,79 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: ShubhamTiwari SEO Tools 1.0.1\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shubhamtiwari-seo-tools\n"
+"Project-Id-Version: DumpSEO 1.0.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/dumpseo\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-01T10:49:55+00:00\n"
+"POT-Creation-Date: 2026-10-08T13:24:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: shubhamtiwari-seo-tools\n"
+"X-Domain: dumpseo\n"
 
 #. Plugin Name of the plugin
-#: shubhamtiwari-seo-tools.php
+#: dumpseo.php
 #: src/Admin/Metabox.php:73
+#: src/Admin/SettingsPage.php:155
+#: assets-src/editor/sidebar.js:119
+#: assets-src/editor/sidebar.js:124
 #: build/editor/index.js:4
-msgid "ShubhamTiwari SEO Tools"
+msgid "DumpSEO"
 msgstr ""
 
 #. Description of the plugin
-#: shubhamtiwari-seo-tools.php
+#: dumpseo.php
 msgid "Search appearance, sitemaps, social metadata, structured data and content analysis for WordPress."
 msgstr ""
 
 #. Author of the plugin
-#: shubhamtiwari-seo-tools.php
+#: dumpseo.php
 msgid "Shubham Tiwari"
 msgstr ""
 
 #: src/Admin/Metabox.php:124
+#: assets-src/editor/sidebar.js:142
 #: build/editor/index.js:4
 msgid "Focus keyphrase"
 msgstr ""
 
 #: src/Admin/Metabox.php:126
+#: assets-src/editor/sidebar.js:143
 #: build/editor/index.js:4
 msgid "The words people would search for to find this page."
 msgstr ""
 
 #: src/Admin/Metabox.php:129
 #: src/Admin/TermFields.php:117
+#: assets-src/editor/sidebar.js:154
 #: build/editor/index.js:4
 msgid "SEO title"
 msgstr ""
 
 #: src/Admin/Metabox.php:131
+#: assets-src/editor/sidebar.js:157
 #: build/editor/index.js:4
 msgid "Leave empty to use the title template. Variables such as %%site_name%% are allowed."
 msgstr ""
 
 #: src/Admin/Metabox.php:134
 #: src/Admin/TermFields.php:124
+#: assets-src/editor/sidebar.js:175
 #: build/editor/index.js:4
 msgid "Meta description"
 msgstr ""
 
 #: src/Admin/Metabox.php:136
 #: src/Admin/TermFields.php:127
+#: assets-src/editor/sidebar.js:178
 #: build/editor/index.js:4
 msgid "Leave empty to use the description template."
 msgstr ""
 
 #: src/Admin/Metabox.php:140
+#: assets-src/editor/components.js:104
 #: build/editor/index.js:4
 msgid "Search result preview"
 msgstr ""
@@ -75,59 +85,69 @@ msgstr ""
 
 #: src/Admin/Metabox.php:153
 #: src/Settings/Schema.php:56
+#: assets-src/editor/sidebar.js:231
 #: build/editor/index.js:4
 msgid "Social sharing"
 msgstr ""
 
 #: src/Admin/Metabox.php:155
 #: src/Admin/TermFields.php:154
+#: assets-src/editor/sidebar.js:235
 #: build/editor/index.js:4
 msgid "Social sharing title"
 msgstr ""
 
 #: src/Admin/Metabox.php:159
 #: src/Admin/TermFields.php:161
+#: assets-src/editor/sidebar.js:247
 #: build/editor/index.js:4
 msgid "Social sharing description"
 msgstr ""
 
 #: src/Admin/Metabox.php:163
 #: src/Admin/TermFields.php:168
+#: assets-src/editor/sidebar.js:260
 #: build/editor/index.js:4
 msgid "Social sharing image URL"
 msgstr ""
 
 #: src/Admin/Metabox.php:165
+#: assets-src/editor/sidebar.js:261
 #: build/editor/index.js:4
 msgid "Leave empty to use the featured image, then the default sharing image."
 msgstr ""
 
 #: src/Admin/Metabox.php:170
 #: src/Settings/Schema.php:60
+#: assets-src/editor/sidebar.js:290
 #: build/editor/index.js:4
 msgid "Advanced"
 msgstr ""
 
 #: src/Admin/Metabox.php:172
 #: src/Admin/TermFields.php:138
+#: assets-src/editor/sidebar.js:294
 #: build/editor/index.js:4
 msgid "Search engines"
 msgstr ""
 
 #: src/Admin/Metabox.php:174
 #: src/Admin/TermFields.php:141
+#: assets-src/editor/sidebar.js:299
 #: build/editor/index.js:4
-msgid "Default (from ShubhamTiwari SEO Tools settings)"
+msgid "Default (from DumpSEO settings)"
 msgstr ""
 
 #: src/Admin/Metabox.php:175
 #: src/Admin/TermFields.php:142
+#: assets-src/editor/sidebar.js:306
 #: build/editor/index.js:4
 msgid "Show in search results (index)"
 msgstr ""
 
 #: src/Admin/Metabox.php:176
 #: src/Admin/TermFields.php:143
+#: assets-src/editor/sidebar.js:313
 #: build/editor/index.js:4
 msgid "Hide from search results (noindex)"
 msgstr ""
@@ -139,41 +159,43 @@ msgstr ""
 
 #: src/Admin/Metabox.php:186
 #: src/Admin/TermFields.php:131
+#: assets-src/editor/sidebar.js:345
 #: build/editor/index.js:4
 msgid "Canonical URL"
 msgstr ""
 
 #: src/Admin/Metabox.php:188
+#: assets-src/editor/sidebar.js:346
 #: build/editor/index.js:4
 msgid "Only if this page duplicates another one. Leave empty for the page’s own address."
 msgstr ""
 
 #: src/Admin/SeoForm.php:113
+#: assets-src/editor/sidebar.js:42
 #: build/editor/index.js:4
 msgid "Do not follow links (nofollow)"
 msgstr ""
 
 #: src/Admin/SeoForm.php:114
+#: assets-src/editor/sidebar.js:43
 #: build/editor/index.js:4
 msgid "Do not show a cached copy (noarchive)"
 msgstr ""
 
 #: src/Admin/SeoForm.php:115
+#: assets-src/editor/sidebar.js:44
 #: build/editor/index.js:4
 msgid "Do not show a text snippet (nosnippet)"
 msgstr ""
 
 #: src/Admin/SeoForm.php:116
+#: assets-src/editor/sidebar.js:45
 #: build/editor/index.js:4
 msgid "Do not index images (noimageindex)"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:154
-msgid "ShubhamTiwari SEO Tools Settings"
-msgstr ""
-
-#: src/Admin/SettingsPage.php:155
-msgid "SEO Tools"
+msgid "DumpSEO Settings"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:191
@@ -189,7 +211,7 @@ msgid "Warning:"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:215
-msgid "Search engines are currently asked not to index this entire site (Settings → Reading → “Discourage search engines from indexing this site”). ShubhamTiwari SEO Tools does not override this."
+msgid "Search engines are currently asked not to index this entire site (Settings → Reading → “Discourage search engines from indexing this site”). DumpSEO does not override this."
 msgstr ""
 
 #: src/Admin/SettingsPage.php:216
@@ -197,12 +219,13 @@ msgid "Change reading settings"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:279
+#: assets-src/editor/sidebar.js:279
 #: build/editor/index.js:4
 msgid "Choose from media library"
 msgstr ""
 
 #: src/Admin/TermFields.php:120
-msgid "Leave empty to use the title template from ShubhamTiwari SEO Tools settings. Variables such as %%site_name%% are allowed."
+msgid "Leave empty to use the title template from DumpSEO settings. Variables such as %%site_name%% are allowed."
 msgstr ""
 
 #: src/Admin/TermFields.php:134
@@ -214,6 +237,7 @@ msgid "Shown when this archive is shared on social media. Leave empty to use the
 msgstr ""
 
 #: src/Admin/TermFields.php:164
+#: assets-src/editor/sidebar.js:248
 #: build/editor/index.js:4
 msgid "Leave empty to use the meta description."
 msgstr ""
@@ -477,11 +501,14 @@ msgstr ""
 #: src/Breadcrumbs/BreadcrumbsModule.php:77
 #: src/Breadcrumbs/Renderer.php:85
 #: src/Settings/Schema.php:58
+#: assets-src/blocks/breadcrumbs/index.js:19
+#: assets-src/blocks/breadcrumbs/index.js:51
 #: build/blocks/breadcrumbs/index.js:1
 msgid "Breadcrumbs"
 msgstr ""
 
 #: src/Breadcrumbs/Trail.php:35
+#: assets-src/blocks/breadcrumbs/index.js:11
 #: build/blocks/breadcrumbs/index.js:1
 msgid "Home"
 msgstr ""
@@ -534,11 +561,12 @@ msgid "Review them in the media library"
 msgstr ""
 
 #: src/Images/ImagesModule.php:224
-msgid "Alternative text describes an image for people who cannot see it and helps image search. ShubhamTiwari SEO Tools only reports; it never changes your media. Purely decorative images can stay empty."
+msgid "Alternative text describes an image for people who cannot see it and helps image search. DumpSEO only reports; it never changes your media. Purely decorative images can stay empty."
 msgstr ""
 
 #: src/Meta/MetaModule.php:145
 #: src/Meta/MetaModule.php:149
+#: assets-src/editor/sidebar.js:127
 #: build/editor/index.js:4
 msgid "Search appearance"
 msgstr ""
@@ -914,13 +942,13 @@ msgstr ""
 #. translators: 1: required PHP version, 2: required WordPress version.
 #: src/Requirements.php:90
 #, php-format
-msgid "ShubhamTiwari SEO Tools is inactive: it requires PHP %1$s and WordPress %2$s or newer."
+msgid "DumpSEO is inactive: it requires PHP %1$s and WordPress %2$s or newer."
 msgstr ""
 
 #. translators: %s: name of another SEO plugin.
 #: src/Schema/SchemaModule.php:142
 #, php-format
-msgid "%s is active and already prints structured data, so ShubhamTiwari SEO Tools does not print its own. The setting below takes effect once it is deactivated."
+msgid "%s is active and already prints structured data, so DumpSEO does not print its own. The setting below takes effect once it is deactivated."
 msgstr ""
 
 #. translators: %s: settings field label.
@@ -1066,11 +1094,11 @@ msgid "Shown between items, for example › or / or ». Screen readers skip it."
 msgstr ""
 
 #: src/Settings/Schema.php:212
-msgid "Remove all ShubhamTiwari SEO Tools data when the plugin is deleted"
+msgid "Remove all DumpSEO data when the plugin is deleted"
 msgstr ""
 
 #: src/Settings/Schema.php:213
-msgid "Deletes ShubhamTiwari SEO Tools settings and SEO data stored for your content. Your posts and pages are never deleted. This cannot be undone."
+msgid "Deletes DumpSEO settings and SEO data stored for your content. Your posts and pages are never deleted. This cannot be undone."
 msgstr ""
 
 #: src/Sitemap/ImageRenderer.php:57
@@ -1078,7 +1106,7 @@ msgid "Sitemap entries support only loc, lastmod, changefreq, priority and image
 msgstr ""
 
 #: src/Sitemap/SitemapModule.php:276
-msgid "ShubhamTiwari SEO Tools adds to the sitemap built into WordPress. Content hidden from search engines (noindex) and content whose canonical URL points elsewhere is left out automatically."
+msgid "DumpSEO adds to the sitemap built into WordPress. Content hidden from search engines (noindex) and content whose canonical URL points elsewhere is left out automatically."
 msgstr ""
 
 #: src/Sitemap/SitemapModule.php:279
@@ -1097,41 +1125,148 @@ msgstr ""
 #. translators: %s: name of another SEO plugin.
 #: src/Social/SocialModule.php:150
 #, php-format
-msgid "%s is active and already prints social sharing tags, so ShubhamTiwari SEO Tools does not print its own. The settings below take effect once it is deactivated."
+msgid "%s is active and already prints social sharing tags, so DumpSEO does not print its own. The settings below take effect once it is deactivated."
 msgstr ""
 
+#: assets-src/blocks/breadcrumbs/index.js:12
+#: build/blocks/breadcrumbs/index.js:1
+msgid "Category"
+msgstr ""
+
+#: assets-src/blocks/breadcrumbs/index.js:13
+#: build/blocks/breadcrumbs/index.js:1
+msgid "Current page"
+msgstr ""
+
+#: assets-src/blocks/breadcrumbs/index.js:52
+#: build/blocks/breadcrumbs/index.js:1
+msgid "Shows the path from the homepage to the current page. The trail is built for each page when it is displayed."
+msgstr ""
+
+#: assets-src/blocks/breadcrumbs/index.js:58
+#: build/blocks/breadcrumbs/index.js:1
+msgid "navigation"
+msgstr ""
+
+#: assets-src/blocks/breadcrumbs/index.js:58
+#: build/blocks/breadcrumbs/index.js:1
+msgid "path"
+msgstr ""
+
+#: assets-src/editor/components.js:9
 #: assets/js/metabox.js:23
 #: build/editor/index.js:1
 msgid "Problem"
 msgstr ""
 
+#: assets-src/editor/components.js:12
 #: assets/js/metabox.js:24
 #: build/editor/index.js:1
 msgid "Improvement"
 msgstr ""
 
+#: assets-src/editor/components.js:14
 #: assets/js/metabox.js:25
 #: build/editor/index.js:1
 msgid "Note"
 msgstr ""
 
+#: assets-src/editor/components.js:15
 #: assets/js/metabox.js:26
 #: build/editor/index.js:1
 msgid "Good"
 msgstr ""
 
+#: assets-src/editor/components.js:50
+#: build/editor/index.js:1
+msgid "Empty."
+msgstr ""
+
+#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
+#: assets-src/editor/components.js:55
+#: build/editor/index.js:2
+#, js-format
+msgid "%1$d characters — a little short (aim for %2$d–%3$d)."
+msgstr ""
+
+#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
+#: assets-src/editor/components.js:67
+#: build/editor/index.js:3
+#, js-format
+msgid "%1$d characters — may be cut off (aim for %2$d–%3$d)."
+msgstr ""
+
+#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
+#: assets-src/editor/components.js:79
+#: build/editor/index.js:4
+#, js-format
+msgid "%1$d characters — good length (%2$d–%3$d)."
+msgstr ""
+
+#: assets-src/editor/components.js:109
+#: build/editor/index.js:4
+msgid "(no title)"
+msgstr ""
+
+#: assets-src/editor/components.js:113
+#: build/editor/index.js:4
+msgid "No description: search engines will pick text from the page."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:61
 #: assets/js/metabox.js:96
 #: build/editor/index.js:4
 msgid "Checking…"
 msgstr ""
 
-#: assets/js/metabox.js:108
-msgid "SEO"
+#: assets-src/editor/sidebar.js:66
+#: build/editor/index.js:4
+msgid "The check could not run:"
 msgstr ""
 
+#: assets-src/editor/sidebar.js:71
+#: build/editor/index.js:4
+msgid "There is not enough text to check yet."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:130
+#: build/editor/index.js:4
+msgid "This page is hidden from search engines."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:202
+#: build/editor/index.js:4
+msgid "SEO analysis"
+msgstr ""
+
+#: assets-src/editor/sidebar.js:217
 #: assets/js/metabox.js:109
 #: build/editor/index.js:4
 msgid "Readability"
+msgstr ""
+
+#: assets-src/editor/sidebar.js:236
+#: build/editor/index.js:4
+msgid "Leave empty to use the SEO title."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:369
+#: build/editor/index.js:4
+msgid "DumpSEO found problems."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:370
+#: build/editor/index.js:4
+msgid "DumpSEO suggests improvements."
+msgstr ""
+
+#: assets-src/editor/sidebar.js:371
+#: build/editor/index.js:4
+msgid "DumpSEO checks passed."
+msgstr ""
+
+#: assets/js/metabox.js:108
+msgid "SEO"
 msgstr ""
 
 #. translators: 1: number of problems, 2: number of improvements.
@@ -1156,86 +1291,4 @@ msgstr ""
 
 #: assets/js/settings.js:22
 msgid "Use this image"
-msgstr ""
-
-#: build/blocks/breadcrumbs/index.js:1
-msgid "Category"
-msgstr ""
-
-#: build/blocks/breadcrumbs/index.js:1
-msgid "Current page"
-msgstr ""
-
-#: build/blocks/breadcrumbs/index.js:1
-msgid "Shows the path from the homepage to the current page. The trail is built for each page when it is displayed."
-msgstr ""
-
-#: build/blocks/breadcrumbs/index.js:1
-msgid "navigation"
-msgstr ""
-
-#: build/blocks/breadcrumbs/index.js:1
-msgid "path"
-msgstr ""
-
-#: build/editor/index.js:1
-msgid "Empty."
-msgstr ""
-
-#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
-#: build/editor/index.js:2
-#, js-format
-msgid "%1$d characters — a little short (aim for %2$d–%3$d)."
-msgstr ""
-
-#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
-#: build/editor/index.js:3
-#, js-format
-msgid "%1$d characters — may be cut off (aim for %2$d–%3$d)."
-msgstr ""
-
-#. translators: 1: characters, 2: recommended minimum, 3: recommended maximum.
-#: build/editor/index.js:4
-#, js-format
-msgid "%1$d characters — good length (%2$d–%3$d)."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "(no title)"
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "No description: search engines will pick text from the page."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "The check could not run:"
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "There is not enough text to check yet."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "ShubhamTiwari SEO Tools found problems."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "ShubhamTiwari SEO Tools suggests improvements."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "ShubhamTiwari SEO Tools checks passed."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "This page is hidden from search engines."
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "SEO analysis"
-msgstr ""
-
-#: build/editor/index.js:4
-msgid "Leave empty to use the SEO title."
 msgstr ""

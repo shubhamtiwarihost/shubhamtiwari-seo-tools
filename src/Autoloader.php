@@ -1,23 +1,23 @@
 <?php
 /**
- * PSR-4 autoloader for the ShubhamTiwariSeoTools namespace.
+ * PSR-4 autoloader for the DumpSEO namespace.
  *
  * The plugin ships without a Composer vendor directory, so it carries its own
  * tiny autoloader. Composer is used for development tooling only.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Maps ShubhamTiwariSeoTools\Foo\Bar to src/Foo/Bar.php.
+ * Maps DumpSEO\Foo\Bar to src/Foo/Bar.php.
  */
 final class Autoloader {
 
-	private const PREFIX = 'ShubhamTiwariSeoTools\\';
+	private const PREFIX = 'DumpSEO\\';
 
 	/**
 	 * Base directory of the namespace root, with trailing slash.
@@ -37,7 +37,7 @@ final class Autoloader {
 	}
 
 	/**
-	 * Loads a class file if it belongs to the ShubhamTiwariSeoTools namespace.
+	 * Loads a class file if it belongs to the DumpSEO namespace.
 	 *
 	 * @param string $class_name Fully qualified class name.
 	 */

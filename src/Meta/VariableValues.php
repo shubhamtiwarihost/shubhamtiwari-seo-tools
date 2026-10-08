@@ -2,10 +2,10 @@
 /**
  * Values for template variables.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -86,7 +86,7 @@ class VariableValues {
 		 * @param array<string, mixed> $values  Values keyed by variable name (without %%).
 		 * @param PageContext          $context Page context.
 		 */
-		$filtered = apply_filters( 'stseo_template_variables', $values, $context );
+		$filtered = apply_filters( 'dumpseo_template_variables', $values, $context );
 
 		$clean = array();
 		foreach ( (array) $filtered as $name => $value ) {
@@ -200,9 +200,9 @@ class VariableValues {
 		}
 		if ( $context->total_pages >= $context->page ) {
 			/* translators: 1: current page number, 2: total number of pages. */
-			return sprintf( __( 'Page %1$d of %2$d', 'shubhamtiwari-seo-tools' ), $context->page, $context->total_pages );
+			return sprintf( __( 'Page %1$d of %2$d', 'dumpseo' ), $context->page, $context->total_pages );
 		}
 		/* translators: %d: current page number. */
-		return sprintf( __( 'Page %d', 'shubhamtiwari-seo-tools' ), $context->page );
+		return sprintf( __( 'Page %d', 'dumpseo' ), $context->page );
 	}
 }

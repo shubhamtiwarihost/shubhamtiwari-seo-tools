@@ -1,5 +1,5 @@
 /**
- * ShubhamTiwari SEO Tools Classic Editor metabox: search preview and analysis.
+ * DumpSEO Classic Editor metabox: search preview and analysis.
  *
  * Sends the current (unsaved) form values to the analysis endpoint and shows
  * the results. Every value is written with textContent, never as HTML.
@@ -7,23 +7,23 @@
 ( function () {
 	'use strict';
 
-	const config = window.stseoMetabox;
-	const box = document.querySelector( '.stseo-metabox' );
+	const config = window.dumpseoMetabox;
+	const box = document.querySelector( '.dumpseo-metabox' );
 	if ( ! config || ! box || ! window.wp || ! window.wp.apiFetch ) {
 		return;
 	}
 
 	const { __, sprintf } = window.wp.i18n;
 	const apiFetch = window.wp.apiFetch;
-	const statusEl = box.querySelector( '.stseo-analysis-status' );
-	const resultsEl = box.querySelector( '#stseo-results' );
-	const button = box.querySelector( '#stseo-analyse' );
+	const statusEl = box.querySelector( '.dumpseo-analysis-status' );
+	const resultsEl = box.querySelector( '#dumpseo-results' );
+	const button = box.querySelector( '#dumpseo-analyse' );
 
 	const STATUS_LABELS = {
-		error: __( 'Problem', 'shubhamtiwari-seo-tools' ),
-		warning: __( 'Improvement', 'shubhamtiwari-seo-tools' ),
-		info: __( 'Note', 'shubhamtiwari-seo-tools' ),
-		pass: __( 'Good', 'shubhamtiwari-seo-tools' ),
+		error: __( 'Problem', 'dumpseo' ),
+		warning: __( 'Improvement', 'dumpseo' ),
+		info: __( 'Note', 'dumpseo' ),
+		pass: __( 'Good', 'dumpseo' ),
 	};
 
 	const value = ( selector ) => {
@@ -45,9 +45,9 @@
 	const request = () => {
 		const data = {
 			post_id: config.postId,
-			keyphrase: value( '#stseo-keyphrase' ),
-			seo_title: value( '#stseo-title' ),
-			seo_description: value( '#stseo-description' ),
+			keyphrase: value( '#dumpseo-keyphrase' ),
+			seo_title: value( '#dumpseo-title' ),
+			seo_description: value( '#dumpseo-description' ),
 			title: value( '#title' ),
 			excerpt: value( '#excerpt' ),
 			slug: value( '#post_name' ),
@@ -70,17 +70,17 @@
 		const list = document.createElement( 'ul' );
 		report.results.forEach( ( result ) => {
 			const item = document.createElement( 'li' );
-			item.className = 'stseo-result stseo-result--' + result.status;
+			item.className = 'dumpseo-result dumpseo-result--' + result.status;
 
 			const label = document.createElement( 'strong' );
-			label.className = 'stseo-result__status';
+			label.className = 'dumpseo-result__status';
 			label.textContent = ( STATUS_LABELS[ result.status ] || result.status ) + ': ';
 			item.appendChild( label );
 			item.appendChild( document.createTextNode( result.message ) );
 
 			if ( result.recommendation ) {
 				const advice = document.createElement( 'span' );
-				advice.className = 'stseo-result__advice';
+				advice.className = 'dumpseo-result__advice';
 				advice.textContent = ' ' + result.recommendation;
 				item.appendChild( advice );
 			}
@@ -93,7 +93,7 @@
 	let running = 0;
 	const analyse = () => {
 		const ticket = ++running;
-		statusEl.textContent = __( 'Checking…', 'shubhamtiwari-seo-tools' );
+		statusEl.textContent = __( 'Checking…', 'dumpseo' );
 		button.disabled = true;
 
 		apiFetch( { path: config.path, method: 'POST', data: request() } )
@@ -101,17 +101,17 @@
 				if ( ticket !== running ) {
 					return; // A newer check started meanwhile.
 				}
-				box.querySelector( '.stseo-preview__title' ).textContent = response.preview.title;
-				box.querySelector( '.stseo-preview__description' ).textContent = response.preview.description;
+				box.querySelector( '.dumpseo-preview__title' ).textContent = response.preview.title;
+				box.querySelector( '.dumpseo-preview__description' ).textContent = response.preview.description;
 
 				resultsEl.replaceChildren(
-					renderReport( __( 'SEO', 'shubhamtiwari-seo-tools' ), response.seo ),
-					renderReport( __( 'Readability', 'shubhamtiwari-seo-tools' ), response.readability )
+					renderReport( __( 'SEO', 'dumpseo' ), response.seo ),
+					renderReport( __( 'Readability', 'dumpseo' ), response.readability )
 				);
 				const counts = response.seo.counts;
 				statusEl.textContent = sprintf(
 					/* translators: 1: number of problems, 2: number of improvements. */
-					__( 'Done: %1$d problems, %2$d improvements.', 'shubhamtiwari-seo-tools' ),
+					__( 'Done: %1$d problems, %2$d improvements.', 'dumpseo' ),
 					counts.error + response.readability.counts.error,
 					counts.warning + response.readability.counts.warning
 				);
@@ -120,8 +120,8 @@
 				if ( ticket === running ) {
 					statusEl.textContent = sprintf(
 						/* translators: %s: error message. */
-						__( 'The check failed: %s', 'shubhamtiwari-seo-tools' ),
-						( error && error.message ) || __( 'unknown error', 'shubhamtiwari-seo-tools' )
+						__( 'The check failed: %s', 'dumpseo' ),
+						( error && error.message ) || __( 'unknown error', 'dumpseo' )
 					);
 				}
 			} )
@@ -139,7 +139,7 @@
 	};
 
 	button.addEventListener( 'click', analyse );
-	[ '#stseo-keyphrase', '#stseo-title', '#stseo-description', '#title' ].forEach( ( selector ) => {
+	[ '#dumpseo-keyphrase', '#dumpseo-title', '#dumpseo-description', '#title' ].forEach( ( selector ) => {
 		const el = document.querySelector( selector );
 		if ( el ) {
 			el.addEventListener( 'input', scheduleAnalyse );

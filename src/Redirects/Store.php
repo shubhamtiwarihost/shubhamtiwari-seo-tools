@@ -2,32 +2,32 @@
 /**
  * Redirect storage.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Redirects;
+namespace DumpSEO\Redirects;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Redirects are posts of type `stseo_redirect`:
+ * Redirects are posts of type `dumpseo_redirect`:
  * - post_title  = normalised source path ("/old-page")
- * - meta `_stseo_redirect_target` = target URL or "/path" ('' for 410)
- * - meta `_stseo_redirect_type`   = 301, 302, 307 or 410
+ * - meta `_dumpseo_redirect_target` = target URL or "/path" ('' for 410)
+ * - meta `_dumpseo_redirect_type`   = 301, 302, 307 or 410
  * - post_status "publish" = active, "draft" = inactive
  *
  * Frontend matching never queries posts: active redirects are copied into the
- * `stseo_redirect_index` option (source => target/type) whenever one
+ * `dumpseo_redirect_index` option (source => target/type) whenever one
  * changes. The option is autoloaded while it holds up to 500 redirects, so
  * matching costs no query at all; above that it is loaded on demand (one
  * query per request, cached by a persistent object cache).
  */
 class Store {
 
-	public const POST_TYPE    = 'stseo_redirect';
-	public const META_TARGET  = '_stseo_redirect_target';
-	public const META_TYPE    = '_stseo_redirect_type';
-	public const INDEX_OPTION = 'stseo_redirect_index';
+	public const POST_TYPE    = 'dumpseo_redirect';
+	public const META_TARGET  = '_dumpseo_redirect_target';
+	public const META_TYPE    = '_dumpseo_redirect_type';
+	public const INDEX_OPTION = 'dumpseo_redirect_index';
 	public const TYPES        = array( 301, 302, 307, 410 );
 	public const AUTOLOAD_MAX = 500;
 
@@ -62,26 +62,26 @@ class Store {
 			self::POST_TYPE,
 			array(
 				'labels'          => array(
-					'name'               => __( 'Redirects', 'shubhamtiwari-seo-tools' ),
-					'singular_name'      => __( 'Redirect', 'shubhamtiwari-seo-tools' ),
-					'add_new'            => __( 'Add redirect', 'shubhamtiwari-seo-tools' ),
-					'add_new_item'       => __( 'Add redirect', 'shubhamtiwari-seo-tools' ),
-					'edit_item'          => __( 'Edit redirect', 'shubhamtiwari-seo-tools' ),
-					'new_item'           => __( 'New redirect', 'shubhamtiwari-seo-tools' ),
-					'search_items'       => __( 'Search redirects', 'shubhamtiwari-seo-tools' ),
-					'not_found'          => __( 'No redirects yet.', 'shubhamtiwari-seo-tools' ),
-					'not_found_in_trash' => __( 'No redirects in the trash.', 'shubhamtiwari-seo-tools' ),
-					'all_items'          => __( 'Redirects', 'shubhamtiwari-seo-tools' ),
+					'name'               => __( 'Redirects', 'dumpseo' ),
+					'singular_name'      => __( 'Redirect', 'dumpseo' ),
+					'add_new'            => __( 'Add redirect', 'dumpseo' ),
+					'add_new_item'       => __( 'Add redirect', 'dumpseo' ),
+					'edit_item'          => __( 'Edit redirect', 'dumpseo' ),
+					'new_item'           => __( 'New redirect', 'dumpseo' ),
+					'search_items'       => __( 'Search redirects', 'dumpseo' ),
+					'not_found'          => __( 'No redirects yet.', 'dumpseo' ),
+					'not_found_in_trash' => __( 'No redirects in the trash.', 'dumpseo' ),
+					'all_items'          => __( 'Redirects', 'dumpseo' ),
 				),
 				'public'          => false,
 				'show_ui'         => true,
-				'show_in_menu'    => 'shubhamtiwari-seo-tools',
+				'show_in_menu'    => 'dumpseo',
 				'show_in_rest'    => false,
 				'rewrite'         => false,
 				'query_var'       => false,
 				'supports'        => array( 'title' ),
 				'map_meta_cap'    => false,
-				'capability_type' => 'stseo_redirect',
+				'capability_type' => 'dumpseo_redirect',
 				'capabilities'    => array(
 					'edit_post'              => $cap,
 					'read_post'              => $cap,

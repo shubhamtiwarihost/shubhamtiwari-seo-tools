@@ -2,13 +2,13 @@
 /**
  * Uninstall behaviour.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Migrations\Migrator;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Migrations\Migrator;
+use DumpSEO\Settings\Settings;
 use WP_UnitTestCase;
 
 /**
@@ -38,11 +38,11 @@ final class UninstallTest extends WP_UnitTestCase {
 		$post_id  = self::factory()->post->create( array( 'post_title' => 'Keep me' ) );
 		$redirect = self::factory()->post->create(
 			array(
-				'post_type'  => 'stseo_redirect',
+				'post_type'  => 'dumpseo_redirect',
 				'post_title' => '/old',
 			)
 		);
-		update_option( 'stseo_redirect_index', array( '/old' => array() ) );
+		update_option( 'dumpseo_redirect_index', array( '/old' => array() ) );
 		update_option( Settings::OPTION, array( 'remove_data_on_uninstall' => true ) );
 		update_option( Migrator::VERSION_OPTION, '0.1.0' );
 
@@ -50,8 +50,8 @@ final class UninstallTest extends WP_UnitTestCase {
 
 		$this->assertFalse( get_option( Settings::OPTION ) );
 		$this->assertFalse( get_option( Migrator::VERSION_OPTION ) );
-		$this->assertNull( get_post( $redirect ), 'Redirects are ShubhamTiwari SEO Tools data.' );
-		$this->assertFalse( get_option( 'stseo_redirect_index' ) );
+		$this->assertNull( get_post( $redirect ), 'Redirects are DumpSEO data.' );
+		$this->assertFalse( get_option( 'dumpseo_redirect_index' ) );
 		$this->assertSame( 'Keep me', get_the_title( $post_id ), 'Uninstall must never delete content.' );
 	}
 
@@ -96,7 +96,7 @@ final class UninstallTest extends WP_UnitTestCase {
 	 */
 	private function run_uninstall(): void {
 		if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-			define( 'WP_UNINSTALL_PLUGIN', 'shubhamtiwari-seo-tools/shubhamtiwari-seo-tools.php' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Core constant uninstall.php checks for.
+			define( 'WP_UNINSTALL_PLUGIN', 'dumpseo/dumpseo.php' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- Core constant uninstall.php checks for.
 		}
 		require dirname( __DIR__, 2 ) . '/uninstall.php';
 	}

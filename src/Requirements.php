@@ -2,10 +2,10 @@
 /**
  * Environment requirement checks.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -87,7 +87,7 @@ final class Requirements {
 			esc_html(
 				sprintf(
 					/* translators: 1: required PHP version, 2: required WordPress version. */
-					__( 'ShubhamTiwari SEO Tools is inactive: it requires PHP %1$s and WordPress %2$s or newer.', 'shubhamtiwari-seo-tools' ),
+					__( 'DumpSEO is inactive: it requires PHP %1$s and WordPress %2$s or newer.', 'dumpseo' ),
 					self::MIN_PHP,
 					self::MIN_WP
 				)

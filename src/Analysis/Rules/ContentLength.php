@@ -2,13 +2,13 @@
 /**
  * Amount of text.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -45,12 +45,12 @@ final class ContentLength extends BaseRule {
 		$words = $input->content->word_count;
 		$meta  = array( 'words' => $words );
 		/* translators: %d: number of words. */
-		$found = sprintf( _n( 'The text contains %d word.', 'The text contains %d words.', $words, 'shubhamtiwari-seo-tools' ), $words );
+		$found = sprintf( _n( 'The text contains %d word.', 'The text contains %d words.', $words, 'dumpseo' ), $words );
 
 		if ( $words >= 300 ) {
 			return $this->result( Result::PASS, Result::MEDIUM, $found, '', $meta );
 		}
-		$advice = __( 'Consider covering the topic in more depth, if readers would benefit.', 'shubhamtiwari-seo-tools' );
+		$advice = __( 'Consider covering the topic in more depth, if readers would benefit.', 'dumpseo' );
 		if ( 'page' === $input->post_type ) {
 			return $this->result( Result::INFO, Result::LOW, $found, $advice, $meta );
 		}

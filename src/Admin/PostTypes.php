@@ -2,10 +2,10 @@
 /**
  * Post types that get SEO editing controls.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Admin;
+namespace DumpSEO\Admin;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -33,11 +33,11 @@ final class PostTypes {
 		);
 
 		/**
-		 * Filters the post types that get the ShubhamTiwari SEO Tools sidebar and metabox.
+		 * Filters the post types that get the DumpSEO sidebar and metabox.
 		 *
 		 * @param mixed $types Post type names. Non-strings are ignored.
 		 */
-		$filtered = apply_filters( 'stseo_editor_post_types', $types );
+		$filtered = apply_filters( 'dumpseo_editor_post_types', $types );
 		return array_values( array_filter( (array) $filtered, 'is_string' ) );
 	}
 

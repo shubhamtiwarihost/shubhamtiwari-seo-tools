@@ -2,20 +2,20 @@
 /**
  * Shared helpers for rules.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Base class: stores the ID and builds results.
  */
-abstract class BaseRule implements \ShubhamTiwariSeoTools\Analysis\Rule {
+abstract class BaseRule implements \DumpSEO\Analysis\Rule {
 
 	/**
 	 * Applies whenever a keyphrase is set, unless a rule says otherwise.

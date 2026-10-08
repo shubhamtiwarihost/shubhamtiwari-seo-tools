@@ -2,14 +2,14 @@
 /**
  * Long sentences.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Readability\Rules;
+namespace DumpSEO\Readability\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
-use ShubhamTiwariSeoTools\Analysis\Rules\BaseRule;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
+use DumpSEO\Analysis\Rules\BaseRule;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -46,7 +46,7 @@ final class SentenceLength extends BaseRule {
 		$sentences = $input->sentences();
 		$long      = 0;
 		foreach ( $sentences as $sentence ) {
-			if ( \ShubhamTiwariSeoTools\Analysis\Document::count_words( $sentence ) > self::MAX_WORDS ) {
+			if ( \DumpSEO\Analysis\Document::count_words( $sentence ) > self::MAX_WORDS ) {
 				++$long;
 			}
 		}
@@ -57,12 +57,12 @@ final class SentenceLength extends BaseRule {
 			'percent'   => $percent,
 		);
 		/* translators: 1: percentage of sentences, 2: word limit. */
-		$found = sprintf( __( '%1$s%% of sentences are longer than %2$d words.', 'shubhamtiwari-seo-tools' ), (string) $percent, self::MAX_WORDS );
+		$found = sprintf( __( '%1$s%% of sentences are longer than %2$d words.', 'dumpseo' ), (string) $percent, self::MAX_WORDS );
 
 		if ( $percent <= 25 ) {
 			return $this->result( Result::PASS, Result::MEDIUM, $found, '', $meta );
 		}
-		$advice = __( 'Split long sentences, or cut words that do not add meaning.', 'shubhamtiwari-seo-tools' );
+		$advice = __( 'Split long sentences, or cut words that do not add meaning.', 'dumpseo' );
 		return $this->result( $percent > 40 ? Result::ERROR : Result::WARNING, Result::MEDIUM, $found, $advice, $meta );
 	}
 }

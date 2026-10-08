@@ -2,19 +2,19 @@
 /**
  * Detection of other plugins that print the same tags.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Compatibility;
+namespace DumpSEO\Compatibility;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Detects active plugins known to print Open Graph / X Card tags or schema.org
- * JSON-LD, so ShubhamTiwari SEO Tools can step aside instead of printing a second set.
+ * JSON-LD, so DumpSEO can step aside instead of printing a second set.
  *
  * Detection uses each plugin's public version constant. Only
- * the name is shown to the site owner, on the ShubhamTiwari SEO Tools settings screen.
+ * the name is shown to the site owner, on the DumpSEO settings screen.
  */
 class Conflicts {
 
@@ -36,11 +36,11 @@ class Conflicts {
 	 */
 	public function social_plugin(): string {
 		/**
-		 * Filters the detected conflicting social-tag plugin. Return '' to force ShubhamTiwari SEO Tools' tags on.
+		 * Filters the detected conflicting social-tag plugin. Return '' to force DumpSEO' tags on.
 		 *
 		 * @param mixed $found Plugin name, or ''. Non-strings are treated as ''.
 		 */
-		$found = apply_filters( 'stseo_social_conflict', $this->active_seo_plugin() );
+		$found = apply_filters( 'dumpseo_social_conflict', $this->active_seo_plugin() );
 		return is_string( $found ) ? $found : '';
 	}
 
@@ -49,11 +49,11 @@ class Conflicts {
 	 */
 	public function schema_plugin(): string {
 		/**
-		 * Filters the detected conflicting structured-data plugin. Return '' to force ShubhamTiwari SEO Tools' schema on.
+		 * Filters the detected conflicting structured-data plugin. Return '' to force DumpSEO' schema on.
 		 *
 		 * @param mixed $found Plugin name, or ''. Non-strings are treated as ''.
 		 */
-		$found = apply_filters( 'stseo_schema_conflict', $this->active_seo_plugin() );
+		$found = apply_filters( 'dumpseo_schema_conflict', $this->active_seo_plugin() );
 		return is_string( $found ) ? $found : '';
 	}
 

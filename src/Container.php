@@ -2,10 +2,10 @@
 /**
  * Minimal dependency injection container.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
 defined( 'ABSPATH' ) || exit;
 

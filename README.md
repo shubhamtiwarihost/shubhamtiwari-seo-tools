@@ -1,8 +1,8 @@
-# ShubhamTiwari SEO Tools
+# DumpSEO
 
 An original, privacy-respecting SEO plugin for WordPress: search appearance, sitemaps, social metadata, structured data and content analysis.
 
-**Status:** feature-complete for Free 1.0 (all requirements in [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)); 1.0.1 is the corrected WordPress.org submission (renamed from the first submission; see [CHANGELOG.md](CHANGELOG.md)). Not yet published.
+**Status:** feature-complete for Free 1.0 (all requirements in [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)); 1.0.2 is the WordPress.org submission under the slug `dumpseo` assigned by the Plugins Team (earlier submissions used other names; see [CHANGELOG.md](CHANGELOG.md)). Not yet published.
 
 - Repository: https://github.com/shubhamtiwarihost/shubhamtiwari-seo-tools
 - Requirements: PHP 7.4–8.3 (7.4, 8.0, 8.1, 8.2, 8.3 supported and tested), WordPress 6.4+

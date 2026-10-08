@@ -17,7 +17,7 @@ npm run env:start      # WordPress at http://localhost:8888 (admin / password)
 | Command | What it does |
 |---|---|
 | `composer lint` | `php -l` on every PHP file |
-| `composer check-versions` | Fails if plugin header, `STSEO_VERSION`, readme Stable tag and package.json disagree |
+| `composer check-versions` | Fails if plugin header, `DUMPSEO_VERSION`, readme Stable tag and package.json disagree |
 | `composer phpcs` / `composer phpcbf` | WordPress Coding Standards + PHP 7.4 compatibility / auto-fix |
 | `composer phpstan` | Static analysis, level 6, with WordPress stubs |
 | `composer test` | Unit tests (Brain Monkey, no WordPress) |
@@ -40,7 +40,7 @@ npm run env:start      # WordPress at http://localhost:8888 (admin / password)
 - Every `phpcs:ignore` or config exclusion must carry a reason comment.
 - No `@phpstan-ignore` without a reason.
 - Sanitize on input, escape on output (late), nonce + `current_user_can()` for every state change.
-- All user-facing strings use text domain `shubhamtiwari-seo-tools`.
+- All user-facing strings use text domain `dumpseo`.
 
 ## Git
 - `main` is always releasable. Work on branches; merge via PR once CI is green.

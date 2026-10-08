@@ -2,10 +2,10 @@
 /**
  * List of migration steps.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Migrations;
+namespace DumpSEO\Migrations;
 
 defined( 'ABSPATH' ) || exit;
 

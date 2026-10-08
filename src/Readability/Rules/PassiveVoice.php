@@ -2,15 +2,15 @@
 /**
  * Passive voice indicators.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Readability\Rules;
+namespace DumpSEO\Readability\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
-use ShubhamTiwariSeoTools\Analysis\Rules\BaseRule;
-use ShubhamTiwariSeoTools\Readability\English;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
+use DumpSEO\Analysis\Rules\BaseRule;
+use DumpSEO\Readability\English;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -53,7 +53,7 @@ final class PassiveVoice extends BaseRule {
 			'percent'   => $percent,
 		);
 		/* translators: %s: percentage of sentences. */
-		$found = sprintf( __( '%s%% of sentences look like passive voice.', 'shubhamtiwari-seo-tools' ), (string) $percent );
+		$found = sprintf( __( '%s%% of sentences look like passive voice.', 'dumpseo' ), (string) $percent );
 
 		if ( $percent <= self::MAX_PERCENT ) {
 			return $this->result( Result::PASS, Result::LOW, $found, '', $meta );
@@ -62,7 +62,7 @@ final class PassiveVoice extends BaseRule {
 			Result::WARNING,
 			Result::LOW,
 			$found,
-			__( 'Where it reads better, say who does what: “We tested the shoes” instead of “The shoes were tested”.', 'shubhamtiwari-seo-tools' ),
+			__( 'Where it reads better, say who does what: “We tested the shoes” instead of “The shoes were tested”.', 'dumpseo' ),
 			$meta
 		);
 	}

@@ -2,15 +2,15 @@
 /**
  * One analysis check.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis;
+namespace DumpSEO\Analysis;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * A single SEO check. Rules are registered through `stseo_analysis_rules`,
+ * A single SEO check. Rules are registered through `dumpseo_analysis_rules`,
  * read only from Input, and must not query the database.
  */
 interface Rule {

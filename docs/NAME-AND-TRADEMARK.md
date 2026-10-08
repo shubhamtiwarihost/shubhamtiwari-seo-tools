@@ -1,22 +1,28 @@
-# Name and trademark notes: "ShubhamTiwari SEO Tools"
+# Name and trademark notes: "DumpSEO"
 
 **Not legal advice.** This file records non-legal research done while preparing the WordPress.org submission. It does not establish that any name is free to use as a trademark.
 
-## Current identity (decided 2026-10-01, project owner)
+## Current identity (assigned 2026-10-08 by the WordPress.org Plugins Team)
 
 | Item | Value |
 |---|---|
-| Plugin name | ShubhamTiwari SEO Tools |
-| Slug / text domain | `shubhamtiwari-seo-tools` |
-| Main file | `shubhamtiwari-seo-tools.php` |
-| PHP namespace | `ShubhamTiwariSeoTools\` |
-| Prefix (options, meta, hooks, functions, REST, block, handles, CSS) | `stseo` (`STSEO_` for constants) |
-| Admin menu label | SEO Tools |
-| Repository | https://github.com/shubhamtiwarihost/shubhamtiwari-seo-tools |
+| Plugin name | DumpSEO |
+| Slug / text domain | `dumpseo` |
+| Main file | `dumpseo.php` |
+| PHP namespace | `DumpSEO\` |
+| Prefix (options, meta, hooks, functions, REST, block, handles, CSS) | `dumpseo` (`DUMPSEO_` for constants) |
+| Admin menu label | DumpSEO |
+| Repository | https://github.com/shubhamtiwarihost/shubhamtiwari-seo-tools (repository name kept from the previous identity; GitHub redirects if it is renamed) |
 
-The name starts with the owner's own name, written as one coined word, followed by a plain description of what the plugin does. It contains no third-party product or project name.
+The WordPress.org Plugins Team renamed/reserved the slug `dumpseo` and asked for the display name, text domain and prefixes to match it. That was done in 1.0.2 (see CHANGELOG.md). It contains no third-party product or project name.
 
-## Why the name changed
+## History
+
+### 1.0.1: "ShubhamTiwari SEO Tools" (not approved)
+
+The 1.0.1 submission used the name "ShubhamTiwari SEO Tools", slug/text domain `shubhamtiwari-seo-tools`, namespace `ShubhamTiwariSeoTools\` and prefix `stseo`. The Plugins Team replaced it with `dumpseo`. Because 1.0.1 was never approved or distributed, every identifier was renamed with no compatibility layer.
+
+### 1.0.0: "SEOEarth" (not approved)
 
 The plugin was first submitted (1.0.0, 2026-09-30) as "SEOEarth" with slug `seoearth`. The WordPress.org pre-review (review ID `AUTOPREREVIEW TRM seoearth/shubhamtiwarihost/1Oct26/T1`) pended it because the name starts with the generic term "SEO" and has no distinctive leading term, and suggested "ShubhamTiwari SEO Tools" / `shubhamtiwari-seo-tools`.
 
@@ -24,7 +30,7 @@ Earlier research (2026-09-30) had also found an active SEO service business trad
 
 Because 1.0.0 was never approved or distributed, every identifier was renamed and no compatibility layer for the old names exists.
 
-## Checks for the new name (2026-10-01)
+### Checks done for "ShubhamTiwari SEO Tools" (2026-10-01)
 
 | Check | Result |
 |---|---|
@@ -33,7 +39,7 @@ Because 1.0.0 was never approved or distributed, every identifier was renamed an
 | Directory search "stseo" (internal prefix) | 0 results |
 | Guideline 17 (must not begin with another product's name) | Begins with the owner's name |
 
-Trademark databases were **not** searched for the new name. "SEO Tools" is a generic description used by many products; the distinguishing part is the owner's name.
+Trademark databases were **not** searched for that name or for "DumpSEO".
 
 ## Rules going forward
 

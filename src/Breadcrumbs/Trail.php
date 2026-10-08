@@ -2,13 +2,13 @@
 /**
  * Breadcrumb trail for a page.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Breadcrumbs;
+namespace DumpSEO\Breadcrumbs;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Meta\PageContext;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Meta\PageContext;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -32,7 +32,7 @@ class Trail {
 	 * @return array<int, array{name: string, url: string}>
 	 */
 	public function items( PageContext $context, string $url ): array {
-		$items  = array( $this->item( __( 'Home', 'shubhamtiwari-seo-tools' ), home_url( '/' ) ) );
+		$items  = array( $this->item( __( 'Home', 'dumpseo' ), home_url( '/' ) ) );
 		$object = $context->object;
 
 		switch ( $context->type ) {
@@ -74,11 +74,11 @@ class Trail {
 
 			case PageContext::SEARCH:
 				/* translators: %s: search phrase. */
-				$items[] = $this->item( sprintf( __( 'Search results for “%s”', 'shubhamtiwari-seo-tools' ), $context->search ), $url );
+				$items[] = $this->item( sprintf( __( 'Search results for “%s”', 'dumpseo' ), $context->search ), $url );
 				break;
 
 			case PageContext::NOT_FOUND:
-				$items[] = $this->item( __( 'Page not found', 'shubhamtiwari-seo-tools' ), $url );
+				$items[] = $this->item( __( 'Page not found', 'dumpseo' ), $url );
 				break;
 		}
 
@@ -88,7 +88,7 @@ class Trail {
 		 * @param array<int, mixed> $items   Items {name, url} from home to the current page. Malformed items are dropped.
 		 * @param PageContext       $context Page context.
 		 */
-		$filtered = apply_filters( 'stseo_breadcrumb_trail', $items, $context );
+		$filtered = apply_filters( 'dumpseo_breadcrumb_trail', $items, $context );
 
 		$clean = array();
 		foreach ( (array) $filtered as $item ) {

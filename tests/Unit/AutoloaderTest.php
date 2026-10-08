@@ -2,15 +2,15 @@
 /**
  * Tests for the Autoloader.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
-use ShubhamTiwariSeoTools\Autoloader;
+use DumpSEO\Autoloader;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Autoloader
+ * @covers \DumpSEO\Autoloader
  */
 final class AutoloaderTest extends TestCase {
 
@@ -18,7 +18,7 @@ final class AutoloaderTest extends TestCase {
 		Autoloader::register( dirname( __DIR__, 2 ) . '/src' );
 
 		Autoloader::load( 'Other\\Thing' );
-		Autoloader::load( 'ShubhamTiwariSeoTools\\..\\..\\etc\\passwd' );
+		Autoloader::load( 'DumpSEO\\..\\..\\etc\\passwd' );
 
 		$this->assertFalse( class_exists( 'Other\\Thing', false ) );
 	}

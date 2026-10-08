@@ -2,13 +2,13 @@
 /**
  * Whether a focus keyphrase is set.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,8 +42,8 @@ final class KeyphraseSet extends BaseRule {
 		return $this->result(
 			Result::INFO,
 			Result::MEDIUM,
-			__( 'No focus keyphrase is set, so keyphrase checks are skipped.', 'shubhamtiwari-seo-tools' ),
-			__( 'Enter the words people would search for to find this page.', 'shubhamtiwari-seo-tools' )
+			__( 'No focus keyphrase is set, so keyphrase checks are skipped.', 'dumpseo' ),
+			__( 'Enter the words people would search for to find this page.', 'dumpseo' )
 		);
 	}
 }

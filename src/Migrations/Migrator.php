@@ -2,10 +2,10 @@
 /**
  * Versioned data migrations.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Migrations;
+namespace DumpSEO\Migrations;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -23,8 +23,8 @@ defined( 'ABSPATH' ) || exit;
  */
 final class Migrator {
 
-	public const VERSION_OPTION = 'stseo_db_version';
-	public const LOCK_OPTION    = 'stseo_migration_lock';
+	public const VERSION_OPTION = 'dumpseo_db_version';
+	public const LOCK_OPTION    = 'dumpseo_migration_lock';
 	public const LOCK_TIMEOUT   = 600;
 
 	/**
@@ -86,11 +86,11 @@ final class Migrator {
 				$this->record( $this->code_version );
 
 				/**
-				 * Fires once when ShubhamTiwari SEO Tools is installed on a site for the first time.
+				 * Fires once when DumpSEO is installed on a site for the first time.
 				 *
 				 * @param string $version Installed plugin version.
 				 */
-				do_action( 'stseo_installed', $this->code_version );
+				do_action( 'dumpseo_installed', $this->code_version );
 				return array();
 			}
 
@@ -103,13 +103,13 @@ final class Migrator {
 			$this->record( $this->code_version );
 
 			/**
-			 * Fires after ShubhamTiwari SEO Tools data has been upgraded.
+			 * Fires after DumpSEO data has been upgraded.
 			 *
 			 * @param string   $from Previous data version.
 			 * @param string   $to   New data version.
 			 * @param string[] $ran  Migration steps that ran.
 			 */
-			do_action( 'stseo_upgraded', $stored, $this->code_version, $ran );
+			do_action( 'dumpseo_upgraded', $stored, $this->code_version, $ran );
 			return $ran;
 		} finally {
 			delete_option( self::LOCK_OPTION );

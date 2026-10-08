@@ -2,24 +2,24 @@
 /**
  * Title and meta description output on real requests.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Frontend\HeadModule;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Frontend\HeadModule;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
 use WP_UnitTestCase;
 
 /**
  * Drives WordPress to each kind of page and checks <title> and description.
  *
- * @covers \ShubhamTiwariSeoTools\Frontend\HeadModule
- * @covers \ShubhamTiwariSeoTools\Meta\Resolver
- * @covers \ShubhamTiwariSeoTools\Meta\PageContext
- * @covers \ShubhamTiwariSeoTools\Meta\VariableValues
+ * @covers \DumpSEO\Frontend\HeadModule
+ * @covers \DumpSEO\Meta\Resolver
+ * @covers \DumpSEO\Meta\PageContext
+ * @covers \DumpSEO\Meta\VariableValues
  */
 final class HeadOutputTest extends WP_UnitTestCase {
 
@@ -272,9 +272,9 @@ final class HeadOutputTest extends WP_UnitTestCase {
 	public function test_output_can_be_disabled_and_feeds_are_untouched(): void {
 		$id = self::factory()->post->create( array( 'post_title' => 'Toggle' ) );
 
-		add_filter( 'stseo_head_output_enabled', '__return_false' );
+		add_filter( 'dumpseo_head_output_enabled', '__return_false' );
 		list( $title, $description ) = $this->visit( get_permalink( $id ) );
-		remove_filter( 'stseo_head_output_enabled', '__return_false' );
+		remove_filter( 'dumpseo_head_output_enabled', '__return_false' );
 
 		$this->assertSame( 'Toggle &#8211; Acme', $title, 'Core title (core texturizes the dash).' );
 		$this->assertSame( '', $description );

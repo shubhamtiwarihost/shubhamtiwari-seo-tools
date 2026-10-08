@@ -2,20 +2,20 @@
 /**
  * Admin notices stay on the plugin's own screens (directory guideline 11).
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Redirects\AdminScreen;
-use ShubhamTiwariSeoTools\Redirects\Store;
-use ShubhamTiwariSeoTools\Requirements;
+use DumpSEO\Plugin;
+use DumpSEO\Redirects\AdminScreen;
+use DumpSEO\Redirects\Store;
+use DumpSEO\Requirements;
 use WP_UnitTestCase;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Requirements
- * @covers \ShubhamTiwariSeoTools\Redirects\AdminScreen
+ * @covers \DumpSEO\Requirements
+ * @covers \DumpSEO\Redirects\AdminScreen
  */
 final class AdminNoticesTest extends WP_UnitTestCase {
 
@@ -85,7 +85,7 @@ final class AdminNoticesTest extends WP_UnitTestCase {
 				foreach ( $callbacks as $callback ) {
 					$function = $callback['function'];
 					$class    = is_array( $function ) ? ( is_object( $function[0] ) ? get_class( $function[0] ) : (string) $function[0] ) : '';
-					if ( 0 === strpos( $class, 'ShubhamTiwariSeoTools\\' ) ) {
+					if ( 0 === strpos( $class, 'DumpSEO\\' ) ) {
 						$found[] = $hook . ': ' . $class . '::' . $function[1];
 					}
 				}
@@ -132,17 +132,17 @@ final class AdminNoticesTest extends WP_UnitTestCase {
 			grant_super_admin( $admin );
 		}
 		$this->redirects->register();
-		set_transient( 'stseo_redirect_errors_' . $admin, array( 'Pending problem' ), 60 );
+		set_transient( 'dumpseo_redirect_errors_' . $admin, array( 'Pending problem' ), 60 );
 
 		$this->assertSame( '', $this->notices_on( $screen_id ) );
-		$this->assertSame( array( 'Pending problem' ), get_transient( 'stseo_redirect_errors_' . $admin ), 'Kept for the redirect screen.' );
+		$this->assertSame( array( 'Pending problem' ), get_transient( 'dumpseo_redirect_errors_' . $admin ), 'Kept for the redirect screen.' );
 	}
 
 	public function test_redirect_errors_are_printed_once_on_the_redirect_screen(): void {
 		$admin = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		wp_set_current_user( $admin );
 		$this->redirects->register();
-		set_transient( 'stseo_redirect_errors_' . $admin, array( 'Pending <b>problem</b>' ), 60 );
+		set_transient( 'dumpseo_redirect_errors_' . $admin, array( 'Pending <b>problem</b>' ), 60 );
 
 		$first = $this->notices_on( Store::POST_TYPE );
 		$this->assertStringContainsString( 'notice-error', $first );
@@ -155,8 +155,8 @@ final class AdminNoticesTest extends WP_UnitTestCase {
 		$other  = self::factory()->user->create( array( 'role' => 'administrator' ) );
 		$editor = self::factory()->user->create( array( 'role' => 'editor' ) );
 		$this->redirects->register();
-		set_transient( 'stseo_redirect_errors_' . $admin, array( 'Pending problem' ), 60 );
-		set_transient( 'stseo_redirect_errors_' . $editor, array( 'Pending problem' ), 60 );
+		set_transient( 'dumpseo_redirect_errors_' . $admin, array( 'Pending problem' ), 60 );
+		set_transient( 'dumpseo_redirect_errors_' . $editor, array( 'Pending problem' ), 60 );
 
 		wp_set_current_user( $other );
 		$this->assertSame( '', $this->notices_on( Store::POST_TYPE ), 'Another administrator does not see it.' );

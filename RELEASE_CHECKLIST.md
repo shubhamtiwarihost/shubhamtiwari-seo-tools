@@ -19,7 +19,7 @@ Version: `x.y.z`   Date: `YYYY-MM-DD`   Release owner: `____`
 - [ ] License audit — every bundled third-party file listed in `docs/LICENSES.md`, GPL-compatible
 
 ## Release metadata
-- [ ] Version bumped in plugin header, `STSEO_VERSION`, readme `Stable tag`, `package.json`, `composer.json` (`composer check-versions`)
+- [ ] Version bumped in plugin header, `DUMPSEO_VERSION`, readme `Stable tag`, `package.json`, `composer.json` (`composer check-versions`)
 - [ ] `Tested up to` equals a WordPress version the integration tests actually ran on
 - [ ] readme.txt validated with the WordPress.org readme validator
 - [ ] CHANGELOG.md and readme.txt changelog updated

@@ -2,12 +2,12 @@
 /**
  * Performs redirects.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Redirects;
+namespace DumpSEO\Redirects;
 
-use ShubhamTiwariSeoTools\Module;
+use DumpSEO\Module;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -56,7 +56,7 @@ final class RedirectsModule implements Module {
 	 */
 	public function register(): void {
 		add_action( 'init', array( Store::class, 'register_post_type' ) );
-		add_action( 'stseo_installed', array( $this->store, 'rebuild' ) );
+		add_action( 'dumpseo_installed', array( $this->store, 'rebuild' ) );
 
 		// Keep the index current however redirects change: admin screen, WP-CLI, imports or code.
 		foreach ( array( 'save_post', 'trashed_post', 'untrashed_post', 'deleted_post' ) as $hook ) {
@@ -94,7 +94,7 @@ final class RedirectsModule implements Module {
 		 * @param mixed  $redirect Matching redirect {id, target, type}, or null. Validated after filtering.
 		 * @param string $path     Normalised request path.
 		 */
-		$redirect = apply_filters( 'stseo_redirect', $redirect, $path );
+		$redirect = apply_filters( 'dumpseo_redirect', $redirect, $path );
 		if ( ! is_array( $redirect ) || ! in_array( (int) ( $redirect['type'] ?? 0 ), Store::TYPES, true ) ) {
 			return;
 		}
@@ -110,7 +110,7 @@ final class RedirectsModule implements Module {
 		}
 
 		// phpcs:ignore WordPress.Security.SafeRedirect.wp_redirect_wp_redirect -- Targets may be other sites by design; only administrators create them and they are validated on save.
-		if ( wp_redirect( $location, (int) $redirect['type'], 'ShubhamTiwari SEO Tools' ) ) {
+		if ( wp_redirect( $location, (int) $redirect['type'], 'DumpSEO' ) ) {
 			$this->finish();
 		}
 	}
@@ -159,7 +159,7 @@ final class RedirectsModule implements Module {
 		/**
 		 * Fires after a redirect header was sent, before the request ends. Tests use it to stop exit.
 		 */
-		do_action( 'stseo_redirected' );
+		do_action( 'dumpseo_redirected' );
 		exit;
 	}
 }

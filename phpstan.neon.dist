@@ -2,7 +2,7 @@ parameters:
 	level: 6
 	phpVersion: 70400
 	paths:
-		- shubhamtiwari-seo-tools.php
+		- dumpseo.php
 		- uninstall.php
 		- src
 	bootstrapFiles:

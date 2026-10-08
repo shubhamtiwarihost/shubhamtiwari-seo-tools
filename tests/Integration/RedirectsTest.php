@@ -2,22 +2,22 @@
 /**
  * Redirects: validation on save, permissions, and frontend behaviour.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Context;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Redirects\AdminScreen;
-use ShubhamTiwariSeoTools\Redirects\RedirectsModule;
-use ShubhamTiwariSeoTools\Redirects\Store;
+use DumpSEO\Context;
+use DumpSEO\Plugin;
+use DumpSEO\Redirects\AdminScreen;
+use DumpSEO\Redirects\RedirectsModule;
+use DumpSEO\Redirects\Store;
 use WP_UnitTestCase;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Redirects\RedirectsModule
- * @covers \ShubhamTiwariSeoTools\Redirects\AdminScreen
- * @covers \ShubhamTiwariSeoTools\Redirects\Store
+ * @covers \DumpSEO\Redirects\RedirectsModule
+ * @covers \DumpSEO\Redirects\AdminScreen
+ * @covers \DumpSEO\Redirects\Store
  */
 final class RedirectsTest extends WP_UnitTestCase {
 
@@ -58,7 +58,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 			'wp_redirect',
 			function ( $location, $status ) {
 				$this->sent = array( (string) $location, (int) $status );
-				throw new \RuntimeException( 'stseo-test-redirect' );
+				throw new \RuntimeException( 'dumpseo-test-redirect' );
 			},
 			10,
 			2
@@ -68,7 +68,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 	public function tear_down(): void {
 		$_POST                     = array();
 		$_SERVER['REQUEST_METHOD'] = 'GET';
-		delete_transient( 'stseo_redirect_errors_' . get_current_user_id() );
+		delete_transient( 'dumpseo_redirect_errors_' . get_current_user_id() );
 		parent::tear_down();
 	}
 
@@ -93,7 +93,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 			);
 		}
 		$_POST = array(
-			AdminScreen::NONCE_FIELD  => wp_create_nonce( 'stseo_redirect_' . $id ),
+			AdminScreen::NONCE_FIELD  => wp_create_nonce( 'dumpseo_redirect_' . $id ),
 			AdminScreen::TARGET_FIELD => wp_slash( $target ),
 			AdminScreen::TYPE_FIELD   => (string) $type,
 		);
@@ -123,7 +123,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 		try {
 			$module->maybe_redirect();
 		} catch ( \RuntimeException $e ) {
-			$this->assertSame( 'stseo-test-redirect', $e->getMessage() );
+			$this->assertSame( 'dumpseo-test-redirect', $e->getMessage() );
 			return $this->sent;
 		}
 		return null;
@@ -135,7 +135,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 	 * @return string[]
 	 */
 	private function errors(): array {
-		$errors = get_transient( 'stseo_redirect_errors_' . get_current_user_id() );
+		$errors = get_transient( 'dumpseo_redirect_errors_' . get_current_user_id() );
 		return is_array( $errors ) ? $errors : array();
 	}
 
@@ -185,7 +185,7 @@ final class RedirectsTest extends WP_UnitTestCase {
 			$id = $this->save( $source, $case[0] );
 			$this->assertSame( 'draft', get_post_status( $id ), $source );
 			$this->assertStringContainsString( $case[1], implode( ' ', $this->errors() ), $source );
-			delete_transient( 'stseo_redirect_errors_' . get_current_user_id() );
+			delete_transient( 'dumpseo_redirect_errors_' . get_current_user_id() );
 		}
 		$this->assertSame( array(), $this->store->index(), 'Nothing invalid is active.' );
 		$this->assertNull( $this->request( '/wp-admin/options.php' ) );

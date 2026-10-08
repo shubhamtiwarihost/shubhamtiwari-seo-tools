@@ -2,7 +2,7 @@
 /**
  * Unit test bootstrap. WordPress is NOT loaded; WP functions are mocked with Brain Monkey.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
 require_once dirname( __DIR__, 2 ) . '/vendor/autoload.php';
@@ -10,11 +10,11 @@ require_once dirname( __DIR__, 2 ) . '/vendor/autoload.php';
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', '/tmp/wordpress/' );
 }
-if ( ! defined( 'STSEO_VERSION' ) ) {
-	define( 'STSEO_VERSION', '0.1.0' );
-	define( 'STSEO_FILE', dirname( __DIR__, 2 ) . '/shubhamtiwari-seo-tools.php' );
-	define( 'STSEO_DIR', dirname( __DIR__, 2 ) . '/' );
-	define( 'STSEO_URL', 'https://example.org/wp-content/plugins/shubhamtiwari-seo-tools/' );
+if ( ! defined( 'DUMPSEO_VERSION' ) ) {
+	define( 'DUMPSEO_VERSION', '0.1.0' );
+	define( 'DUMPSEO_FILE', dirname( __DIR__, 2 ) . '/dumpseo.php' );
+	define( 'DUMPSEO_DIR', dirname( __DIR__, 2 ) . '/' );
+	define( 'DUMPSEO_URL', 'https://example.org/wp-content/plugins/dumpseo/' );
 }
 
 if ( ! class_exists( 'WP_Screen' ) ) {

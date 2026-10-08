@@ -2,31 +2,31 @@
 /**
  * Robots directives.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Decides ShubhamTiwari SEO Tools' robots directives for a page.
+ * Decides DumpSEO' robots directives for a page.
  *
  * Sources, in order:
  * 1. Search results and 404 pages: always noindex.
  * 2. Page-type setting ("hide Posts from search engines" → noindex_pt_post).
- * 3. Per-post / per-term value (`_stseo_robots`): "index" or "noindex"
+ * 3. Per-post / per-term value (`_dumpseo_robots`): "index" or "noindex"
  *    overrides step 2; nofollow, noarchive, nosnippet and noimageindex add to it.
  *
- * ShubhamTiwari SEO Tools only ever ADDS restrictions to what WordPress core decides. It
+ * DumpSEO only ever ADDS restrictions to what WordPress core decides. It
  * never removes core's own noindex (e.g. "Discourage search engines").
  */
 class Robots {
 
 	/**
-	 * Tokens accepted in `_stseo_robots`.
+	 * Tokens accepted in `_dumpseo_robots`.
 	 */
 	public const TOKENS = array( 'index', 'noindex', 'nofollow', 'noarchive', 'nosnippet', 'noimageindex' );
 
@@ -75,7 +75,7 @@ class Robots {
 		}
 
 		/**
-		 * Filters the robots directives ShubhamTiwari SEO Tools applies to a page (e.g. an
+		 * Filters the robots directives DumpSEO applies to a page (e.g. an
 		 * integration hiding shop utility pages). Only allowlisted directives
 		 * are kept. The canonical URL, structured data and social tags all
 		 * follow the result, so they stay consistent.
@@ -83,7 +83,7 @@ class Robots {
 		 * @param mixed       $directives Directive => true. Unknown directives and non-true values are dropped.
 		 * @param PageContext $context    Page context.
 		 */
-		$filtered = apply_filters( 'stseo_robots_directives', $directives, $context );
+		$filtered = apply_filters( 'dumpseo_robots_directives', $directives, $context );
 
 		$clean = array();
 		foreach ( (array) $filtered as $token => $on ) {
@@ -95,7 +95,7 @@ class Robots {
 	}
 
 	/**
-	 * Whether ShubhamTiwari SEO Tools marks the page noindex.
+	 * Whether DumpSEO marks the page noindex.
 	 *
 	 * @param PageContext $context Page context.
 	 */

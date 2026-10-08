@@ -6,10 +6,10 @@
 		"https://downloads.wordpress.org/plugin/woocommerce.latest-stable.zip"
 	],
 	"mappings": {
-		"wp-content/plugins/shubhamtiwari-seo-tools": "."
+		"wp-content/plugins/dumpseo": "."
 	},
 	"lifecycleScripts": {
-		"afterStart": "npx wp-env run cli wp plugin activate shubhamtiwari-seo-tools && npx wp-env run tests-cli wp plugin activate shubhamtiwari-seo-tools"
+		"afterStart": "npx wp-env run cli wp plugin activate dumpseo && npx wp-env run tests-cli wp plugin activate dumpseo"
 	},
 	"config": {
 		"WP_DEBUG": true,

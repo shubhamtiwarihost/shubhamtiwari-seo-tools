@@ -2,13 +2,13 @@
 /**
  * Prints the SEO title, meta description, canonical and robots directives.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Frontend;
+namespace DumpSEO\Frontend;
 
-use ShubhamTiwariSeoTools\Context;
-use ShubhamTiwariSeoTools\Module;
+use DumpSEO\Context;
+use DumpSEO\Module;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -97,7 +97,7 @@ final class HeadModule implements Module {
 	}
 
 	/**
-	 * Adds ShubhamTiwari SEO Tools directives to core's robots meta tag. Never removes core directives.
+	 * Adds DumpSEO directives to core's robots meta tag. Never removes core directives.
 	 *
 	 * @param mixed $robots Directives from core and other plugins.
 	 * @return mixed
@@ -171,14 +171,14 @@ final class HeadModule implements Module {
 	}
 
 	/**
-	 * Whether ShubhamTiwari SEO Tools should print its head tags.
+	 * Whether DumpSEO should print its head tags.
 	 */
 	private function enabled(): bool {
 		/**
-		 * Filters whether ShubhamTiwari SEO Tools outputs title, description, canonical and robots.
+		 * Filters whether DumpSEO outputs title, description, canonical and robots.
 		 *
 		 * @param bool $enabled Default true.
 		 */
-		return (bool) apply_filters( 'stseo_head_output_enabled', true );
+		return (bool) apply_filters( 'dumpseo_head_output_enabled', true );
 	}
 }

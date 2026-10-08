@@ -2,13 +2,13 @@
 /**
  * Resolves the SEO title and description for a page.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
-use ShubhamTiwariSeoTools\Settings\Schema;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Settings\Schema;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 

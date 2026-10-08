@@ -1,10 +1,10 @@
 # Redirects
 
-Send visitors (and search engines) from an old address to a new one — for example after renaming a page or moving content. **SEO Tools → Redirects**, administrators only.
+Send visitors (and search engines) from an old address to a new one — for example after renaming a page or moving content. **DumpSEO → Redirects**, administrators only.
 
 ## Adding a redirect
 
-1. **SEO Tools → Redirects → Add redirect**.
+1. **DumpSEO → Redirects → Add redirect**.
 2. **Old address** (title field): the path that should stop working, e.g. `/old-page`. You can paste a full address from this site; only the path is kept.
 3. **New address**: a path on this site such as `/new-page/`, or a full address starting with `https://` (another site is fine).
 4. **Type**, then **Publish** to switch it on (**Save Draft** keeps it off).
@@ -20,7 +20,7 @@ Send visitors (and search engines) from an old address to a new one — for exam
 - Matching ignores letter case, a trailing slash and the query string: `/Old-Page/?ref=x` matches a redirect from `/old-page`.
 - The query string is passed on to the new address, unless the new address has its own.
 - Only normal page visits (GET/HEAD) are redirected; form submissions are not.
-- Responses carry an `X-Redirect-By: ShubhamTiwari SEO Tools` header, which helps when checking with browser tools.
+- Responses carry an `X-Redirect-By: DumpSEO` header, which helps when checking with browser tools.
 
 ## Protection against mistakes
 
@@ -34,7 +34,7 @@ A redirect is saved **inactive**, with the reason shown, when:
 
 ## Not included in the free version
 
-Regular-expression (pattern) redirects and a log of 404 errors are not part of ShubhamTiwari SEO Tools Free.
+Regular-expression (pattern) redirects and a log of 404 errors are not part of DumpSEO Free.
 
 ## Performance
 

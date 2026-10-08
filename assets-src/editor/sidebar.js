@@ -1,5 +1,5 @@
 /**
- * The ShubhamTiwari SEO Tools sidebar.
+ * The DumpSEO sidebar.
  */
 import { MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import {
@@ -39,19 +39,10 @@ const PluginSidebarMoreMenuItem =
 	editor.PluginSidebarMoreMenuItem || editPost.PluginSidebarMoreMenuItem;
 
 const DIRECTIVES = {
-	nofollow: __( 'Do not follow links (nofollow)', 'shubhamtiwari-seo-tools' ),
-	noarchive: __(
-		'Do not show a cached copy (noarchive)',
-		'shubhamtiwari-seo-tools'
-	),
-	nosnippet: __(
-		'Do not show a text snippet (nosnippet)',
-		'shubhamtiwari-seo-tools'
-	),
-	noimageindex: __(
-		'Do not index images (noimageindex)',
-		'shubhamtiwari-seo-tools'
-	),
+	nofollow: __( 'Do not follow links (nofollow)', 'dumpseo' ),
+	noarchive: __( 'Do not show a cached copy (noarchive)', 'dumpseo' ),
+	nosnippet: __( 'Do not show a text snippet (nosnippet)', 'dumpseo' ),
+	noimageindex: __( 'Do not index images (noimageindex)', 'dumpseo' ),
 };
 
 /**
@@ -66,24 +57,20 @@ function AnalysisBody( { report, loading, error } ) {
 	return (
 		<Fragment>
 			{ loading && (
-				<p className="stseo-loading">
-					<Spinner /> { __( 'Checking…', 'shubhamtiwari-seo-tools' ) }
+				<p className="dumpseo-loading">
+					<Spinner /> { __( 'Checking…', 'dumpseo' ) }
 				</p>
 			) }
 			{ error && (
 				<Notice status="error" isDismissible={ false }>
-					{ __(
-						'The check could not run:',
-						'shubhamtiwari-seo-tools'
-					) }{ ' ' }
-					{ error }
+					{ __( 'The check could not run:', 'dumpseo' ) } { error }
 				</Notice>
 			) }
 			{ report && report.results.length === 0 && (
 				<p>
 					{ __(
 						'There is not enough text to check yet.',
-						'shubhamtiwari-seo-tools'
+						'dumpseo'
 					) }
 				</p>
 			) }
@@ -101,7 +88,7 @@ function AnalysisBody( { report, loading, error } ) {
  */
 function PanelTitle( { label, report } ) {
 	return (
-		<span className="stseo-panel-title">
+		<span className="dumpseo-panel-title">
 			{ label }
 			{ report && report.results.length > 0 && (
 				<StatusMarker status={ overallStatus( [ report ] ) } />
@@ -124,33 +111,25 @@ export default function Sidebar() {
 		: null;
 	const hidden =
 		indexChoice( robots ) === 'noindex' ||
-		( window.stseoEditor && ! window.stseoEditor.blogPublic );
+		( window.dumpseoEditor && ! window.dumpseoEditor.blogPublic );
 
 	return (
 		<Fragment>
-			<PluginSidebarMoreMenuItem target="stseo-sidebar">
-				{ __( 'ShubhamTiwari SEO Tools', 'shubhamtiwari-seo-tools' ) }
+			<PluginSidebarMoreMenuItem target="dumpseo-sidebar">
+				{ __( 'DumpSEO', 'dumpseo' ) }
 			</PluginSidebarMoreMenuItem>
 			<PluginSidebar
-				className="stseo-sidebar"
-				name="stseo-sidebar"
-				title={ __(
-					'ShubhamTiwari SEO Tools',
-					'shubhamtiwari-seo-tools'
-				) }
+				className="dumpseo-sidebar"
+				name="dumpseo-sidebar"
+				title={ __( 'DumpSEO', 'dumpseo' ) }
 				icon="search"
 			>
-				<PanelBody
-					title={ __(
-						'Search appearance',
-						'shubhamtiwari-seo-tools'
-					) }
-				>
+				<PanelBody title={ __( 'Search appearance', 'dumpseo' ) }>
 					{ hidden && (
 						<Notice status="warning" isDismissible={ false }>
 							{ __(
 								'This page is hidden from search engines.',
-								'shubhamtiwari-seo-tools'
+								'dumpseo'
 							) }
 						</Notice>
 					) }
@@ -160,13 +139,10 @@ export default function Sidebar() {
 						description={ data ? data.preview.description : '' }
 					/>
 					<TextControl
-						label={ __(
-							'Focus keyphrase',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Focus keyphrase', 'dumpseo' ) }
 						help={ __(
 							'The words people would search for to find this page.',
-							'shubhamtiwari-seo-tools'
+							'dumpseo'
 						) }
 						value={ meta[ KEYS.keyphrase ] || '' }
 						onChange={ ( value ) =>
@@ -175,12 +151,12 @@ export default function Sidebar() {
 						__nextHasNoMarginBottom
 					/>
 					<TextControl
-						label={ __( 'SEO title', 'shubhamtiwari-seo-tools' ) }
+						label={ __( 'SEO title', 'dumpseo' ) }
 						help={
 							<Fragment>
 								{ __(
 									'Leave empty to use the title template. Variables such as %%site_name%% are allowed.',
-									'shubhamtiwari-seo-tools'
+									'dumpseo'
 								) }{ ' ' }
 								{ data && (
 									<LengthHint
@@ -196,15 +172,12 @@ export default function Sidebar() {
 						__nextHasNoMarginBottom
 					/>
 					<TextareaControl
-						label={ __(
-							'Meta description',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Meta description', 'dumpseo' ) }
 						help={
 							<Fragment>
 								{ __(
 									'Leave empty to use the description template.',
-									'shubhamtiwari-seo-tools'
+									'dumpseo'
 								) }{ ' ' }
 								{ data && (
 									<LengthHint
@@ -226,10 +199,7 @@ export default function Sidebar() {
 				<PanelBody
 					title={
 						<PanelTitle
-							label={ __(
-								'SEO analysis',
-								'shubhamtiwari-seo-tools'
-							) }
+							label={ __( 'SEO analysis', 'dumpseo' ) }
 							report={ data && data.seo }
 						/>
 					}
@@ -244,10 +214,7 @@ export default function Sidebar() {
 				<PanelBody
 					title={
 						<PanelTitle
-							label={ __(
-								'Readability',
-								'shubhamtiwari-seo-tools'
-							) }
+							label={ __( 'Readability', 'dumpseo' ) }
 							report={ data && data.readability }
 						/>
 					}
@@ -261,17 +228,14 @@ export default function Sidebar() {
 				</PanelBody>
 
 				<PanelBody
-					title={ __( 'Social sharing', 'shubhamtiwari-seo-tools' ) }
+					title={ __( 'Social sharing', 'dumpseo' ) }
 					initialOpen={ false }
 				>
 					<TextControl
-						label={ __(
-							'Social sharing title',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Social sharing title', 'dumpseo' ) }
 						help={ __(
 							'Leave empty to use the SEO title.',
-							'shubhamtiwari-seo-tools'
+							'dumpseo'
 						) }
 						value={ meta[ KEYS.socialTitle ] || '' }
 						onChange={ ( value ) =>
@@ -280,13 +244,10 @@ export default function Sidebar() {
 						__nextHasNoMarginBottom
 					/>
 					<TextareaControl
-						label={ __(
-							'Social sharing description',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Social sharing description', 'dumpseo' ) }
 						help={ __(
 							'Leave empty to use the meta description.',
-							'shubhamtiwari-seo-tools'
+							'dumpseo'
 						) }
 						value={ meta[ KEYS.socialDescription ] || '' }
 						onChange={ ( value ) =>
@@ -296,13 +257,10 @@ export default function Sidebar() {
 					/>
 					<TextControl
 						type="url"
-						label={ __(
-							'Social sharing image URL',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Social sharing image URL', 'dumpseo' ) }
 						help={ __(
 							'Leave empty to use the featured image, then the default sharing image.',
-							'shubhamtiwari-seo-tools'
+							'dumpseo'
 						) }
 						value={ meta[ KEYS.socialImage ] || '' }
 						onChange={ ( value ) =>
@@ -320,7 +278,7 @@ export default function Sidebar() {
 								<Button variant="secondary" onClick={ open }>
 									{ __(
 										'Choose from media library',
-										'shubhamtiwari-seo-tools'
+										'dumpseo'
 									) }
 								</Button>
 							) }
@@ -329,35 +287,32 @@ export default function Sidebar() {
 				</PanelBody>
 
 				<PanelBody
-					title={ __( 'Advanced', 'shubhamtiwari-seo-tools' ) }
+					title={ __( 'Advanced', 'dumpseo' ) }
 					initialOpen={ false }
 				>
 					<SelectControl
-						label={ __(
-							'Search engines',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Search engines', 'dumpseo' ) }
 						value={ indexChoice( robots ) }
 						options={ [
 							{
 								value: '',
 								label: __(
-									'Default (from ShubhamTiwari SEO Tools settings)',
-									'shubhamtiwari-seo-tools'
+									'Default (from DumpSEO settings)',
+									'dumpseo'
 								),
 							},
 							{
 								value: 'index',
 								label: __(
 									'Show in search results (index)',
-									'shubhamtiwari-seo-tools'
+									'dumpseo'
 								),
 							},
 							{
 								value: 'noindex',
 								label: __(
 									'Hide from search results (noindex)',
-									'shubhamtiwari-seo-tools'
+									'dumpseo'
 								),
 							},
 						] }
@@ -387,13 +342,10 @@ export default function Sidebar() {
 					) ) }
 					<TextControl
 						type="url"
-						label={ __(
-							'Canonical URL',
-							'shubhamtiwari-seo-tools'
-						) }
+						label={ __( 'Canonical URL', 'dumpseo' ) }
 						help={ __(
 							'Only if this page duplicates another one. Leave empty for the page’s own address.',
-							'shubhamtiwari-seo-tools'
+							'dumpseo'
 						) }
 						value={ meta[ KEYS.canonical ] || '' }
 						onChange={ ( value ) =>
@@ -414,16 +366,7 @@ export default function Sidebar() {
 }
 
 const STATUS_SUMMARY = {
-	error: __(
-		'ShubhamTiwari SEO Tools found problems.',
-		'shubhamtiwari-seo-tools'
-	),
-	warning: __(
-		'ShubhamTiwari SEO Tools suggests improvements.',
-		'shubhamtiwari-seo-tools'
-	),
-	pass: __(
-		'ShubhamTiwari SEO Tools checks passed.',
-		'shubhamtiwari-seo-tools'
-	),
+	error: __( 'DumpSEO found problems.', 'dumpseo' ),
+	warning: __( 'DumpSEO suggests improvements.', 'dumpseo' ),
+	pass: __( 'DumpSEO checks passed.', 'dumpseo' ),
 };

@@ -2,10 +2,10 @@
 /**
  * What the current request is showing.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Meta;
+namespace DumpSEO\Meta;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -150,7 +150,7 @@ final class PageContext {
 		}
 		if ( $query->is_month() && $year && $month ) {
 			/* translators: Date format for monthly archives, see https://www.php.net/manual/datetime.format.php */
-			return (string) mysql2date( _x( 'F Y', 'monthly archives date format', 'shubhamtiwari-seo-tools' ), sprintf( '%04d-%02d-01 00:00:00', $year, $month ) );
+			return (string) mysql2date( _x( 'F Y', 'monthly archives date format', 'dumpseo' ), sprintf( '%04d-%02d-01 00:00:00', $year, $month ) );
 		}
 		return $year ? (string) $year : '';
 	}

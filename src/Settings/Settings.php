@@ -2,10 +2,10 @@
 /**
  * Settings repository.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Settings;
+namespace DumpSEO\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Settings {
 
-	public const OPTION = 'stseo_settings';
+	public const OPTION = 'dumpseo_settings';
 
 	/**
 	 * Settings schema.

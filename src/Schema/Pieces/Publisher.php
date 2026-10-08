@@ -2,13 +2,13 @@
 /**
  * Organization or Person behind the site.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema\Pieces;
+namespace DumpSEO\Schema\Pieces;
 
-use ShubhamTiwariSeoTools\Schema\Piece;
-use ShubhamTiwariSeoTools\Schema\SchemaContext;
+use DumpSEO\Schema\Piece;
+use DumpSEO\Schema\SchemaContext;
 
 defined( 'ABSPATH' ) || exit;
 

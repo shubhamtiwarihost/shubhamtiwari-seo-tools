@@ -1,16 +1,16 @@
-// ShubhamTiwari SEO Tools sidebar. Status is always written out in text; symbols and color only reinforce it.
+// DumpSEO sidebar. Status is always written out in text; symbols and color only reinforce it.
 
-.stseo-sidebar .components-base-control {
+.dumpseo-sidebar .components-base-control {
 	margin-bottom: 16px;
 }
 
-.stseo-panel-title {
+.dumpseo-panel-title {
 	display: inline-flex;
 	gap: 8px;
 	align-items: center;
 }
 
-.stseo-preview {
+.dumpseo-preview {
 	margin-bottom: 16px;
 	padding: 12px;
 	border: 1px solid #dcdcde;
@@ -23,81 +23,81 @@
 	}
 }
 
-.stseo-preview__url {
+.dumpseo-preview__url {
 	color: #006621;
 	font-size: 12px;
 	word-break: break-all;
 }
 
-.stseo-preview__title {
+.dumpseo-preview__title {
 	color: #1a0dab;
 	font-size: 16px;
 	line-height: 1.3;
 }
 
-.stseo-preview__description {
+.dumpseo-preview__description {
 	color: #3c4043;
 	font-size: 13px;
 	line-height: 1.5;
 }
 
-.stseo-status {
+.dumpseo-status {
 	display: inline-flex;
 	gap: 4px;
 	align-items: center;
 	font-weight: 400;
 }
 
-.stseo-status__symbol {
+.dumpseo-status__symbol {
 	display: inline-block;
 	width: 1.2em;
 	font-weight: 700;
 	text-align: center;
 }
 
-.stseo-status--error .stseo-status__symbol {
+.dumpseo-status--error .dumpseo-status__symbol {
 	color: #b32d2e;
 }
 
-.stseo-status--warning .stseo-status__symbol {
+.dumpseo-status--warning .dumpseo-status__symbol {
 	color: #996800;
 }
 
-.stseo-status--info .stseo-status__symbol {
+.dumpseo-status--info .dumpseo-status__symbol {
 	color: #2271b1;
 }
 
-.stseo-status--pass .stseo-status__symbol {
+.dumpseo-status--pass .dumpseo-status__symbol {
 	color: #007017;
 }
 
-.stseo-results {
+.dumpseo-results {
 	margin: 0;
 }
 
-.stseo-result {
+.dumpseo-result {
 	display: flex;
 	flex-direction: column;
 	gap: 2px;
 	margin-bottom: 12px;
 }
 
-.stseo-result__status,
-.stseo-status__label {
+.dumpseo-result__status,
+.dumpseo-status__label {
 	font-size: 11px;
 	text-transform: uppercase;
 }
 
-.stseo-result__advice {
+.dumpseo-result__advice {
 	color: #50575e;
 }
 
-.stseo-length--long,
-.stseo-length--empty {
+.dumpseo-length--long,
+.dumpseo-length--empty {
 	font-weight: 600;
 }
 
-.stseo-loading {
+.dumpseo-loading {
 	display: flex;
 	align-items: center;
 	gap: 4px;

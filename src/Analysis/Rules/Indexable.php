@@ -2,13 +2,13 @@
 /**
  * Whether search engines may index the page.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,8 +42,8 @@ final class Indexable extends BaseRule {
 		return $this->result(
 			Result::INFO,
 			Result::HIGH,
-			__( 'This page is hidden from search engines (noindex), so it will not appear in search results.', 'shubhamtiwari-seo-tools' ),
-			__( 'If that is not intended, change the page’s search engine visibility.', 'shubhamtiwari-seo-tools' )
+			__( 'This page is hidden from search engines (noindex), so it will not appear in search results.', 'dumpseo' ),
+			__( 'If that is not intended, change the page’s search engine visibility.', 'dumpseo' )
 		);
 	}
 }

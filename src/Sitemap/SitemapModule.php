@@ -2,20 +2,20 @@
 /**
  * XML sitemap integration.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Sitemap;
+namespace DumpSEO\Sitemap;
 
-use ShubhamTiwariSeoTools\Module;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Module;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Extends WordPress core sitemaps (/wp-sitemap.xml) instead of replacing them.
  *
- * - Honours ShubhamTiwari SEO Tools indexing rules: noindex post types, taxonomies, posts and
+ * - Honours DumpSEO indexing rules: noindex post types, taxonomies, posts and
  *   terms are left out; items explicitly set to "index" are kept even when
  *   their type is noindex; items whose canonical points elsewhere are left out.
  * - Leaves out password-protected posts (core lists them).
@@ -31,7 +31,7 @@ final class SitemapModule implements Module {
 	/**
 	 * Query var marking plugin-adjusted sitemap queries, so caches are primed only for them.
 	 */
-	private const QUERY_FLAG = 'stseo_sitemap';
+	private const QUERY_FLAG = 'dumpseo_sitemap';
 
 	/**
 	 * Settings.
@@ -87,7 +87,7 @@ final class SitemapModule implements Module {
 		add_filter( 'wp_sitemaps_posts_entry', array( $this, 'filter_post_entry' ), 10, 2 );
 		add_filter( 'wp_sitemaps_taxonomies', array( $this, 'filter_taxonomies' ) );
 		add_filter( 'wp_sitemaps_taxonomies_query_args', array( $this, 'filter_terms_query' ), 10, 2 );
-		add_action( 'stseo_settings_section_sitemap', array( $this, 'render_help' ) );
+		add_action( 'dumpseo_settings_section_sitemap', array( $this, 'render_help' ) );
 	}
 
 	/**
@@ -161,7 +161,7 @@ final class SitemapModule implements Module {
 		 * @param mixed  $ids       Post IDs. Non-numeric entries are ignored.
 		 * @param string $post_type Post type.
 		 */
-		$extra                    = array_filter( array_map( 'intval', (array) apply_filters( 'stseo_sitemap_excluded_posts', array(), $post_type ) ) );
+		$extra                    = array_filter( array_map( 'intval', (array) apply_filters( 'dumpseo_sitemap_excluded_posts', array(), $post_type ) ) );
 		$elsewhere                = array_merge( $this->exclusions->posts_canonicalised_elsewhere( $post_type ), $extra );
 		$args[ self::QUERY_FLAG ] = true;
 
@@ -273,10 +273,10 @@ final class SitemapModule implements Module {
 	 * Help text with a link to the live sitemap, above the sitemap settings.
 	 */
 	public function render_help(): void {
-		echo '<p>' . esc_html__( 'ShubhamTiwari SEO Tools adds to the sitemap built into WordPress. Content hidden from search engines (noindex) and content whose canonical URL points elsewhere is left out automatically.', 'shubhamtiwari-seo-tools' ) . '</p>';
+		echo '<p>' . esc_html__( 'DumpSEO adds to the sitemap built into WordPress. Content hidden from search engines (noindex) and content whose canonical URL points elsewhere is left out automatically.', 'dumpseo' ) . '</p>';
 
 		if ( '0' === (string) get_option( 'blog_public' ) ) {
-			echo '<p><strong>' . esc_html__( 'The sitemap is unavailable because the site is set to discourage search engines (Settings → Reading).', 'shubhamtiwari-seo-tools' ) . '</strong></p>';
+			echo '<p><strong>' . esc_html__( 'The sitemap is unavailable because the site is set to discourage search engines (Settings → Reading).', 'dumpseo' ) . '</strong></p>';
 			return;
 		}
 		if ( function_exists( 'get_sitemap_url' ) && false !== $this->settings->get( 'sitemap_enabled' ) ) {
@@ -285,9 +285,9 @@ final class SitemapModule implements Module {
 				printf(
 					'<p><a href="%1$s" target="_blank" rel="noopener">%2$s<span class="screen-reader-text"> %3$s</span></a></p>',
 					esc_url( $url ),
-					esc_html__( 'View your sitemap', 'shubhamtiwari-seo-tools' ),
+					esc_html__( 'View your sitemap', 'dumpseo' ),
 					/* translators: Accessibility text for links that open in a new tab. */
-					esc_html__( '(opens in a new tab)', 'shubhamtiwari-seo-tools' )
+					esc_html__( '(opens in a new tab)', 'dumpseo' )
 				);
 			}
 		}

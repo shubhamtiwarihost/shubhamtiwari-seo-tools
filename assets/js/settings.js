@@ -1,5 +1,5 @@
 /**
- * ShubhamTiwari SEO Tools settings screen: media library picker for image URL fields.
+ * DumpSEO settings screen: media library picker for image URL fields.
  * Only fills in the field; nothing is saved until the form is submitted.
  */
 ( function ( $ ) {
@@ -10,7 +10,7 @@
 	}
 	const { __ } = window.wp.i18n;
 
-	$( document ).on( 'click', '.stseo-pick-image', function ( event ) {
+	$( document ).on( 'click', '.dumpseo-pick-image', function ( event ) {
 		event.preventDefault();
 		const input = document.getElementById( this.getAttribute( 'data-target' ) );
 		if ( ! input ) {
@@ -18,8 +18,8 @@
 		}
 
 		const frame = window.wp.media( {
-			title: __( 'Choose an image', 'shubhamtiwari-seo-tools' ),
-			button: { text: __( 'Use this image', 'shubhamtiwari-seo-tools' ) },
+			title: __( 'Choose an image', 'dumpseo' ),
+			button: { text: __( 'Use this image', 'dumpseo' ) },
 			library: { type: 'image' },
 			multiple: false,
 		} );

@@ -2,12 +2,12 @@
 /**
  * Image URLs for sitemap entries.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Sitemap;
+namespace DumpSEO\Sitemap;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
+use DumpSEO\Helpers\Text;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -68,7 +68,7 @@ class Images {
 		 * @param string[] $clean Image URLs.
 		 * @param \WP_Post $post  Post.
 		 */
-		$filtered = apply_filters( 'stseo_sitemap_images', $clean, $post );
+		$filtered = apply_filters( 'dumpseo_sitemap_images', $clean, $post );
 
 		return array_values( array_filter( (array) $filtered, 'is_string' ) );
 	}
@@ -136,7 +136,7 @@ class Images {
 			 *
 			 * @param mixed $hosts Host names.
 			 */
-			$hosts       = apply_filters( 'stseo_sitemap_image_hosts', $hosts );
+			$hosts       = apply_filters( 'dumpseo_sitemap_image_hosts', $hosts );
 			$this->hosts = array_values( array_unique( array_map( 'strtolower', array_filter( (array) $hosts, 'is_string' ) ) ) );
 		}
 

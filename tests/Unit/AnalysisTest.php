@@ -2,27 +2,27 @@
 /**
  * Tests for the SEO analysis engine.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
 use Brain\Monkey\Functions;
-use ShubhamTiwariSeoTools\Analysis\Document;
-use ShubhamTiwariSeoTools\Analysis\Engine;
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Keyphrase;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Document;
+use DumpSEO\Analysis\Engine;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Keyphrase;
+use DumpSEO\Analysis\Result;
 
 /**
  * Covers content parsing, keyphrase matching and every built-in rule.
  *
- * @covers \ShubhamTiwariSeoTools\Analysis\Document
- * @covers \ShubhamTiwariSeoTools\Analysis\Keyphrase
- * @covers \ShubhamTiwariSeoTools\Analysis\Engine
- * @covers \ShubhamTiwariSeoTools\Analysis\Input
- * @covers \ShubhamTiwariSeoTools\Analysis\Result
- * @covers \ShubhamTiwariSeoTools\Analysis\Rules\BaseRule
+ * @covers \DumpSEO\Analysis\Document
+ * @covers \DumpSEO\Analysis\Keyphrase
+ * @covers \DumpSEO\Analysis\Engine
+ * @covers \DumpSEO\Analysis\Input
+ * @covers \DumpSEO\Analysis\Result
+ * @covers \DumpSEO\Analysis\Rules\BaseRule
  */
 final class AnalysisTest extends TestCase {
 

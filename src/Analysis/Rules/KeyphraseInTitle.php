@@ -2,13 +2,13 @@
 /**
  * Keyphrase in the SEO title.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -37,8 +37,8 @@ final class KeyphraseInTitle extends BaseRule {
 			return $this->result(
 				Result::ERROR,
 				Result::HIGH,
-				__( 'The SEO title does not contain the focus keyphrase.', 'shubhamtiwari-seo-tools' ),
-				__( 'Add the keyphrase to the SEO title.', 'shubhamtiwari-seo-tools' ),
+				__( 'The SEO title does not contain the focus keyphrase.', 'dumpseo' ),
+				__( 'Add the keyphrase to the SEO title.', 'dumpseo' ),
 				$meta
 			);
 		}
@@ -46,11 +46,11 @@ final class KeyphraseInTitle extends BaseRule {
 			return $this->result(
 				Result::WARNING,
 				Result::LOW,
-				__( 'The focus keyphrase is in the second half of the SEO title.', 'shubhamtiwari-seo-tools' ),
-				__( 'Move the keyphrase towards the start of the title, where it is less likely to be cut off.', 'shubhamtiwari-seo-tools' ),
+				__( 'The focus keyphrase is in the second half of the SEO title.', 'dumpseo' ),
+				__( 'Move the keyphrase towards the start of the title, where it is less likely to be cut off.', 'dumpseo' ),
 				$meta
 			);
 		}
-		return $this->result( Result::PASS, Result::HIGH, __( 'The SEO title contains the focus keyphrase.', 'shubhamtiwari-seo-tools' ), '', $meta );
+		return $this->result( Result::PASS, Result::HIGH, __( 'The SEO title contains the focus keyphrase.', 'dumpseo' ), '', $meta );
 	}
 }

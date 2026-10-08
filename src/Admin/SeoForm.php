@@ -2,14 +2,14 @@
 /**
  * SEO form fields shared by the term screen and the Classic Editor metabox.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Admin;
+namespace DumpSEO\Admin;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\Robots;
+use DumpSEO\Helpers\Text;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\Robots;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -19,15 +19,15 @@ defined( 'ABSPATH' ) || exit;
  */
 final class SeoForm {
 
-	public const TITLE_FIELD        = 'stseo_title';
-	public const DESC_FIELD         = 'stseo_description';
-	public const CANON_FIELD        = 'stseo_canonical';
-	public const INDEX_FIELD        = 'stseo_robots_index';
-	public const ROBOT_FIELD        = 'stseo_robots';
-	public const SOCIAL_TITLE_FIELD = 'stseo_social_title';
-	public const SOCIAL_DESC_FIELD  = 'stseo_social_description';
-	public const SOCIAL_IMAGE_FIELD = 'stseo_social_image';
-	public const KEYPHRASE_FIELD    = 'stseo_focus_keyphrase';
+	public const TITLE_FIELD        = 'dumpseo_title';
+	public const DESC_FIELD         = 'dumpseo_description';
+	public const CANON_FIELD        = 'dumpseo_canonical';
+	public const INDEX_FIELD        = 'dumpseo_robots_index';
+	public const ROBOT_FIELD        = 'dumpseo_robots';
+	public const SOCIAL_TITLE_FIELD = 'dumpseo_social_title';
+	public const SOCIAL_DESC_FIELD  = 'dumpseo_social_description';
+	public const SOCIAL_IMAGE_FIELD = 'dumpseo_social_image';
+	public const KEYPHRASE_FIELD    = 'dumpseo_focus_keyphrase';
 
 	/**
 	 * Robots directives offered as checkboxes (index/noindex is a separate choice).
@@ -110,10 +110,10 @@ final class SeoForm {
 	 */
 	public static function directive_labels(): array {
 		return array(
-			'nofollow'     => __( 'Do not follow links (nofollow)', 'shubhamtiwari-seo-tools' ),
-			'noarchive'    => __( 'Do not show a cached copy (noarchive)', 'shubhamtiwari-seo-tools' ),
-			'nosnippet'    => __( 'Do not show a text snippet (nosnippet)', 'shubhamtiwari-seo-tools' ),
-			'noimageindex' => __( 'Do not index images (noimageindex)', 'shubhamtiwari-seo-tools' ),
+			'nofollow'     => __( 'Do not follow links (nofollow)', 'dumpseo' ),
+			'noarchive'    => __( 'Do not show a cached copy (noarchive)', 'dumpseo' ),
+			'nosnippet'    => __( 'Do not show a text snippet (nosnippet)', 'dumpseo' ),
+			'noimageindex' => __( 'Do not index images (noimageindex)', 'dumpseo' ),
 		);
 	}
 }

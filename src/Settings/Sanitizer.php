@@ -2,12 +2,12 @@
 /**
  * Settings sanitizer.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Settings;
+namespace DumpSEO\Settings;
 
-use ShubhamTiwariSeoTools\Helpers\Text;
+use DumpSEO\Helpers\Text;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -79,7 +79,7 @@ class Sanitizer {
 			if ( null === $value ) {
 				$clean[ $key ] = $old;
 				/* translators: %s: settings field label. */
-				$this->errors[ $key ] = sprintf( __( '“%s” was not saved because the value is not valid.', 'shubhamtiwari-seo-tools' ), $field->label );
+				$this->errors[ $key ] = sprintf( __( '“%s” was not saved because the value is not valid.', 'dumpseo' ), $field->label );
 				continue;
 			}
 			$clean[ $key ] = $value;

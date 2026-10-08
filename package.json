@@ -1,8 +1,8 @@
 {
-	"name": "shubhamtiwari-seo-tools",
-	"version": "1.0.1",
+	"name": "dumpseo",
+	"version": "1.0.2",
 	"private": true,
-	"description": "ShubhamTiwari SEO Tools WordPress plugin — editor and admin JavaScript.",
+	"description": "DumpSEO WordPress plugin — editor and admin JavaScript.",
 	"license": "GPL-2.0-or-later",
 	"engines": {
 		"node": ">=20"
@@ -17,13 +17,13 @@
 		"env": "wp-env",
 		"env:start": "wp-env start",
 		"env:stop": "wp-env stop",
-		"test:php:integration": "wp-env run tests-cli --env-cwd=wp-content/plugins/shubhamtiwari-seo-tools vendor/bin/phpunit -c phpunit-integration.xml.dist",
-		"test:php:multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/shubhamtiwari-seo-tools env WP_MULTISITE=1 vendor/bin/phpunit -c phpunit-integration.xml.dist",
-		"test:php:woo": "wp-env run tests-cli --env-cwd=wp-content/plugins/shubhamtiwari-seo-tools env STSEO_TEST_WOO=1 vendor/bin/phpunit -c phpunit-integration.xml.dist",
+		"test:php:integration": "wp-env run tests-cli --env-cwd=wp-content/plugins/dumpseo vendor/bin/phpunit -c phpunit-integration.xml.dist",
+		"test:php:multisite": "wp-env run tests-cli --env-cwd=wp-content/plugins/dumpseo env WP_MULTISITE=1 vendor/bin/phpunit -c phpunit-integration.xml.dist",
+		"test:php:woo": "wp-env run tests-cli --env-cwd=wp-content/plugins/dumpseo env DUMPSEO_TEST_WOO=1 vendor/bin/phpunit -c phpunit-integration.xml.dist",
 		"plugin-zip": "wp-scripts plugin-zip"
 	},
 	"files": [
-		"shubhamtiwari-seo-tools.php",
+		"dumpseo.php",
 		"uninstall.php",
 		"readme.txt",
 		"LICENSE",

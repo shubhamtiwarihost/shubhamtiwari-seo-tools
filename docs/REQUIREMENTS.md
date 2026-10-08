@@ -1,17 +1,17 @@
-# ShubhamTiwari SEO Tools — Requirements (v1.0 Free)
+# DumpSEO — Requirements (v1.0 Free)
 
 Status: **Finalized in Phase 1** (2026-09-29). Changes require a note in the changelog below.
 
 ## Identity
 | Item | Value |
 |---|---|
-| Plugin name | ShubhamTiwari SEO Tools |
-| Slug / text domain | `shubhamtiwari-seo-tools` |
-| PHP namespace | `ShubhamTiwariSeoTools\` |
-| Global prefix (functions, options, meta, hooks) | `stseo_` / `_stseo_` / `STSEO_` |
+| Plugin name | DumpSEO |
+| Slug / text domain | `dumpseo` |
+| PHP namespace | `DumpSEO\` |
+| Global prefix (functions, options, meta, hooks) | `dumpseo_` / `_dumpseo_` / `DUMPSEO_` |
 | License | GPL-2.0-or-later |
 
-Renamed on 2026-10-01 (version 1.0.1) after the WordPress.org pre-review; the reasons and the name checks are in [NAME-AND-TRADEMARK.md](NAME-AND-TRADEMARK.md). Not legal advice.
+Renamed to DumpSEO on 2026-10-08 (version 1.0.2), the slug assigned by the WordPress.org Plugins Team; the reasons and the name checks are in [NAME-AND-TRADEMARK.md](NAME-AND-TRADEMARK.md). Not legal advice.
 
 ## Platform
 | Requirement | Minimum | Notes |
@@ -42,9 +42,9 @@ Renamed on 2026-10-01 (version 1.0.1) after the WordPress.org pre-review; the re
 ## Non-functional requirements
 - **Security:** sanitize input, escape output late, nonces + capability checks for every state change, `$wpdb->prepare` only. Release blocker.
 - **Privacy:** zero telemetry, zero outbound HTTP requests in Free.
-- **Performance:** frontend adds no uncached DB queries beyond WordPress's own for singular views; admin assets only on ShubhamTiwari SEO Tools screens/editor. Measured, not claimed.
+- **Performance:** frontend adds no uncached DB queries beyond WordPress's own for singular views; admin assets only on DumpSEO screens/editor. Measured, not claimed.
 - **Accessibility:** WordPress admin a11y practices; status never conveyed by color alone.
-- **i18n:** all strings translatable with text domain `shubhamtiwari-seo-tools`.
+- **i18n:** all strings translatable with text domain `dumpseo`.
 - **Originality:** no code, UI, text, assets or algorithms copied from other SEO plugins.
 
 ## Out of scope for Free 1.0 (future Pro candidates)

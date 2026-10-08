@@ -2,12 +2,12 @@
 /**
  * Activation and deactivation handlers.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
-use ShubhamTiwariSeoTools\Migrations\Migrator;
+use DumpSEO\Migrations\Migrator;
 
 defined( 'ABSPATH' ) || exit;
 

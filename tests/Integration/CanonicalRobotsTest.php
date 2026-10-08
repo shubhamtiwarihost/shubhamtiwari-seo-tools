@@ -2,27 +2,27 @@
 /**
  * Canonical and robots output on real requests.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Integration;
+namespace DumpSEO\Tests\Integration;
 
-use ShubhamTiwariSeoTools\Admin\SettingsPage;
-use ShubhamTiwariSeoTools\Admin\TermFields;
-use ShubhamTiwariSeoTools\Frontend\HeadModule;
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\MetaModule;
-use ShubhamTiwariSeoTools\Plugin;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Admin\SettingsPage;
+use DumpSEO\Admin\TermFields;
+use DumpSEO\Frontend\HeadModule;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\MetaModule;
+use DumpSEO\Plugin;
+use DumpSEO\Settings\Settings;
 use WP_REST_Request;
 use WP_UnitTestCase;
 
 /**
  * Drives WordPress to pages and inspects the full wp_head() output.
  *
- * @covers \ShubhamTiwariSeoTools\Meta\Canonical
- * @covers \ShubhamTiwariSeoTools\Meta\Robots
- * @covers \ShubhamTiwariSeoTools\Frontend\HeadModule
+ * @covers \DumpSEO\Meta\Canonical
+ * @covers \DumpSEO\Meta\Robots
+ * @covers \DumpSEO\Frontend\HeadModule
  */
 final class CanonicalRobotsTest extends WP_UnitTestCase {
 
@@ -57,7 +57,7 @@ final class CanonicalRobotsTest extends WP_UnitTestCase {
 	private function head_html( string $url ): string {
 		$this->go_to( $url );
 		$this->head->reset();
-		add_action( 'wp_head', 'rel_canonical' ); // Restore core's canonical each visit; ShubhamTiwari SEO Tools must remove it.
+		add_action( 'wp_head', 'rel_canonical' ); // Restore core's canonical each visit; DumpSEO must remove it.
 		return get_echo( 'wp_head' );
 	}
 
@@ -230,7 +230,7 @@ final class CanonicalRobotsTest extends WP_UnitTestCase {
 		$this->assertInstanceOf( TermFields::class, $fields );
 
 		$_POST = array(
-			TermFields::NONCE_FIELD => wp_create_nonce( 'stseo_term_' . $tag ),
+			TermFields::NONCE_FIELD => wp_create_nonce( 'dumpseo_term_' . $tag ),
 			TermFields::CANON_FIELD => 'https://example.com/tags/',
 			TermFields::INDEX_FIELD => 'index',
 			TermFields::ROBOT_FIELD => array( 'nofollow', 'evil', 'noindex' ),
@@ -254,10 +254,10 @@ final class CanonicalRobotsTest extends WP_UnitTestCase {
 
 	public function test_output_disabled_leaves_core_canonical(): void {
 		$id = self::factory()->post->create();
-		add_filter( 'stseo_head_output_enabled', '__return_false' );
+		add_filter( 'dumpseo_head_output_enabled', '__return_false' );
 
 		$html = $this->head_html( get_permalink( $id ) );
-		remove_filter( 'stseo_head_output_enabled', '__return_false' );
+		remove_filter( 'dumpseo_head_output_enabled', '__return_false' );
 
 		$this->assertSame( array( get_permalink( $id ) ), $this->canonicals( $html ), 'Core prints its own canonical.' );
 	}

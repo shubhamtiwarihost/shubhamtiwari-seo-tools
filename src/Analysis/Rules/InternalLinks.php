@@ -2,13 +2,13 @@
 /**
  * Links to other pages of this site.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -41,7 +41,7 @@ final class InternalLinks extends BaseRule {
 	public function check( Input $input ): Result {
 		$count = 0;
 		foreach ( $input->content->links as $href ) {
-			if ( \ShubhamTiwariSeoTools\Analysis\Document::is_internal( $href, $input->host ) ) {
+			if ( \DumpSEO\Analysis\Document::is_internal( $href, $input->host ) ) {
 				++$count;
 			}
 		}
@@ -50,12 +50,12 @@ final class InternalLinks extends BaseRule {
 			return $this->result(
 				Result::WARNING,
 				Result::MEDIUM,
-				__( 'The text has no links to other pages on this site.', 'shubhamtiwari-seo-tools' ),
-				__( 'Link to related posts or pages where it helps the reader.', 'shubhamtiwari-seo-tools' ),
+				__( 'The text has no links to other pages on this site.', 'dumpseo' ),
+				__( 'Link to related posts or pages where it helps the reader.', 'dumpseo' ),
 				$meta
 			);
 		}
 		/* translators: %d: number of links. */
-		return $this->result( Result::PASS, Result::MEDIUM, sprintf( _n( 'The text has %d link to this site.', 'The text has %d links to this site.', $count, 'shubhamtiwari-seo-tools' ), $count ), '', $meta );
+		return $this->result( Result::PASS, Result::MEDIUM, sprintf( _n( 'The text has %d link to this site.', 'The text has %d links to this site.', $count, 'dumpseo' ), $count ), '', $meta );
 	}
 }

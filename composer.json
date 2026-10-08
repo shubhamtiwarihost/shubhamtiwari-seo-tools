@@ -1,8 +1,8 @@
 {
-	"name": "shubhamtiwarihost/shubhamtiwari-seo-tools",
-	"description": "ShubhamTiwari SEO Tools — an original, privacy-respecting SEO plugin for WordPress.",
+	"name": "shubhamtiwarihost/dumpseo",
+	"description": "DumpSEO — an original, privacy-respecting SEO plugin for WordPress.",
 	"type": "wordpress-plugin",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": ">=7.4"
@@ -21,8 +21,8 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"ShubhamTiwariSeoTools\\": "src/",
-			"ShubhamTiwariSeoTools\\Tests\\": "tests/"
+			"DumpSEO\\": "src/",
+			"DumpSEO\\Tests\\": "tests/"
 		}
 	},
 	"config": {
@@ -36,7 +36,7 @@
 		"sort-packages": true
 	},
 	"scripts": {
-		"lint": "find shubhamtiwari-seo-tools.php uninstall.php src tests bin -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null",
+		"lint": "find dumpseo.php uninstall.php src tests bin -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null",
 		"phpcs": "phpcs",
 		"phpcbf": "phpcbf",
 		"phpstan": "phpstan analyse --memory-limit=1G",

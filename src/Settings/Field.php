@@ -2,10 +2,10 @@
 /**
  * Settings field definition.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Settings;
+namespace DumpSEO\Settings;
 
 defined( 'ABSPATH' ) || exit;
 

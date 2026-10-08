@@ -2,15 +2,15 @@
 /**
  * Prints Open Graph and X (Twitter) Card tags.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Social;
+namespace DumpSEO\Social;
 
-use ShubhamTiwariSeoTools\Compatibility\Conflicts;
-use ShubhamTiwariSeoTools\Frontend\CurrentPage;
-use ShubhamTiwariSeoTools\Module;
-use ShubhamTiwariSeoTools\Settings\Settings;
+use DumpSEO\Compatibility\Conflicts;
+use DumpSEO\Frontend\CurrentPage;
+use DumpSEO\Module;
+use DumpSEO\Settings\Settings;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  * Social meta tags in the page head (wp_head, priority 5).
  *
  * Steps aside when another plugin that prints these tags is active, and turns
- * off Jetpack's Open Graph tags (through Jetpack's own filter) while ShubhamTiwari SEO Tools
+ * off Jetpack's Open Graph tags (through Jetpack's own filter) while DumpSEO
  * prints its own, so tags are never duplicated.
  */
 final class SocialModule implements Module {
@@ -79,11 +79,11 @@ final class SocialModule implements Module {
 	public function register(): void {
 		add_action( 'wp_head', array( $this, 'print_tags' ), 5 );
 		add_filter( 'jetpack_enable_open_graph', array( $this, 'jetpack_open_graph' ), 100 );
-		add_action( 'stseo_settings_section_social', array( $this, 'render_notice' ) );
+		add_action( 'dumpseo_settings_section_social', array( $this, 'render_notice' ) );
 	}
 
 	/**
-	 * Whether ShubhamTiwari SEO Tools prints social tags on this request.
+	 * Whether DumpSEO prints social tags on this request.
 	 */
 	public function active(): bool {
 		if ( '' !== $this->conflicts->social_plugin() ) {
@@ -92,11 +92,11 @@ final class SocialModule implements Module {
 		$any = false !== $this->settings->get( 'social_og_enabled' ) || false !== $this->settings->get( 'social_twitter_enabled' );
 
 		/**
-		 * Filters whether ShubhamTiwari SEO Tools outputs Open Graph / X Card tags.
+		 * Filters whether DumpSEO outputs Open Graph / X Card tags.
 		 *
 		 * @param bool $any Whether any social output is enabled in settings.
 		 */
-		return (bool) apply_filters( 'stseo_social_output_enabled', $any );
+		return (bool) apply_filters( 'dumpseo_social_output_enabled', $any );
 	}
 
 	/**
@@ -122,7 +122,7 @@ final class SocialModule implements Module {
 	}
 
 	/**
-	 * Turns off Jetpack's Open Graph tags while ShubhamTiwari SEO Tools prints Open Graph tags.
+	 * Turns off Jetpack's Open Graph tags while DumpSEO prints Open Graph tags.
 	 *
 	 * @param mixed $enabled Jetpack's decision.
 	 * @return mixed
@@ -135,7 +135,7 @@ final class SocialModule implements Module {
 	}
 
 	/**
-	 * Notice on the ShubhamTiwari SEO Tools settings screen when another plugin handles social tags.
+	 * Notice on the DumpSEO settings screen when another plugin handles social tags.
 	 */
 	public function render_notice(): void {
 		$plugin = $this->conflicts->social_plugin();
@@ -147,7 +147,7 @@ final class SocialModule implements Module {
 			esc_html(
 				sprintf(
 					/* translators: %s: name of another SEO plugin. */
-					__( '%s is active and already prints social sharing tags, so ShubhamTiwari SEO Tools does not print its own. The settings below take effect once it is deactivated.', 'shubhamtiwari-seo-tools' ),
+					__( '%s is active and already prints social sharing tags, so DumpSEO does not print its own. The settings below take effect once it is deactivated.', 'dumpseo' ),
 					$plugin
 				)
 			)

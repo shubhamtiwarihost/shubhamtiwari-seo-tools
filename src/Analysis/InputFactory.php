@@ -2,15 +2,15 @@
 /**
  * Builds analysis input for a post.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis;
+namespace DumpSEO\Analysis;
 
-use ShubhamTiwariSeoTools\Meta\Keys;
-use ShubhamTiwariSeoTools\Meta\PageContext;
-use ShubhamTiwariSeoTools\Meta\Resolver;
-use ShubhamTiwariSeoTools\Meta\Robots;
+use DumpSEO\Meta\Keys;
+use DumpSEO\Meta\PageContext;
+use DumpSEO\Meta\Resolver;
+use DumpSEO\Meta\Robots;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -99,7 +99,7 @@ class InputFactory {
 				 * @param string   $locale Site locale.
 				 * @param \WP_Post $post   Post.
 				 */
-				'language'          => (string) apply_filters( 'stseo_content_locale', get_locale(), $post ),
+				'language'          => (string) apply_filters( 'dumpseo_content_locale', get_locale(), $post ),
 			)
 		);
 	}

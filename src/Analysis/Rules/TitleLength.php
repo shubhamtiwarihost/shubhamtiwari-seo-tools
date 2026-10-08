@@ -2,13 +2,13 @@
 /**
  * SEO title length.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Analysis\Rules;
+namespace DumpSEO\Analysis\Rules;
 
-use ShubhamTiwariSeoTools\Analysis\Input;
-use ShubhamTiwariSeoTools\Analysis\Result;
+use DumpSEO\Analysis\Input;
+use DumpSEO\Analysis\Result;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -50,15 +50,15 @@ final class TitleLength extends BaseRule {
 			'max'    => self::MAX,
 		);
 		if ( 0 === $length ) {
-			return $this->result( Result::ERROR, Result::HIGH, __( 'The page has no SEO title.', 'shubhamtiwari-seo-tools' ), __( 'Give the page a title.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::ERROR, Result::HIGH, __( 'The page has no SEO title.', 'dumpseo' ), __( 'Give the page a title.', 'dumpseo' ), $meta );
 		}
 		/* translators: %d: number of characters. */
-		$found = sprintf( _n( 'The SEO title is %d character long.', 'The SEO title is %d characters long.', $length, 'shubhamtiwari-seo-tools' ), $length );
+		$found = sprintf( _n( 'The SEO title is %d character long.', 'The SEO title is %d characters long.', $length, 'dumpseo' ), $length );
 		if ( $length < self::MIN ) {
-			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Add a few descriptive words; there is room for more.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Add a few descriptive words; there is room for more.', 'dumpseo' ), $meta );
 		}
 		if ( $length > self::MAX ) {
-			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Shorten the title so search results are less likely to cut it off.', 'shubhamtiwari-seo-tools' ), $meta );
+			return $this->result( Result::WARNING, Result::MEDIUM, $found, __( 'Shorten the title so search results are less likely to cut it off.', 'dumpseo' ), $meta );
 		}
 		return $this->result( Result::PASS, Result::MEDIUM, $found, '', $meta );
 	}

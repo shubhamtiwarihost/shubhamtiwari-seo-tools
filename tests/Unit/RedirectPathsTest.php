@@ -2,15 +2,15 @@
 /**
  * Tests for redirect path handling and loop detection.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
-use ShubhamTiwariSeoTools\Redirects\Paths;
+use DumpSEO\Redirects\Paths;
 
 /**
- * @covers \ShubhamTiwariSeoTools\Redirects\Paths
+ * @covers \DumpSEO\Redirects\Paths
  */
 final class RedirectPathsTest extends TestCase {
 

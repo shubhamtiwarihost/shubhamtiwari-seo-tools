@@ -2,10 +2,10 @@
 /**
  * Sitemap renderer with image support.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Sitemap;
+namespace DumpSEO\Sitemap;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -54,7 +54,7 @@ class ImageRenderer extends \WP_Sitemaps_Renderer {
 				} else {
 					_doing_it_wrong(
 						__METHOD__,
-						esc_html__( 'Sitemap entries support only loc, lastmod, changefreq, priority and images.', 'shubhamtiwari-seo-tools' ),
+						esc_html__( 'Sitemap entries support only loc, lastmod, changefreq, priority and images.', 'dumpseo' ),
 						'1.0.0'
 					);
 				}

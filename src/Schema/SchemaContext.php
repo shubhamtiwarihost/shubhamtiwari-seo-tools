@@ -2,12 +2,12 @@
 /**
  * Everything schema pieces need to know about the page.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema;
+namespace DumpSEO\Schema;
 
-use ShubhamTiwariSeoTools\Meta\PageContext;
+use DumpSEO\Meta\PageContext;
 
 defined( 'ABSPATH' ) || exit;
 

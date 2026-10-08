@@ -2,10 +2,10 @@
 /**
  * Contract for feature modules.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools;
+namespace DumpSEO;
 
 defined( 'ABSPATH' ) || exit;
 

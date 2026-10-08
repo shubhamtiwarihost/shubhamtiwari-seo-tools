@@ -2,14 +2,14 @@
 /**
  * The page being viewed.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Schema\Pieces;
+namespace DumpSEO\Schema\Pieces;
 
-use ShubhamTiwariSeoTools\Meta\PageContext;
-use ShubhamTiwariSeoTools\Schema\Piece;
-use ShubhamTiwariSeoTools\Schema\SchemaContext;
+use DumpSEO\Meta\PageContext;
+use DumpSEO\Schema\Piece;
+use DumpSEO\Schema\SchemaContext;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -42,7 +42,7 @@ final class WebPage implements Piece {
 			 * @param string        $type    WebPage, CollectionPage, ProfilePage or SearchResultsPage.
 			 * @param SchemaContext $context Schema context.
 			 */
-			'@type'       => (string) apply_filters( 'stseo_schema_webpage_type', $this->type( $context->page ), $context ),
+			'@type'       => (string) apply_filters( 'dumpseo_schema_webpage_type', $this->type( $context->page ), $context ),
 			'@id'         => $context->webpage_id(),
 			'url'         => $context->url,
 			'name'        => $context->title,

@@ -2,17 +2,17 @@
 /**
  * Tests for Container.
  *
- * @package ShubhamTiwariSeoTools
+ * @package DumpSEO
  */
 
-namespace ShubhamTiwariSeoTools\Tests\Unit;
+namespace DumpSEO\Tests\Unit;
 
-use ShubhamTiwariSeoTools\Container;
+use DumpSEO\Container;
 
 /**
  * Covers the DI container.
  *
- * @covers \ShubhamTiwariSeoTools\Container
+ * @covers \DumpSEO\Container
  */
 final class ContainerTest extends TestCase {
 
